@@ -1,4 +1,6 @@
-# Getting Started with Create React App
+# Typescript & React state RND
+
+Playground for experimenting with all things state management (local or remote) with the purpose of finding good workflows, either by integrating existing third party tools and libraries or developing new ones.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
