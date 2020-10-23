@@ -14,7 +14,7 @@ export const App: React.FC<AppProps> = ({ theme }) => (
   <MuiThemeProvider theme={theme}>
     <SCThemeProvider theme={theme}>
       <CssBaseline />
-      Typescript & React State RND
+      Typescript & React state R&D
     </SCThemeProvider>
   </MuiThemeProvider>
 );
