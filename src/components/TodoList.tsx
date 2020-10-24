@@ -1,16 +1,25 @@
 import React from "react";
 import { List } from "@material-ui/core";
-import { TodoListItem } from "./TodoListItem";
+import { TodoListItem, TodoListItemProps } from "./TodoListItem";
 import { Todo } from "../state/Todo";
 
-export type TodoListProps = {
+export type TodoListProps = Pick<TodoListItemProps, "onUpdate" | "onDelete"> & {
   items: Todo[];
 };
 
-export const TodoList: React.FC<TodoListProps> = ({ items }) => (
+export const TodoList: React.FC<TodoListProps> = ({
+  items,
+  onUpdate,
+  onDelete,
+}) => (
   <List>
     {items.map((item, index) => (
-      <TodoListItem key={index} item={item} />
+      <TodoListItem
+        key={index}
+        item={item}
+        onUpdate={onUpdate}
+        onDelete={onDelete}
+      />
     ))}
   </List>
 );

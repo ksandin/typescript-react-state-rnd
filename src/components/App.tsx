@@ -16,14 +16,18 @@ export type AppProps = {
 };
 
 export const App: React.FC<AppProps> = ({ theme }) => {
-  const [todos, addTodo] = useListState<Todo>();
+  const [todos, addTodo, deleteTodo, replaceTodo] = useListState<Todo>();
   return (
     <MuiThemeProvider theme={theme}>
       <SCThemeProvider theme={theme}>
         <CssBaseline />
         <CenteredBox>
           <Typography variant="h6">Typescript & React state R&D</Typography>
-          <TodoList items={todos} />
+          <TodoList
+            items={todos}
+            onUpdate={replaceTodo}
+            onDelete={deleteTodo}
+          />
           <CreateTodoForm onCreate={addTodo} />
         </CenteredBox>
       </SCThemeProvider>
