@@ -13,7 +13,7 @@ import { toggleTodoDone } from "../state/toggleTodoDone";
 
 export type TodoListItemProps = {
   item: Todo;
-  onUpdate: (oldItem: Todo, newItem: Todo) => void;
+  onUpdate: (newItem: Todo) => void;
   onDelete: (item: Todo) => void;
 };
 
@@ -22,8 +22,7 @@ export const TodoListItem: React.FC<TodoListItemProps> = ({
   onUpdate,
   onDelete,
 }) => {
-  const emitUpdate = useCallback((newItem: Todo) => onUpdate(item, newItem), [
-    item,
+  const emitUpdate = useCallback((newItem: Todo) => onUpdate(newItem), [
     onUpdate,
   ]);
   const emitDelete = useCallback(() => onDelete(item), [item, onDelete]);

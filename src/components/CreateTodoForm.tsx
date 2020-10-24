@@ -1,7 +1,8 @@
 import React, { ChangeEvent, useCallback, useState } from "react";
-import { Todo } from "../state/Todo";
 import styled from "styled-components";
 import { TextField } from "@material-ui/core";
+import { Todo } from "../state/Todo";
+import { createTodo } from "../state/createTodo";
 
 export type CreateTodoFormProps = {
   onCreate: (todo: Todo) => void;
@@ -33,8 +34,6 @@ export const CreateTodoForm: React.FC<CreateTodoFormProps> = ({ onCreate }) => {
     </Row>
   );
 };
-
-const createTodo = (label: string): Todo => ({ label, done: false });
 
 const Row = styled.div`
   display: flex;
