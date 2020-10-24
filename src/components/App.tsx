@@ -5,6 +5,7 @@ import {
   ThemeProvider as MuiThemeProvider,
 } from "@material-ui/core/styles";
 import { CssBaseline } from "@material-ui/core";
+import { CenteredBox } from "./CenteredBox";
 
 export type AppProps = {
   theme: Theme;
@@ -14,7 +15,7 @@ export const App: React.FC<AppProps> = ({ theme }) => (
   <MuiThemeProvider theme={theme}>
     <SCThemeProvider theme={theme}>
       <CssBaseline />
-      Typescript & React state R&D
+      <CenteredBox>Typescript & React state R&D</CenteredBox>
     </SCThemeProvider>
   </MuiThemeProvider>
 );
