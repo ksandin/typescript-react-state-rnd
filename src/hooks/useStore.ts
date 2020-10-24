@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const useListState = <T, Id>(
+export const useStore = <T, Id>(
   getIdentity: (item: T) => Id,
   initialValues: T[] | (() => T[]) = [],
   emit: (list: T[]) => void = () => {}

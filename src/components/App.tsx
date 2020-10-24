@@ -8,7 +8,7 @@ import { CssBaseline, Typography } from "@material-ui/core";
 import { TodoList } from "./TodoList";
 import { CenteredBox } from "./CenteredBox";
 import { Todo } from "../state/Todo";
-import { useListState } from "../hooks/useListState";
+import { useStore } from "../hooks/useStore";
 import { CreateTodoForm } from "./CreateTodoForm";
 
 export type AppProps = {
@@ -16,7 +16,7 @@ export type AppProps = {
 };
 
 export const App: React.FC<AppProps> = ({ theme }) => {
-  const [todos, addTodo, deleteTodo, updateTodo] = useListState(
+  const [todos, addTodo, deleteTodo, updateTodo] = useStore(
     (todo: Todo) => todo.id
   );
   return (
