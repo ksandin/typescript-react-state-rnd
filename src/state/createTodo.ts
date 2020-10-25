@@ -1,10 +1,8 @@
 import { Todo } from "./Todo";
-
-let idCounter = 0;
-const nextId = () => idCounter++;
+import { TodoId } from "./TodoId";
 
 export const createTodo = (label: string): Todo => ({
-  id: nextId(),
+  id: -1 as TodoId,
   label,
   done: false,
 });

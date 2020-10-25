@@ -1,34 +1,30 @@
 import React from "react";
-import { ThemeProvider as SCThemeProvider } from "styled-components";
+import styled, { ThemeProvider as SCThemeProvider } from "styled-components";
 import {
   Theme,
   ThemeProvider as MuiThemeProvider,
 } from "@material-ui/core/styles";
-import { CssBaseline, Typography } from "@material-ui/core";
-import { TodoList } from "./TodoList";
-import { CenteredBox } from "./CenteredBox";
-import { Todo } from "../state/Todo";
-import { useStore } from "../hooks/useStore";
-import { CreateTodoForm } from "./CreateTodoForm";
+import { CssBaseline } from "@material-ui/core";
+import { Examples } from "./Examples";
 
 export type AppProps = {
   theme: Theme;
 };
 
 export const App: React.FC<AppProps> = ({ theme }) => {
-  const [todos, addTodo, deleteTodo, updateTodo] = useStore(
-    (todo: Todo) => todo.id
-  );
   return (
     <MuiThemeProvider theme={theme}>
       <SCThemeProvider theme={theme}>
         <CssBaseline />
-        <CenteredBox>
-          <Typography variant="h6">Typescript & React state R&D</Typography>
-          <TodoList items={todos} onUpdate={updateTodo} onDelete={deleteTodo} />
-          <CreateTodoForm onCreate={addTodo} />
-        </CenteredBox>
+        <Container>
+          <Examples />
+        </Container>
       </SCThemeProvider>
     </MuiThemeProvider>
   );
 };
+
+const Container = styled.div`
+  margin: auto;
+  width: 600px;
+`;

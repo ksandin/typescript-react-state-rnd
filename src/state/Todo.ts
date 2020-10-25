@@ -1,5 +1,7 @@
+import { TodoId } from "./TodoId";
+
 export type Todo = {
-  id: number;
+  id: TodoId;
   label: string;
   done: boolean;
 };
