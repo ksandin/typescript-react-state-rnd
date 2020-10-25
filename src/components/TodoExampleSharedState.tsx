@@ -27,7 +27,7 @@ const TodoStoreExample: React.FC<{ store: Store<TodoId, Todo> }> = ({
   return (
     <TodoExample
       todos={entries.toList().toArray()}
-      addTodo={addItem}
+      createTodo={addItem}
       updateTodo={updateItem}
       deleteTodo={deleteItem}
     />

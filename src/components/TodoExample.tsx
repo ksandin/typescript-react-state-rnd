@@ -7,20 +7,20 @@ import { Paper } from "@material-ui/core";
 
 export type TodoExampleProps = {
   todos: Todo[];
-  addTodo: (todo: Todo) => void;
+  createTodo: (todo: Todo) => void;
   updateTodo: (todo: Todo) => void;
   deleteTodo: (todo: Todo) => void;
 };
 
 export const TodoExample: React.FC<TodoExampleProps> = ({
   todos,
-  addTodo,
+  createTodo,
   updateTodo,
   deleteTodo,
 }) => (
   <Container>
     <TodoList items={todos} onUpdate={updateTodo} onDelete={deleteTodo} />
-    <CreateTodoForm onCreate={addTodo} />
+    <CreateTodoForm onCreate={createTodo} />
   </Container>
 );
 

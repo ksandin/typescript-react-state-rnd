@@ -28,7 +28,7 @@ const TodoComponentStoreExample = () => {
   return (
     <TodoExample
       todos={entries.toList().toArray()}
-      addTodo={addItem}
+      createTodo={addItem}
       updateTodo={updateItem}
       deleteTodo={deleteItem}
     />
