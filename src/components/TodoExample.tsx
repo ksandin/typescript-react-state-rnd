@@ -25,7 +25,7 @@ export const TodoExample: React.FC<TodoExampleProps> = ({
     <TodoList items={todos} onUpdate={updateTodo} onDelete={deleteTodo} />
     <CreateTodoForm
       onCreate={createTodo}
-      loading={statuses?.create === "pending"}
+      loading={statuses?.get("create") === "pending"}
     />
   </Container>
 );

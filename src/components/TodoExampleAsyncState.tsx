@@ -5,12 +5,19 @@ import { Todo } from "../state/Todo";
 import { TodoId } from "../state/TodoId";
 import { useStore } from "../lib/store/useStore";
 import { createStore } from "../lib/store/createStore";
+import { createAsyncAdapter } from "../lib/store/createAsyncAdapter";
 
 let idCounter = 0;
 const nextId = () => idCounter++;
 const todoStore = createStore(
   (todo: Todo) => todo.id,
-  (todo: Todo) => ({ ...todo, id: nextId() as TodoId })
+  (todo: Todo) => ({ ...todo, id: nextId() as TodoId }),
+  undefined,
+  createAsyncAdapter(
+    (todo: Todo) => todo.id,
+    (todo: Todo) => ({ ...todo, id: nextId() as TodoId }),
+    1000
+  )
 );
 
 export type TodoExampleAsyncStateProps = {};

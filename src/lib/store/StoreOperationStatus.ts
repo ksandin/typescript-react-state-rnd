@@ -1,1 +1,1 @@
-export type StoreOperationStatus = "init" | "resolved" | "pending" | "rejected";
+export type StoreOperationStatus = "resolved" | "pending" | "rejected";
