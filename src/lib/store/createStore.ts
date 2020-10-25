@@ -11,6 +11,11 @@ export const createStore = <Id, Model>(
   const store: Store<Id, Model> = {
     entries: initialEntries,
     events: new EventEmitter() as StoreEvents<Id, Model>,
+    statuses: {
+      create: "init",
+      update: "init",
+      delete: "init",
+    },
     create: (newItem: Model) => {
       const withId = withNewIdentity(newItem);
       change(store.entries.set(getIdentity(withId), withId));
@@ -22,7 +27,7 @@ export const createStore = <Id, Model>(
   };
   function change(newEntries: Map<Id, Model>) {
     store.entries = newEntries;
-    store.events.emit("change", store.entries);
+    store.events.emit("entries", store.entries);
   }
   return store;
 };
