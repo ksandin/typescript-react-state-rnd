@@ -10,9 +10,6 @@ import { createAsyncAdapter } from "../lib/store/createAsyncAdapter";
 let idCounter = 0;
 const nextId = () => idCounter++;
 const todoStore = createStore(
-  (todo: Todo) => todo.id,
-  (todo: Todo) => ({ ...todo, id: nextId() as TodoId }),
-  undefined,
   createAsyncAdapter(
     (todo: Todo) => todo.id,
     (todo: Todo) => ({ ...todo, id: nextId() as TodoId }),

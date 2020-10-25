@@ -4,13 +4,11 @@ import { Store } from "./Store";
 import { StoreEvents } from "./StoreEvents";
 import { StoreOperationStatus } from "./StoreOperationStatus";
 import { StoreActions } from "./StoreActions";
-import { createSyncAdapter } from "./createSyncAdapter";
+import { StoreAdapter } from "./StoreAdapter";
 
 export const createStore = <Id, Model>(
-  getIdentity: (item: Model) => Id,
-  withNewIdentity: (item: Model) => Model,
-  initialEntries = Map<Id, Model>(),
-  adapter = createSyncAdapter<Id, Model>(getIdentity, withNewIdentity)
+  adapter: StoreAdapter<Id, Model>,
+  initialEntries = Map<Id, Model>()
 ): Store<Id, Model> => {
   const store: Store<Id, Model> = {
     entries: initialEntries,
@@ -18,15 +16,15 @@ export const createStore = <Id, Model>(
     statuses: Map(),
     create: (item: Model) =>
       doAction("create", item, undefined, (item) =>
-        change(store.entries.set(getIdentity(item), item))
+        change(store.entries.set(adapter.id(item), item))
       ),
     update: (item: Model) =>
       doAction("update", item, () =>
-        change(store.entries.set(getIdentity(item), item))
+        change(store.entries.set(adapter.id(item), item))
       ),
     delete: (item: Model) =>
       doAction("delete", item, () =>
-        change(store.entries.delete(getIdentity(item)))
+        change(store.entries.delete(adapter.id(item)))
       ),
   };
   async function doAction(

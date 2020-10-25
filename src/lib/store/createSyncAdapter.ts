@@ -4,9 +4,10 @@ import { Map } from "immutable";
 export const createSyncAdapter = <Id, Model>(
   getIdentity: (item: Model) => Id,
   withNewIdentity: (item: Model) => Model
-): StoreAdapter<Model> => {
+): StoreAdapter<Id, Model> => {
   let entries = Map<Id, Model>();
   return {
+    id: getIdentity,
     create: async (newItem: Model): Promise<Model> => {
       const withId = withNewIdentity(newItem);
       entries = entries.set(getIdentity(withId), withId);

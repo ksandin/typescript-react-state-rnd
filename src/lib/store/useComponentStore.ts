@@ -1,6 +1,7 @@
 import { Map } from "immutable";
 import { useState } from "react";
 import { createStore } from "./createStore";
+import { createSyncAdapter } from "./createSyncAdapter";
 
 export const useComponentStore = <Id, Model>(
   getIdentity: (item: Model) => Id,
@@ -8,7 +9,7 @@ export const useComponentStore = <Id, Model>(
   initialEntries = Map<Id, Model>()
 ) => {
   const [store] = useState(() =>
-    createStore(getIdentity, withNewIdentity, initialEntries)
+    createStore(createSyncAdapter(getIdentity, withNewIdentity), initialEntries)
   );
   return store;
 };
