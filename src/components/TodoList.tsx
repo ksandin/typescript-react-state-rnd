@@ -11,15 +11,20 @@ export const TodoList: React.FC<TodoListProps> = ({
   items,
   onUpdate,
   onDelete,
-}) => (
-  <List>
-    {items.map((item, index) => (
-      <TodoListItem
-        key={index}
-        item={item}
-        onUpdate={onUpdate}
-        onDelete={onDelete}
-      />
-    ))}
-  </List>
-);
+}) => {
+  if (!items.length) {
+    return null;
+  }
+  return (
+    <List>
+      {items.map((item, index) => (
+        <TodoListItem
+          key={index}
+          item={item}
+          onUpdate={onUpdate}
+          onDelete={onDelete}
+        />
+      ))}
+    </List>
+  );
+};
