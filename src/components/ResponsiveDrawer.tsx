@@ -91,9 +91,10 @@ export const ResponsiveDrawer: React.FC<ResponsiveDrawerProps> = ({
                   button
                   key={optionIndex}
                   selected={isSelected}
-                  onClick={() =>
-                    onHighlightChange([categoryIndex, optionIndex])
-                  }
+                  onClick={() => {
+                    onHighlightChange([categoryIndex, optionIndex]);
+                    setMobileOpen(false);
+                  }}
                 >
                   <ListItemIcon>
                     <Icon />
