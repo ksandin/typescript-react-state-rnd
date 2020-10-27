@@ -1,4 +1,4 @@
-export type StoreAdapter<Id, Model> = {
+export type CrudAdapter<Id, Model> = {
   create: (item: Model) => Promise<Model>;
   update: (item: Model) => Promise<Model>;
   delete: (item: Model) => Promise<Model>;

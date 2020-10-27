@@ -1,4 +1,4 @@
-import { StoreAdapter } from "./StoreAdapter";
+import { CrudAdapter } from "./CrudAdapter";
 import { Map } from "immutable";
 import { wait } from "./wait";
 
@@ -6,7 +6,7 @@ export const createAsyncAdapter = <Id, Model>(
   getIdentity: (item: Model) => Id,
   withNewIdentity: (item: Model) => Model,
   simulatedDelay = 0
-): StoreAdapter<Id, Model> => {
+): CrudAdapter<Id, Model> => {
   let entries = Map<Id, Model>();
   return {
     id: getIdentity,

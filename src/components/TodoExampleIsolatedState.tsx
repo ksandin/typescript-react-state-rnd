@@ -22,15 +22,15 @@ const nextId = () => idCounter++;
 const TodoComponentStoreExample = () => {
   const store = useComponentStore(
     (todo: Todo) => todo.id,
-    (todo: Todo) => ({ ...todo, id: nextId() as TodoId })
+    (todo: Todo) => ({ ...todo, id: nextId() as TodoId } as Todo)
   );
-  const [entries, addItem, updateItem, deleteItem] = useStore(store);
+  const [entries, , actions] = useStore(store);
   return (
     <TodoExample
       todos={entries.toList().toArray()}
-      createTodo={addItem}
-      updateTodo={updateItem}
-      deleteTodo={deleteItem}
+      createTodo={actions.create}
+      updateTodo={actions.update}
+      deleteTodo={actions.delete}
     />
   );
 };

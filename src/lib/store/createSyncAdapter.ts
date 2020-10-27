@@ -1,10 +1,10 @@
-import { StoreAdapter } from "./StoreAdapter";
+import { CrudAdapter } from "./CrudAdapter";
 import { Map } from "immutable";
 
 export const createSyncAdapter = <Id, Model>(
   getIdentity: (item: Model) => Id,
   withNewIdentity: (item: Model) => Model
-): StoreAdapter<Id, Model> => {
+): CrudAdapter<Id, Model> => {
   let entries = Map<Id, Model>();
   return {
     id: getIdentity,
