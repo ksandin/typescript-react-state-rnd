@@ -4,7 +4,7 @@ import { Todo } from "../state/Todo";
 import { TodoId } from "../state/TodoId";
 import { useStore } from "../lib/store/useStore";
 import { createStore } from "../lib/store/createStore";
-import { createAsyncAdapter } from "../lib/store/createAsyncAdapter";
+import { createCrudMemoryAdapter } from "../lib/store/createCrudMemoryAdapter";
 import { createRepository } from "../lib/store/createRepository";
 import { createCrudDispatcher } from "../lib/store/createCrudDispatcher";
 
@@ -15,7 +15,7 @@ const todoStore = createStore(
   repository,
   createCrudDispatcher(
     repository,
-    createAsyncAdapter(
+    createCrudMemoryAdapter(
       (todo: Todo) => todo.id,
       (todo: Todo) => ({ ...todo, id: nextId() as TodoId }),
       1000

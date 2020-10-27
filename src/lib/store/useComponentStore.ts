@@ -1,9 +1,9 @@
 import { Map } from "immutable";
 import { useState } from "react";
 import { createStore } from "./createStore";
-import { createSyncAdapter } from "./createSyncAdapter";
 import { createRepository } from "./createRepository";
 import { createCrudDispatcher } from "./createCrudDispatcher";
+import { createCrudMemoryAdapter } from "./createCrudMemoryAdapter";
 
 export const useComponentStore = <Id, Model>(
   getIdentity: (item: Model) => Id,
@@ -16,7 +16,7 @@ export const useComponentStore = <Id, Model>(
       repository,
       createCrudDispatcher(
         repository,
-        createSyncAdapter(getIdentity, withNewIdentity)
+        createCrudMemoryAdapter(getIdentity, withNewIdentity)
       )
     );
   });

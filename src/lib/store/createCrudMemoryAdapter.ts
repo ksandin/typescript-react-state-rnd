@@ -1,23 +1,28 @@
 import { CrudAdapter } from "./CrudAdapter";
 import { Map } from "immutable";
+import { wait } from "./wait";
 
-export const createSyncAdapter = <Id, Model>(
+export const createCrudMemoryAdapter = <Id, Model>(
   getIdentity: (item: Model) => Id,
-  withNewIdentity: (item: Model) => Model
+  withNewIdentity: (item: Model) => Model,
+  simulatedDelay = 0
 ): CrudAdapter<Id, Model> => {
   let entries = Map<Id, Model>();
   return {
     id: getIdentity,
     create: async (newItem: Model): Promise<Model> => {
+      await wait(simulatedDelay);
       const withId = withNewIdentity(newItem);
       entries = entries.set(getIdentity(withId), withId);
       return withId;
     },
     update: async (updatedItem: Model): Promise<Model> => {
+      await wait(simulatedDelay);
       entries = entries.set(getIdentity(updatedItem), updatedItem);
       return updatedItem;
     },
     delete: async (newItem: Model): Promise<Model> => {
+      await wait(simulatedDelay);
       const id = getIdentity(newItem);
       if (!entries.has(id)) {
         throw new Error(`Id not found: ${id}`);

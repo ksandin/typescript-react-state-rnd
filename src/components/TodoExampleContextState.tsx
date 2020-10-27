@@ -4,9 +4,9 @@ import { TodoExample } from "./TodoExample";
 import { Todo } from "../state/Todo";
 import { TodoId } from "../state/TodoId";
 import { createStore } from "../lib/store/createStore";
-import { createSyncAdapter } from "../lib/store/createSyncAdapter";
 import { createRepository } from "../lib/store/createRepository";
 import { createCrudDispatcher } from "../lib/store/createCrudDispatcher";
+import { createCrudMemoryAdapter } from "../lib/store/createCrudMemoryAdapter";
 
 export type TodoExampleContextStateProps = {};
 
@@ -18,7 +18,7 @@ const TodoStoreContext = createContext(
     repository,
     createCrudDispatcher(
       repository,
-      createSyncAdapter(
+      createCrudMemoryAdapter(
         (todo: Todo) => todo.id,
         (todo: Todo) => ({ ...todo, id: nextId() as TodoId })
       )
