@@ -4,11 +4,11 @@ import { CreateTodoForm } from "./CreateTodoForm";
 import { Todo } from "../state/Todo";
 import styled from "styled-components";
 import { Paper } from "@material-ui/core";
-import { StoreStatuses } from "../lib/store/StoreStatuses";
+import { ActionStatuses } from "../lib/store/ActionStatuses";
 
 export type TodoExampleProps = {
   todos: Todo[];
-  statuses?: StoreStatuses;
+  statuses?: ActionStatuses<"create" | "update" | "delete">;
   createTodo: (todo: Todo) => void;
   updateTodo: (todo: Todo) => void;
   deleteTodo: (todo: Todo) => void;

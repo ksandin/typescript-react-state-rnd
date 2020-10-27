@@ -1,35 +1,23 @@
 import { useEffect, useState } from "react";
 import { Map } from "immutable";
 import { Store } from "./Store";
-import { StoreOperation } from "./StoreOperation";
-import { StoreStatuses } from "./StoreStatuses";
+import { Actions } from "./Actions";
+import { ActionStatuses } from "./ActionStatuses";
 
-export const useStore = <Id, Model>(
-  store: Store<Id, Model>
-): [
-  Map<Id, Model>,
-  StoreOperation<Model>,
-  StoreOperation<Model>,
-  StoreOperation<Model>,
-  StoreStatuses
-] => {
-  const [localEntries, setLocalEntries] = useState(store.entries);
-  const [localStatuses, setLocalStatuses] = useState(store.statuses);
+export const useStore = <Id, Model, TActions extends Actions>(
+  store: Store<Id, Model, TActions>
+): [Map<Id, Model>, ActionStatuses<keyof TActions>, TActions] => {
+  const [localEntries, setLocalEntries] = useState(store.repository.entries);
+  const [localStatuses, setLocalStatuses] = useState(store.dispatcher.statuses);
 
   useEffect(() => {
-    store.events.on("entries", setLocalEntries);
-    store.events.on("statuses", setLocalStatuses);
+    store.repository.events.on("change", setLocalEntries);
+    store.dispatcher.events.on("change", setLocalStatuses);
     return () => {
-      store.events.off("entries", setLocalEntries);
-      store.events.off("statuses", setLocalStatuses);
+      store.repository.events.off("change", setLocalEntries);
+      store.dispatcher.events.off("change", setLocalStatuses);
     };
   }, [store]);
 
-  return [
-    localEntries,
-    store.create,
-    store.update,
-    store.delete,
-    localStatuses,
-  ];
+  return [localEntries, localStatuses, store.dispatcher.actions];
 };

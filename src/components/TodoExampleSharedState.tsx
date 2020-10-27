@@ -1,12 +1,15 @@
 import React from "react";
 import { Typography } from "@material-ui/core";
-import { Store } from "../lib/store/Store";
 import { TodoId } from "../state/TodoId";
 import { Todo } from "../state/Todo";
 import { useStore } from "../lib/store/useStore";
 import { TodoExample } from "./TodoExample";
 import { useBasicComponentStore } from "../lib/store/useBasicComponentStore";
 import { Example } from "./Example";
+
+// HACK extracting type information from hook
+const useHack = () => useBasicComponentStore<TodoId, Todo>();
+type TodoStore = ReturnType<typeof useHack>;
 
 export const TodoExampleSharedState = () => {
   const store = useBasicComponentStore<TodoId, Todo>();
@@ -20,16 +23,14 @@ export const TodoExampleSharedState = () => {
   );
 };
 
-const TodoStoreExample: React.FC<{ store: Store<TodoId, Todo> }> = ({
-  store,
-}) => {
-  const [entries, addItem, updateItem, deleteItem] = useStore(store);
+const TodoStoreExample: React.FC<{ store: TodoStore }> = ({ store }) => {
+  const [entries, , actions] = useStore(store);
   return (
     <TodoExample
       todos={entries.toList().toArray()}
-      createTodo={addItem}
-      updateTodo={updateItem}
-      deleteTodo={deleteItem}
+      createTodo={actions.create}
+      updateTodo={actions.update}
+      deleteTodo={actions.delete}
     />
   );
 };
