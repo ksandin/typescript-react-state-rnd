@@ -1,5 +1,4 @@
 import React, { createContext, useContext } from "react";
-import { Example } from "./Example";
 import { useStore } from "../lib/store/useStore";
 import { TodoExample } from "./TodoExample";
 import { Todo } from "../state/Todo";
@@ -31,13 +30,11 @@ export const TodoExampleContextState: React.FC<TodoExampleContextStateProps> = (
   const store = useContext(TodoStoreContext);
   const [entries, , actions] = useStore(store);
   return (
-    <Example label="Todo app with context state">
-      <TodoExample
-        todos={entries.toList().toArray()}
-        createTodo={actions.create}
-        updateTodo={actions.update}
-        deleteTodo={actions.delete}
-      />
-    </Example>
+    <TodoExample
+      todos={entries.toList().toArray()}
+      createTodo={actions.create}
+      updateTodo={actions.update}
+      deleteTodo={actions.delete}
+    />
   );
 };

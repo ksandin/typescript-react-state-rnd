@@ -70,6 +70,7 @@ export const ResponsiveDrawer: React.FC<ResponsiveDrawerProps> = ({
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
   const [activeCategoryIndex, activeOptionIndex] = menuHighlight;
+  const title = `${menu[activeCategoryIndex].name} > ${menu[activeCategoryIndex].options[activeOptionIndex].name}`;
 
   const drawer = (
     <div>
@@ -125,7 +126,7 @@ export const ResponsiveDrawer: React.FC<ResponsiveDrawerProps> = ({
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Responsive drawer
+            {title}
           </Typography>
         </Toolbar>
       </AppBar>

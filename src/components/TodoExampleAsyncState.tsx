@@ -1,5 +1,4 @@
 import React from "react";
-import { Example } from "./Example";
 import { TodoExample } from "./TodoExample";
 import { Todo } from "../state/Todo";
 import { TodoId } from "../state/TodoId";
@@ -29,14 +28,12 @@ export type TodoExampleAsyncStateProps = {};
 export const TodoExampleAsyncState: React.FC<TodoExampleAsyncStateProps> = () => {
   const [entries, statuses, actions] = useStore(todoStore);
   return (
-    <Example label="Todo app with async state">
-      <TodoExample
-        todos={entries.toList().toArray()}
-        createTodo={actions.create}
-        updateTodo={actions.update}
-        deleteTodo={actions.delete}
-        statuses={statuses}
-      />
-    </Example>
+    <TodoExample
+      todos={entries.toList().toArray()}
+      createTodo={actions.create}
+      updateTodo={actions.update}
+      deleteTodo={actions.delete}
+      statuses={statuses}
+    />
   );
 };
