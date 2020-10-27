@@ -1,30 +1,35 @@
-import React from "react";
-import styled, { ThemeProvider as SCThemeProvider } from "styled-components";
+import React, { useState } from "react";
+import { ThemeProvider as SCThemeProvider } from "styled-components";
 import {
   Theme,
   ThemeProvider as MuiThemeProvider,
 } from "@material-ui/core/styles";
 import { CssBaseline } from "@material-ui/core";
-import { Examples } from "./Examples";
+import { ResponsiveDrawer } from "./ResponsiveDrawer";
+import { MenuCategory } from "../state/MenuCategory";
+import { MenuHighlight } from "../state/MenuHighlight";
 
 export type AppProps = {
   theme: Theme;
+  menu: MenuCategory[];
 };
 
-export const App: React.FC<AppProps> = ({ theme }) => {
+export const App: React.FC<AppProps> = ({ theme, menu }) => {
+  const [route, setRoute] = useState<MenuHighlight>([0, 0]);
+  const [categoryIndex, childIndex] = route;
+  const Page = menu[categoryIndex].options[childIndex].component;
   return (
     <MuiThemeProvider theme={theme}>
       <SCThemeProvider theme={theme}>
         <CssBaseline />
-        <Container>
-          <Examples />
-        </Container>
+        <ResponsiveDrawer
+          menu={menu}
+          menuHighlight={route}
+          onHighlightChange={setRoute}
+        >
+          <Page />
+        </ResponsiveDrawer>
       </SCThemeProvider>
     </MuiThemeProvider>
   );
 };
-
-const Container = styled.div`
-  margin: auto;
-  width: 600px;
-`;

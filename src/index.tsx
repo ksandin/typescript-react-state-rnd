@@ -3,10 +3,11 @@ import ReactDOM from "react-dom";
 import { App } from "./components/App";
 import reportWebVitals from "./reportWebVitals";
 import { createAppTheme } from "./fixtures/theme";
+import { createAppMenu } from "./fixtures/menu";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App theme={createAppTheme()} />
+    <App theme={createAppTheme()} menu={createAppMenu()} />
   </React.StrictMode>,
   document.getElementById("root")
 );
