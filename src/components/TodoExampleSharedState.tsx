@@ -4,14 +4,32 @@ import { TodoId } from "../state/TodoId";
 import { Todo } from "../state/Todo";
 import { useStore } from "../lib/store/useStore";
 import { TodoExample } from "./TodoExample";
-import { useBasicComponentStore } from "../lib/store/useBasicComponentStore";
+import { createRepository } from "../lib/store/createRepository";
+import { createStore } from "../lib/store/createStore";
+import { createCrudDispatcher } from "../lib/store/createCrudDispatcher";
+import { createCrudMemoryAdapter } from "../lib/store/createCrudMemoryAdapter";
+
+const createCrudStore = () => {
+  let idCounter = 0;
+  const nextId = () => idCounter++;
+  const repository = createRepository<TodoId, Todo>();
+  return createStore(
+    repository,
+    createCrudDispatcher(
+      repository,
+      createCrudMemoryAdapter(
+        (todo: Todo) => todo.id,
+        (todo: Todo) => ({ ...todo, id: nextId() as TodoId } as Todo)
+      )
+    )
+  );
+};
 
 // HACK extracting type information from hook
-const useHack = () => useBasicComponentStore<TodoId, Todo>();
-type TodoStore = ReturnType<typeof useHack>;
+type TodoStore = ReturnType<typeof createCrudStore>;
 
 export const TodoExampleSharedState = () => {
-  const store = useBasicComponentStore<TodoId, Todo>();
+  const store = createCrudStore();
   return (
     <>
       <Typography variant="h6">App 1</Typography>

@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Typography } from "@material-ui/core";
 import { useStore } from "../lib/store/useStore";
-import { useComponentStore } from "../lib/store/useComponentStore";
 import { Todo } from "../state/Todo";
 import { TodoId } from "../state/TodoId";
 import { TodoExample } from "./TodoExample";
+import { createRepository } from "../lib/store/createRepository";
+import { createStore } from "../lib/store/createStore";
+import { createCrudDispatcher } from "../lib/store/createCrudDispatcher";
+import { createCrudMemoryAdapter } from "../lib/store/createCrudMemoryAdapter";
 
 export const TodoExampleIsolatedState = () => (
   <>
@@ -15,14 +18,24 @@ export const TodoExampleIsolatedState = () => (
   </>
 );
 
-let idCounter = 0;
-const nextId = () => idCounter++;
+const createCrudStore = () => {
+  let idCounter = 0;
+  const nextId = () => idCounter++;
+  const repository = createRepository<TodoId, Todo>();
+  return createStore(
+    repository,
+    createCrudDispatcher(
+      repository,
+      createCrudMemoryAdapter<TodoId, Todo>(
+        (todo) => todo.id,
+        (todo) => ({ ...todo, id: nextId() as TodoId })
+      )
+    )
+  );
+};
 
 const TodoComponentStoreExample = () => {
-  const store = useComponentStore(
-    (todo: Todo) => todo.id,
-    (todo: Todo) => ({ ...todo, id: nextId() as TodoId } as Todo)
-  );
+  const [store] = useState(createCrudStore);
   const [entries, , actions] = useStore(store);
   return (
     <TodoExample
