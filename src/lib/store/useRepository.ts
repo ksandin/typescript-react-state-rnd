@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Map } from "immutable";
 import { Repository } from "./Repository";
+import { RepositoryEntries } from "./RepositoryEntries";
 
 export const useRepository = <Id, Model>(
   repository: Repository<Id, Model>
-): Map<Id, Model> => {
+): RepositoryEntries<Id, Model> => {
   const [localEntries, setLocalEntries] = useState(repository.entries);
 
   useEffect(() => {
