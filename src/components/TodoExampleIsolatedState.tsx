@@ -6,8 +6,8 @@ import { TodoId } from "../state/TodoId";
 import { TodoExample } from "./TodoExample";
 import { createRepository } from "../lib/store/createRepository";
 import { createStore } from "../lib/store/createStore";
-import { createCrudDispatcher } from "../lib/store/createCrudDispatcher";
-import { createCrudMemoryAdapter } from "../lib/store/createCrudMemoryAdapter";
+import { createCrudDispatcher } from "../lib/crud/createCrudDispatcher";
+import { createCrudMemoryAdapter } from "../lib/crud/createCrudMemoryAdapter";
 
 export const TodoExampleIsolatedState = () => (
   <>

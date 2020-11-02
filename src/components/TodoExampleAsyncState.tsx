@@ -4,9 +4,9 @@ import { Todo } from "../state/Todo";
 import { TodoId } from "../state/TodoId";
 import { useStore } from "../lib/store/useStore";
 import { createStore } from "../lib/store/createStore";
-import { createCrudMemoryAdapter } from "../lib/store/createCrudMemoryAdapter";
+import { createCrudMemoryAdapter } from "../lib/crud/createCrudMemoryAdapter";
 import { createRepository } from "../lib/store/createRepository";
-import { createCrudDispatcher } from "../lib/store/createCrudDispatcher";
+import { createCrudDispatcher } from "../lib/crud/createCrudDispatcher";
 
 let idCounter = 0;
 const nextId = () => idCounter++;

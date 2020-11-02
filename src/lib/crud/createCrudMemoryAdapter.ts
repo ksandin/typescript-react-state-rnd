@@ -1,7 +1,7 @@
 import { CrudAdapter } from "./CrudAdapter";
 import { Map } from "immutable";
 import { wait } from "./wait";
-import { RepositoryEntries } from "./RepositoryEntries";
+import { RepositoryEntries } from "../store/RepositoryEntries";
 
 export const createCrudMemoryAdapter = <Id, Model>(
   getIdentity: (item: Model) => Id,

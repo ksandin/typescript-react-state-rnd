@@ -5,8 +5,8 @@ import { Todo } from "../state/Todo";
 import { TodoId } from "../state/TodoId";
 import { createStore } from "../lib/store/createStore";
 import { createRepository } from "../lib/store/createRepository";
-import { createCrudDispatcher } from "../lib/store/createCrudDispatcher";
-import { createCrudMemoryAdapter } from "../lib/store/createCrudMemoryAdapter";
+import { createCrudDispatcher } from "../lib/crud/createCrudDispatcher";
+import { createCrudMemoryAdapter } from "../lib/crud/createCrudMemoryAdapter";
 
 export type TodoExampleContextStateProps = {};
 

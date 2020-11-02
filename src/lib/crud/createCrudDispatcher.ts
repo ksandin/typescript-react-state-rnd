@@ -1,6 +1,6 @@
-import { createDispatcher } from "./createDispatcher";
-import { updateRepository } from "./updateRepository";
-import { Repository } from "./Repository";
+import { createDispatcher } from "../store/createDispatcher";
+import { updateRepository } from "../store/updateRepository";
+import { Repository } from "../store/Repository";
 import { CrudAdapter } from "./CrudAdapter";
 
 export const createCrudDispatcher = <Id, Model>(
