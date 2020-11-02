@@ -1,34 +1,19 @@
 import { Actions } from "./Actions";
 import { Dispatcher } from "./Dispatcher";
 import { Action } from "./Action";
-import { setDispatcherStatus } from "./setDispatcherStatus";
+import { automateDispatcherStatus } from "./automateDispatcherStatus";
 
-export function automateDispatcherStatuses<TActions extends Actions>(
+export const automateDispatcherStatuses = <TActions extends Actions>(
   dispatcher: Dispatcher<TActions>,
   actions: TActions
-): TActions {
+): TActions => {
   const newActions: Record<keyof any, Action> = {};
   for (const actionName in actions) {
-    newActions[actionName] = createActionWithStatusSetter(
+    newActions[actionName] = automateDispatcherStatus(
       dispatcher,
       actionName,
       actions[actionName]
     );
   }
   return newActions as TActions;
-}
-
-const createActionWithStatusSetter = <TActions extends Actions>(
-  dispatcher: Dispatcher<TActions>,
-  actionName: keyof TActions,
-  oldAction: Action
-) => async (...args: any[]) => {
-  setDispatcherStatus(dispatcher, actionName, "pending");
-  try {
-    const response = await oldAction(...args);
-    setDispatcherStatus(dispatcher, actionName, "rejected");
-    return response;
-  } catch (e) {
-    setDispatcherStatus(dispatcher, actionName, "rejected");
-  }
 };
