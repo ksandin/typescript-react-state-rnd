@@ -1,7 +1,5 @@
-import { Map } from "immutable";
-import { ActionStatus } from "./ActionStatus";
+import { ActionStatusMeta } from "./ActionStatusMeta";
 
-export type ActionStatuses<ActionNames extends keyof any> = Map<
-  ActionNames,
-  ActionStatus
+export type ActionStatuses<ActionNames extends keyof any> = Readonly<
+  Record<ActionNames, ActionStatusMeta>
 >;
