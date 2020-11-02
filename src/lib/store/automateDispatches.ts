@@ -1,15 +1,15 @@
 import { Actions } from "./Actions";
 import { Dispatcher } from "./Dispatcher";
 import { Action } from "./Action";
-import { automateDispatcherStatus } from "./automateDispatcherStatus";
+import { automateDispatch } from "./automateDispatch";
 
-export const automateDispatcherStatuses = <TActions extends Actions>(
+export const automateDispatches = <TActions extends Actions>(
   dispatcher: Dispatcher<TActions>,
   actions: TActions
 ): TActions => {
   const newActions: Record<keyof any, Action> = {};
   for (const actionName in actions) {
-    newActions[actionName] = automateDispatcherStatus(
+    newActions[actionName] = automateDispatch(
       dispatcher,
       actionName,
       actions[actionName]

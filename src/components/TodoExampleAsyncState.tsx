@@ -26,7 +26,7 @@ const todoStore = createStore(
 export type TodoExampleAsyncStateProps = {};
 
 export const TodoExampleAsyncState: React.FC<TodoExampleAsyncStateProps> = () => {
-  const [entries, statuses, actions] = useStore(todoStore);
+  const [entries, dispatches, actions] = useStore(todoStore);
   return (
     <>
       <TodoExample
@@ -34,9 +34,9 @@ export const TodoExampleAsyncState: React.FC<TodoExampleAsyncStateProps> = () =>
         createTodo={actions.create}
         updateTodo={actions.update}
         deleteTodo={actions.delete}
-        statuses={statuses}
+        dispatches={dispatches}
       />
-      <pre>{JSON.stringify(statuses, null, 2)}</pre>
+      <pre>{JSON.stringify(dispatches, null, 2)}</pre>
     </>
   );
 };

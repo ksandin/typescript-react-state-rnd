@@ -1,9 +1,9 @@
 import TypedEmitter from "typed-emitter";
-import { ActionStatuses } from "./ActionStatuses";
+import { Dispatches } from "./Dispatches";
 
 export type DispatcherEvents<ActionNames extends keyof any> = TypedEmitter<{
   change: (
-    newStatuses: ActionStatuses<ActionNames>,
-    oldStatuses: ActionStatuses<ActionNames>
+    newDispatches: Dispatches<ActionNames>,
+    oldDispatches: Dispatches<ActionNames>
   ) => void;
 }>;

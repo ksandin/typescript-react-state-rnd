@@ -1,19 +1,19 @@
 import EventEmitter from "events";
 import { Actions } from "./Actions";
 import { Dispatcher } from "./Dispatcher";
-import { automateDispatcherStatuses } from "./automateDispatcherStatuses";
-import { createActionStatuses } from "./createActionStatuses";
+import { automateDispatches } from "./automateDispatches";
+import { createDispatches } from "./createDispatches";
 
 export const createDispatcher = <TActions extends Actions>(
   actions: TActions
 ) => {
   const dispatcher: Dispatcher<TActions> = {
-    statuses: createActionStatuses<keyof TActions>(
+    dispatches: createDispatches<keyof TActions>(
       Object.getOwnPropertyNames(actions)
     ),
     events: new EventEmitter(),
     actions,
   };
-  dispatcher.actions = automateDispatcherStatuses(dispatcher, actions);
+  dispatcher.actions = automateDispatches(dispatcher, actions);
   return dispatcher;
 };
