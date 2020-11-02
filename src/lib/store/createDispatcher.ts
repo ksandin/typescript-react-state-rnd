@@ -1,19 +1,19 @@
 import EventEmitter from "events";
-import { Map } from "immutable";
 import { Actions } from "./Actions";
-import { ActionStatuses } from "./ActionStatuses";
 import { Dispatcher } from "./Dispatcher";
-import { automateDispatcherStatuses } from "./automateDispatcherStatuses";
+import { automateDispatches } from "./automateDispatches";
+import { createDispatches } from "./createDispatches";
 
 export const createDispatcher = <TActions extends Actions>(
-  actions: TActions,
-  statuses: ActionStatuses<keyof TActions> = Map()
+  actions: TActions
 ) => {
   const dispatcher: Dispatcher<TActions> = {
-    statuses,
+    dispatches: createDispatches<keyof TActions>(
+      Object.getOwnPropertyNames(actions)
+    ),
     events: new EventEmitter(),
     actions,
   };
-  dispatcher.actions = automateDispatcherStatuses(dispatcher, actions);
+  dispatcher.actions = automateDispatches(dispatcher, actions);
   return dispatcher;
 };

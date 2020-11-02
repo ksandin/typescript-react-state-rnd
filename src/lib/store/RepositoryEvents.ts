@@ -1,6 +1,9 @@
 import TypedEmitter from "typed-emitter";
-import { Map } from "immutable";
+import { RepositoryEntries } from "./RepositoryEntries";
 
 export type RepositoryEvents<Id, Model> = TypedEmitter<{
-  change: (newEntries: Map<Id, Model>, oldEntries: Map<Id, Model>) => void;
+  change: (
+    newEntries: RepositoryEntries<Id, Model>,
+    oldEntries: RepositoryEntries<Id, Model>
+  ) => void;
 }>;

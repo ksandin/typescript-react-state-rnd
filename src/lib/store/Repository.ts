@@ -1,7 +1,7 @@
-import { Map } from "immutable";
 import { RepositoryEvents } from "./RepositoryEvents";
+import { RepositoryEntries } from "./RepositoryEntries";
 
 export type Repository<Id, Model> = {
-  entries: Map<Id, Model>;
+  entries: RepositoryEntries<Id, Model>;
   events: RepositoryEvents<Id, Model>;
 };

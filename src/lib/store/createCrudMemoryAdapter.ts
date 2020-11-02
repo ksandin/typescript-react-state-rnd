@@ -1,13 +1,14 @@
 import { CrudAdapter } from "./CrudAdapter";
 import { Map } from "immutable";
 import { wait } from "./wait";
+import { RepositoryEntries } from "./RepositoryEntries";
 
 export const createCrudMemoryAdapter = <Id, Model>(
   getIdentity: (item: Model) => Id,
   withNewIdentity: (item: Model) => Model,
   simulatedDelay = 0
 ): CrudAdapter<Id, Model> => {
-  let entries = Map<Id, Model>();
+  let entries: RepositoryEntries<Id, Model> = Map();
   return {
     id: getIdentity,
     create: async (newItem: Model): Promise<Model> => {
