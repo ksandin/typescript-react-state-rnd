@@ -18,6 +18,7 @@ const todoStore = createStore(
     createCrudMemoryAdapter(
       (todo: Todo) => todo.id,
       (todo: Todo) => ({ ...todo, id: nextId() as TodoId }),
+      undefined,
       1000
     )
   )
