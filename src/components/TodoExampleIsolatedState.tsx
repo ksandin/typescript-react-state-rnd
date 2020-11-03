@@ -18,7 +18,7 @@ export const TodoExampleIsolatedState = () => (
   </>
 );
 
-const createCrudStore = () => {
+const createTodoStore = () => {
   let idCounter = 0;
   const nextId = () => idCounter++;
   const repository = createRepository<TodoId, Todo>();
@@ -35,7 +35,7 @@ const createCrudStore = () => {
 };
 
 const TodoComponentStoreExample = () => {
-  const [store] = useState(createCrudStore);
+  const [store] = useState(createTodoStore);
   const [entries, , actions] = useStore(store);
   return (
     <TodoExample
