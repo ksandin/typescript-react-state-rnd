@@ -6,9 +6,10 @@ import { RepositoryEntries } from "../store/RepositoryEntries";
 export const createCrudMemoryAdapter = <Id, Model>(
   getIdentity: (item: Model) => Id,
   withNewIdentity: (item: Model) => Model,
+  initialEntries: RepositoryEntries<Id, Model> = Map(),
   simulatedDelay = 0
 ): CrudAdapter<Id, Model> => {
-  let entries: RepositoryEntries<Id, Model> = Map();
+  let entries = initialEntries;
   return {
     id: getIdentity,
     create: async (newItem: Model): Promise<Model> => {
