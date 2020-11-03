@@ -4,28 +4,23 @@ import { TodoId } from "../state/TodoId";
 import { Todo } from "../state/Todo";
 import { createStore } from "../lib/store/createStore";
 import { createCrudDispatcher } from "../lib/crud/createCrudDispatcher";
-import { createCrudMemoryAdapter } from "../lib/crud/createCrudMemoryAdapter";
 import { useStore } from "../lib/store/useStore";
 import { TodoExample } from "./TodoExample";
 import { automateLocalStorageSerialization } from "../lib/automateLocalStorageSerialization";
+import { createNumericCrudMemoryAdapter } from "../lib/crud/createNumericCrudMemoryAdapter";
 
 export type TodoExamplePersistedLocalStateProps = {};
 
 const createTodoStore = () => {
   const repository = createRepository<TodoId, Todo>();
   automateLocalStorageSerialization("localStateExample", repository);
-  const repositoryIds = Array.from(repository.entries.values()).map(
-    (todo) => todo.id
-  );
-  let idCounter = Math.max(...repositoryIds) + 1;
-  const nextId = () => idCounter++;
   return createStore(
     repository,
     createCrudDispatcher(
       repository,
-      createCrudMemoryAdapter<TodoId, Todo>(
+      createNumericCrudMemoryAdapter<TodoId, Todo>(
         (todo) => todo.id,
-        (todo) => ({ ...todo, id: nextId() as TodoId }),
+        (todo, id) => ({ ...todo, id }),
         repository.entries
       )
     )

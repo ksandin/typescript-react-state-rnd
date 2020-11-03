@@ -7,7 +7,7 @@ import { TodoExample } from "./TodoExample";
 import { createRepository } from "../lib/store/createRepository";
 import { createStore } from "../lib/store/createStore";
 import { createCrudDispatcher } from "../lib/crud/createCrudDispatcher";
-import { createCrudMemoryAdapter } from "../lib/crud/createCrudMemoryAdapter";
+import { createNumericCrudMemoryAdapter } from "../lib/crud/createNumericCrudMemoryAdapter";
 
 export const TodoExampleIsolatedState = () => (
   <>
@@ -19,16 +19,14 @@ export const TodoExampleIsolatedState = () => (
 );
 
 const createTodoStore = () => {
-  let idCounter = 0;
-  const nextId = () => idCounter++;
   const repository = createRepository<TodoId, Todo>();
   return createStore(
     repository,
     createCrudDispatcher(
       repository,
-      createCrudMemoryAdapter<TodoId, Todo>(
+      createNumericCrudMemoryAdapter<TodoId, Todo>(
         (todo) => todo.id,
-        (todo) => ({ ...todo, id: nextId() as TodoId })
+        (todo, id) => ({ ...todo, id })
       )
     )
   );
