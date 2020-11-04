@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { TodoList } from "./TodoList";
 import { CreateTodoForm } from "./CreateTodoForm";
-import { Todo } from "../state/Todo";
-import { Dispatches } from "../lib/store/Dispatches";
+import { Todo } from "../../shared/state/Todo";
+import { Dispatches } from "../../lib/store/Dispatches";
 
 export type TodoExampleProps = {
   todos: Todo[];
