@@ -10,11 +10,9 @@ import { createNumericCrudIdentityFactory } from "../lib/crud/createNumericCrudI
 import { createCrudMemoryAdapter } from "../lib/crud/createCrudMemoryAdapter";
 import { automateLocalStorageSerialization } from "../lib/automateLocalStorageSerialization";
 
-export type TodoExamplePersistedLocalStateProps = {};
-
 const createTodoStore = () => {
   const repository = createRepository<TodoId, Todo>();
-  automateLocalStorageSerialization("localStateExample", repository);
+  automateLocalStorageSerialization("localStateObserverExample", repository);
   return createStore(
     repository,
     createCrudDispatcher(
@@ -31,7 +29,7 @@ const createTodoStore = () => {
   );
 };
 
-export const TodoExamplePersistedLocalState: React.FC<TodoExamplePersistedLocalStateProps> = () => {
+export const TodoExamplePersistedLocalStateObserver = () => {
   const [store] = useState(createTodoStore);
   const [entries, , actions] = useStore(store);
   return (
