@@ -25,17 +25,17 @@ export const createAppMenu = (): MenuCategory[] => [
         icon: Autorenew,
       },
       {
-        name: "Remote state",
+        name: "Persisted remote state",
         component: TodoExamplePersistedRemoteState,
         icon: CloudQueue,
       },
       {
-        name: "Local state (Observer)",
+        name: "Persisted local state (Observer)",
         component: TodoExamplePersistedLocalStateObserver,
         icon: Save,
       },
       {
-        name: "Local state (Adapter)",
+        name: "Persisted local state (Adapter)",
         component: TodoExamplePersistedLocalStateAdapter,
         icon: Save,
       },
