@@ -2,8 +2,9 @@ import { TodoExampleSharedState } from "../components/TodoExampleSharedState";
 import { TodoExampleIsolatedState } from "../components/TodoExampleIsolatedState";
 import { TodoExampleAsyncState } from "../components/TodoExampleAsyncState";
 import { TodoExamplePersistedRemoteState } from "../components/TodoExamplePersistedRemoteState";
-import { TodoExamplePersistedLocalState } from "../components/TodoExamplePersistedLocalState";
+import { TodoExamplePersistedLocalStateObserver } from "../components/TodoExamplePersistedLocalStateObserver";
 import { TodoExampleContextState } from "../components/TodoExampleContextState";
+import { TodoExamplePersistedLocalStateAdapter } from "../components/TodoExamplePersistedLocalStateAdapter";
 import { MenuCategory } from "../state/MenuCategory";
 import {
   AccountTree,
@@ -29,8 +30,13 @@ export const createAppMenu = (): MenuCategory[] => [
         icon: CloudQueue,
       },
       {
-        name: "Local state",
-        component: TodoExamplePersistedLocalState,
+        name: "Local state (Observer)",
+        component: TodoExamplePersistedLocalStateObserver,
+        icon: Save,
+      },
+      {
+        name: "Local state (Adapter)",
+        component: TodoExamplePersistedLocalStateAdapter,
         icon: Save,
       },
       {

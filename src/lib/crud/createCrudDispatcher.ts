@@ -2,6 +2,7 @@ import { createDispatcher } from "../store/createDispatcher";
 import { updateRepository } from "../store/updateRepository";
 import { Repository } from "../store/Repository";
 import { CrudAdapter } from "./CrudAdapter";
+import { listToMap } from "./listToMap";
 
 export const createCrudDispatcher = <Id, Model>(
   repository: Repository<Id, Model>,
@@ -12,19 +13,26 @@ export const createCrudDispatcher = <Id, Model>(
       const withId = await adapter.create(item);
       updateRepository(
         repository,
-        repository.entries.set(adapter.id(withId), withId)
+        repository.entries.set(
+          adapter.identityFactory.getIdentity(withId),
+          withId
+        )
       );
       return withId;
     },
-    // read: async () => {
-    //   const newEntries = await adapter.read();
-    //   updateRepository(repository, repository.entries.merge(newEntries));
-    // },
+    readAll: async () => {
+      const newEntries = await adapter.readAll();
+      const newEntriesMap = listToMap(
+        newEntries,
+        adapter.identityFactory.getIdentity
+      );
+      updateRepository(repository, repository.entries.merge(newEntriesMap));
+    },
     update: async (item: Model) => {
       const rollbackEntries = repository.entries;
       updateRepository(
         repository,
-        repository.entries.set(adapter.id(item), item)
+        repository.entries.set(adapter.identityFactory.getIdentity(item), item)
       );
       try {
         await adapter.update(item);
@@ -34,7 +42,7 @@ export const createCrudDispatcher = <Id, Model>(
       }
     },
     delete: async (item: Model) => {
-      const id = adapter.id(item);
+      const id = adapter.identityFactory.getIdentity(item);
       const rollbackEntries = repository.entries;
       updateRepository(repository, repository.entries.delete(id));
       try {

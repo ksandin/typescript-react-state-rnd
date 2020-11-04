@@ -1,23 +1,13 @@
 import React, { useState } from "react";
-import { Typography } from "@material-ui/core";
-import { useStore } from "../lib/store/useStore";
-import { Todo } from "../state/Todo";
-import { TodoId } from "../state/TodoId";
-import { TodoExample } from "./TodoExample";
 import { createRepository } from "../lib/store/createRepository";
+import { TodoId } from "../state/TodoId";
+import { Todo } from "../state/Todo";
 import { createStore } from "../lib/store/createStore";
 import { createCrudDispatcher } from "../lib/crud/createCrudDispatcher";
+import { useStore } from "../lib/store/useStore";
+import { TodoExample } from "./TodoExample";
 import { createNumericCrudIdentityFactory } from "../lib/crud/createNumericCrudIdentityFactory";
-import { createCrudMemoryAdapter } from "../lib/crud/createCrudMemoryAdapter";
-
-export const TodoExampleIsolatedState = () => (
-  <>
-    <Typography variant="h6">App 1</Typography>
-    <TodoComponentStoreExample />
-    <Typography variant="h6">App 2</Typography>
-    <TodoComponentStoreExample />
-  </>
-);
+import { createCrudLocalStorageAdapter } from "../lib/crud/createCrudLocalStorageAdapter";
 
 const createTodoStore = () => {
   const repository = createRepository<TodoId, Todo>();
@@ -25,17 +15,19 @@ const createTodoStore = () => {
     repository,
     createCrudDispatcher(
       repository,
-      createCrudMemoryAdapter<TodoId, Todo>(
+      createCrudLocalStorageAdapter<TodoId, Todo>(
+        "localStateAdapterExample",
         createNumericCrudIdentityFactory(
           (todo) => todo.id,
-          (todo, id) => ({ ...todo, id })
+          (todo, id) => ({ ...todo, id }),
+          repository.entries
         )
       )
     )
   );
 };
 
-const TodoComponentStoreExample = () => {
+export const TodoExamplePersistedLocalStateAdapter = () => {
   const [store] = useState(createTodoStore);
   const [entries, , actions] = useStore(store);
   return (
@@ -44,6 +36,7 @@ const TodoComponentStoreExample = () => {
       createTodo={actions.create}
       updateTodo={actions.update}
       deleteTodo={actions.delete}
+      readAllTodos={actions.readAll}
     />
   );
 };
