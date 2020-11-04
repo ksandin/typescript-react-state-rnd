@@ -19,6 +19,7 @@ export const createCrudLocalStorageAdapter = <Id, Model>(
       setEntries(getEntries().set(identityFactory.getIdentity(withId), withId));
       return withId;
     },
+    readAll: async () => Array.from(getEntries().values()),
     update: async (updatedItem: Model): Promise<Model> => {
       setEntries(
         getEntries().set(identityFactory.getIdentity(updatedItem), updatedItem)

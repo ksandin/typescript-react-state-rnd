@@ -18,6 +18,7 @@ export const createCrudMemoryAdapter = <Id, Model>(
       entries = entries.set(identityFactory.getIdentity(withId), withId);
       return withId;
     },
+    readAll: async () => Array.from(entries.values()),
     update: async (updatedItem: Model): Promise<Model> => {
       await wait(simulatedDelay);
       entries = entries.set(

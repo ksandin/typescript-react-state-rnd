@@ -2,6 +2,7 @@ import { createDispatcher } from "../store/createDispatcher";
 import { updateRepository } from "../store/updateRepository";
 import { Repository } from "../store/Repository";
 import { CrudAdapter } from "./CrudAdapter";
+import { listToMap } from "./listToMap";
 
 export const createCrudDispatcher = <Id, Model>(
   repository: Repository<Id, Model>,
@@ -19,10 +20,14 @@ export const createCrudDispatcher = <Id, Model>(
       );
       return withId;
     },
-    // read: async () => {
-    //   const newEntries = await adapter.read();
-    //   updateRepository(repository, repository.entries.merge(newEntries));
-    // },
+    readAll: async () => {
+      const newEntries = await adapter.readAll();
+      const newEntriesMap = listToMap(
+        newEntries,
+        adapter.identityFactory.getIdentity
+      );
+      updateRepository(repository, repository.entries.merge(newEntriesMap));
+    },
     update: async (item: Model) => {
       const rollbackEntries = repository.entries;
       updateRepository(

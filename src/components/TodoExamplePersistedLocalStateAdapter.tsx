@@ -36,6 +36,7 @@ export const TodoExamplePersistedLocalStateAdapter = () => {
       createTodo={actions.create}
       updateTodo={actions.update}
       deleteTodo={actions.delete}
+      readAllTodos={actions.readAll}
     />
   );
 };
