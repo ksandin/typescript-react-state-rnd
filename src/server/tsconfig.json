@@ -1,4 +1,5 @@
 {
+  "extends": "../../tsconfig.base",
   "compilerOptions": {
     "target": "esnext",
     "lib": ["esnext"],
