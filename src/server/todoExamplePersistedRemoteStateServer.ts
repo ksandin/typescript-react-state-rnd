@@ -33,7 +33,7 @@ app.put("/todo", jsonParser, async (req, res) =>
 // Delete
 app.delete("/todo/:id", async (req, res) => {
   const id = parseInt(req.params.id, 10) as TodoId;
-  await adapter.delete({ id, done: false, label: "" }); // HACK fake Todo instance
+  await adapter.delete(id);
   res.end();
 });
 

@@ -26,8 +26,7 @@ export const createCrudLocalStorageAdapter = <Id, Model>(
       );
       return updatedItem;
     },
-    delete: async (newItem: Model) => {
-      const id = identityFactory.getIdentity(newItem);
+    delete: async (id: Id) => {
       const entries = getEntries();
       if (!entries.has(id)) {
         throw new Error(`Id not found: ${id}`);

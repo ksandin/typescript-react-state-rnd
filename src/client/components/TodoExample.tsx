@@ -3,6 +3,7 @@ import { TodoList } from "./TodoList";
 import { CreateTodoForm } from "./CreateTodoForm";
 import { Todo } from "../../shared/state/Todo";
 import { Dispatches } from "../../lib/store/Dispatches";
+import { TodoId } from "../../shared/state/TodoId";
 
 export type TodoExampleProps = {
   todos: Todo[];
@@ -10,7 +11,7 @@ export type TodoExampleProps = {
   createTodo: (todo: Todo) => void;
   readAllTodos?: () => void;
   updateTodo: (todo: Todo) => void;
-  deleteTodo: (todo: Todo) => void;
+  deleteTodo: (id: TodoId) => void;
 };
 
 export const TodoExample: React.FC<TodoExampleProps> = ({
@@ -28,7 +29,11 @@ export const TodoExample: React.FC<TodoExampleProps> = ({
   }, [readAllTodos]);
   return (
     <>
-      <TodoList items={todos} onUpdate={updateTodo} onDelete={deleteTodo} />
+      <TodoList
+        items={todos}
+        onUpdate={updateTodo}
+        onDelete={(todo) => deleteTodo(todo.id)}
+      />
       <CreateTodoForm
         onCreate={createTodo}
         loading={dispatches?.create.status === "pending"}

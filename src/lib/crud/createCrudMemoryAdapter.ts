@@ -27,9 +27,8 @@ export const createCrudMemoryAdapter = <Id, Model>(
       );
       return updatedItem;
     },
-    delete: async (newItem: Model) => {
+    delete: async (id) => {
       await wait(simulatedDelay);
-      const id = identityFactory.getIdentity(newItem);
       if (!entries.has(id)) {
         throw new Error(`Id not found: ${id}`);
       }

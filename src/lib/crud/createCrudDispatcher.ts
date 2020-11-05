@@ -35,12 +35,11 @@ export const createCrudDispatcher = <Id, Model>(
         throw e;
       }
     },
-    delete: async (item: Model) => {
-      const id = adapter.id(item);
+    delete: async (id: Id) => {
       const rollbackEntries = repository.entries;
       updateRepository(repository, repository.entries.delete(id));
       try {
-        await adapter.delete(item);
+        await adapter.delete(id);
       } catch (e) {
         updateRepository(repository, rollbackEntries);
         throw e;

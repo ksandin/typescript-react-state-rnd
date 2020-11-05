@@ -32,8 +32,8 @@ export const createCrudRestAdapter = <Id, Model>(
     findErrors(response);
     return (await response.json()) as Model;
   },
-  delete: async (item: Model) => {
-    const response = await fetch(`${baseUrl}/${id(item)}`, {
+  delete: async (id: Id) => {
+    const response = await fetch(`${baseUrl}/${id}`, {
       method: "delete",
     });
     findErrors(response);
