@@ -13,26 +13,20 @@ export const createCrudDispatcher = <Id, Model>(
       const withId = await adapter.create(item);
       updateRepository(
         repository,
-        repository.entries.set(
-          adapter.identityFactory.getIdentity(withId),
-          withId
-        )
+        repository.entries.set(adapter.id(withId), withId)
       );
       return withId;
     },
     readAll: async () => {
       const newEntries = await adapter.readAll();
-      const newEntriesMap = listToMap(
-        newEntries,
-        adapter.identityFactory.getIdentity
-      );
+      const newEntriesMap = listToMap(newEntries, adapter.id);
       updateRepository(repository, repository.entries.merge(newEntriesMap));
     },
     update: async (item: Model) => {
       const rollbackEntries = repository.entries;
       updateRepository(
         repository,
-        repository.entries.set(adapter.identityFactory.getIdentity(item), item)
+        repository.entries.set(adapter.id(item), item)
       );
       try {
         await adapter.update(item);
@@ -42,7 +36,7 @@ export const createCrudDispatcher = <Id, Model>(
       }
     },
     delete: async (item: Model) => {
-      const id = adapter.identityFactory.getIdentity(item);
+      const id = adapter.id(item);
       const rollbackEntries = repository.entries;
       updateRepository(repository, repository.entries.delete(id));
       try {

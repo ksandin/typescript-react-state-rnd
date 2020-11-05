@@ -11,7 +11,7 @@ export const createCrudMemoryAdapter = <Id, Model>(
 ): CrudAdapter<Id, Model> => {
   let entries = initialEntries;
   return {
-    identityFactory,
+    id: identityFactory.getIdentity,
     create: async (newItem: Model): Promise<Model> => {
       await wait(simulatedDelay);
       const withId = identityFactory.withNewIdentity(newItem);

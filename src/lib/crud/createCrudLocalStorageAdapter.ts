@@ -13,7 +13,7 @@ export const createCrudLocalStorageAdapter = <Id, Model>(
   const setEntries = (entries: RepositoryEntries<Id, Model>) =>
     saveMapToLocalStorage(localStorageKey, entries);
   return {
-    identityFactory,
+    id: identityFactory.getIdentity,
     create: async (newItem: Model): Promise<Model> => {
       const withId = identityFactory.withNewIdentity(newItem);
       setEntries(getEntries().set(identityFactory.getIdentity(withId), withId));
