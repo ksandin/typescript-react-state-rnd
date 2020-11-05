@@ -27,14 +27,13 @@ export const createCrudMemoryAdapter = <Id, Model>(
       );
       return updatedItem;
     },
-    delete: async (newItem: Model): Promise<Model> => {
+    delete: async (newItem: Model) => {
       await wait(simulatedDelay);
       const id = identityFactory.getIdentity(newItem);
       if (!entries.has(id)) {
         throw new Error(`Id not found: ${id}`);
       }
       entries = entries.remove(id);
-      return newItem;
     },
   };
 };

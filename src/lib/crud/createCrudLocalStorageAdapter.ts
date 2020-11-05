@@ -26,14 +26,13 @@ export const createCrudLocalStorageAdapter = <Id, Model>(
       );
       return updatedItem;
     },
-    delete: async (newItem: Model): Promise<Model> => {
+    delete: async (newItem: Model) => {
       const id = identityFactory.getIdentity(newItem);
       const entries = getEntries();
       if (!entries.has(id)) {
         throw new Error(`Id not found: ${id}`);
       }
       setEntries(entries.remove(id));
-      return newItem;
     },
   };
 };
