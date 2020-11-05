@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": ["esnext"],
+    "esModuleInterop": true
+  },
+  "include": [".", "../types"]
+}

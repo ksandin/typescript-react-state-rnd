@@ -29,7 +29,8 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start-server": "ts-node-dev --project ./src/server/tsconfig.json ./src/server/todoExamplePersistedRemoteStateServer.ts"
   },
   "eslintConfig": {
     "extends": [
@@ -61,6 +62,13 @@
     ]
   },
   "devDependencies": {
-    "react-app-rewired": "^2.1.6"
+    "@types/body-parser": "^1.19.0",
+    "@types/cors": "^2.8.8",
+    "@types/express": "^4.17.8",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "react-app-rewired": "^2.1.6",
+    "ts-node-dev": "^1.0.0"
   }
 }
