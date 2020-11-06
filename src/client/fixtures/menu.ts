@@ -1,10 +1,11 @@
 import { TodoExampleSharedState } from "../components/TodoExampleSharedState";
 import { TodoExampleIsolatedState } from "../components/TodoExampleIsolatedState";
 import { TodoExampleAsyncState } from "../components/TodoExampleAsyncState";
-import { TodoExamplePersistedRemoteState } from "../components/TodoExamplePersistedRemoteState";
+import { TodoExamplePersistedRemoteMemoryState } from "../components/TodoExamplePersistedRemoteMemoryState";
 import { TodoExamplePersistedLocalStateObserver } from "../components/TodoExamplePersistedLocalStateObserver";
 import { TodoExampleContextState } from "../components/TodoExampleContextState";
 import { TodoExamplePersistedLocalStateAdapter } from "../components/TodoExamplePersistedLocalStateAdapter";
+import { TodoExamplePersistedRemoteMongoDBState } from "../components/TodoExamplePersistedRemoteMongoDBState";
 import { MenuCategory } from "../state/MenuCategory";
 import {
   AccountTree,
@@ -25,8 +26,13 @@ export const createAppMenu = (): MenuCategory[] => [
         icon: Autorenew,
       },
       {
-        name: "Persisted remote state",
-        component: TodoExamplePersistedRemoteState,
+        name: "Persisted remote state (Memory)",
+        component: TodoExamplePersistedRemoteMemoryState,
+        icon: CloudQueue,
+      },
+      {
+        name: "Persisted remote state (MongoDB)",
+        component: TodoExamplePersistedRemoteMongoDBState,
         icon: CloudQueue,
       },
       {

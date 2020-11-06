@@ -30,7 +30,7 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
-    "start-server": "ts-node-dev --project ./src/server/tsconfig.json ./src/server/todoExamplePersistedRemoteStateServer.ts"
+    "start-server": "ts-node-dev --project ./src/server/tsconfig.json ./src/server/index.ts"
   },
   "eslintConfig": {
     "extends": [

@@ -15,14 +15,14 @@ const createTodoStore = () => {
     createCrudDispatcher(
       repository,
       createCrudRestAdapter<TodoId, Todo>(
-        "http://localhost:3001/todo",
+        "http://localhost:3002/todo",
         (todo) => todo.id
       )
     )
   );
 };
 
-export const TodoExamplePersistedRemoteState = () => {
+export const TodoExamplePersistedRemoteMongoDBState = () => {
   const [store] = useState(createTodoStore);
   const [entries, , actions] = useStore(store);
   return (
