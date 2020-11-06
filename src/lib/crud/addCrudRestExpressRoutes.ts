@@ -26,7 +26,10 @@ export const addCrudRestExpressRoutes = <Id, Model>(
 
   // Delete
   app.delete(path, jsonParser, (req, res) =>
-    tryIt(res, () => adapter.delete(req.body.id as Id))
+    tryIt(res, async () => {
+      await adapter.delete(req.body.id as Id);
+      res.end();
+    })
   );
 };
 
