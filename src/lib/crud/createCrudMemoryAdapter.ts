@@ -11,7 +11,7 @@ export const createCrudMemoryAdapter = <Id, Model>(
 ): CrudAdapter<Id, Model> => {
   let entries = initialEntries;
   return {
-    identityFactory,
+    id: identityFactory.getIdentity,
     create: async (newItem: Model): Promise<Model> => {
       await wait(simulatedDelay);
       const withId = identityFactory.withNewIdentity(newItem);
@@ -27,14 +27,12 @@ export const createCrudMemoryAdapter = <Id, Model>(
       );
       return updatedItem;
     },
-    delete: async (newItem: Model): Promise<Model> => {
+    delete: async (id) => {
       await wait(simulatedDelay);
-      const id = identityFactory.getIdentity(newItem);
       if (!entries.has(id)) {
         throw new Error(`Id not found: ${id}`);
       }
       entries = entries.remove(id);
-      return newItem;
     },
   };
 };

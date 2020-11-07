@@ -13,7 +13,7 @@ export const createCrudLocalStorageAdapter = <Id, Model>(
   const setEntries = (entries: RepositoryEntries<Id, Model>) =>
     saveMapToLocalStorage(localStorageKey, entries);
   return {
-    identityFactory,
+    id: identityFactory.getIdentity,
     create: async (newItem: Model): Promise<Model> => {
       const withId = identityFactory.withNewIdentity(newItem);
       setEntries(getEntries().set(identityFactory.getIdentity(withId), withId));
@@ -26,14 +26,12 @@ export const createCrudLocalStorageAdapter = <Id, Model>(
       );
       return updatedItem;
     },
-    delete: async (newItem: Model): Promise<Model> => {
-      const id = identityFactory.getIdentity(newItem);
+    delete: async (id: Id) => {
       const entries = getEntries();
       if (!entries.has(id)) {
         throw new Error(`Id not found: ${id}`);
       }
       setEntries(entries.remove(id));
-      return newItem;
     },
   };
 };

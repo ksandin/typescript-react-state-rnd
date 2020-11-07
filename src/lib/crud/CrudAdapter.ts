@@ -1,9 +1,7 @@
-import { CrudIdentityFactory } from "./CrudIdentityFactory";
-
 export type CrudAdapter<Id, Model> = {
-  identityFactory: CrudIdentityFactory<Id, Model>;
+  id: (item: Model) => Id;
   create: (item: Model) => Promise<Model>;
   readAll: () => Promise<Model[]>;
   update: (item: Model) => Promise<Model>;
-  delete: (item: Model) => Promise<Model>;
+  delete: (id: Id) => Promise<void>;
 };
