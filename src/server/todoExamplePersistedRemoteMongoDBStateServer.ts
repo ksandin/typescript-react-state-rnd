@@ -1,23 +1,52 @@
 import express from "express";
 import cors from "cors";
-import { TodoId } from "../shared/state/TodoId";
-import { Todo } from "../shared/state/Todo";
-import { createCrudMemoryAdapter } from "../lib/crud/createCrudMemoryAdapter";
-import { createNumericCrudIdentityFactory } from "../lib/crud/createNumericCrudIdentityFactory";
+import { MongoMemoryServer } from "mongodb-memory-server";
+import { connect, model, Schema, Document } from "mongoose";
+import { documentSchemaDefinition } from "../lib/mongoose-tsextensions/documentSchemaDefinition";
 import { addCrudRestExpressRoutes } from "../lib/crud/addCrudRestExpressRoutes";
+import { createCrudMongooseAdapter1to1 } from "../lib/crud/createCrudMongooseAdapter1to1";
+import { Todo } from "../shared/state/Todo";
 
-const app = express();
-app.use(cors());
-addCrudRestExpressRoutes(
-  "/todo",
-  app,
-  createCrudMemoryAdapter<TodoId, Todo>(
-    createNumericCrudIdentityFactory(
-      (todo) => todo.id,
-      (todo, id) => ({ ...todo, id })
-    )
-  )
+type TodoDocument = Omit<Todo, "id"> & Document;
+
+const TodoSchema = new Schema(
+  documentSchemaDefinition<TodoDocument>({
+    label: { type: String, required: true },
+    done: { type: Boolean, required: true },
+  })
 );
 
-const port = 3002;
-app.listen(port, () => console.log(`${__filename} listening on port ${port}`));
+const TodoModel = model<TodoDocument>("Todo", TodoSchema);
+
+async function startMongoDB() {
+  const mongoDB = new MongoMemoryServer();
+  const uri = await mongoDB.getUri();
+  return await connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  });
+}
+
+async function startExpress() {
+  const app = express();
+  app.use(cors());
+  addCrudRestExpressRoutes(
+    "/todo",
+    app,
+    createCrudMongooseAdapter1to1<Todo, TodoDocument>(TodoModel, "id")
+  );
+
+  const port = 3002;
+  app.listen(port, () =>
+    console.log(`${__filename} listening on port ${port}`)
+  );
+  return app;
+}
+
+async function mongoDBExample() {
+  await startMongoDB();
+  await startExpress();
+}
+
+mongoDBExample();
