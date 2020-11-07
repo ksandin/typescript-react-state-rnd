@@ -5,5 +5,5 @@
     "lib": ["esnext"],
     "esModuleInterop": true
   },
-  "include": ["src/apiIndex.ts", "src/apps/*/api", "src/types"]
+  "include": ["src/apiIndex.ts", "src/apps/*/api"]
 }
