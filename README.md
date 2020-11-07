@@ -1,8 +1,18 @@
 # Typescript & React state R&D
 
-Playground for experimenting with all things state management (local or remote) with the purpose of finding good workflows, either by integrating existing third party tools and libraries or developing new ones.
+## Goals
+
+This project is a playground for experimenting with all things state management with the purpose of finding good workflows, either by using existing tools and libraries or developing new ones.
+
+This project also aims to produce example code for as many state management scenarios as possible (ie. local vs remote state, in-memory vs persisted state, etc.) for a wide range of application complexities (ie. small, medium or large scale applications).
+
+> Note that this is primarily a project for myself to practice state management with.
+
+## The app
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+When you run `yarn start` you will launch a react application with examples demonstrating the state management scenarios mentioned above.
 
 ## Available Scripts
 
@@ -10,11 +20,14 @@ In the project directory, you can run:
 
 ### `yarn start`
 
-Runs the app in the development mode.\
+Runs the react application in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
+
+### `yarn start-server`
+Runs the api servers required for some of the react examples.
 
 ### `yarn test`
 
