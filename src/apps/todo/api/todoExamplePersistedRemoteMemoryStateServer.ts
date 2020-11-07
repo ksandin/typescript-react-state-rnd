@@ -19,5 +19,13 @@ addCrudRestExpressRoutes(
   )
 );
 
+type NumberId = Opaque<number, "NumberId">;
+type StringId = Opaque<string, "StringId">;
+
+const numberId = 1 as NumberId;
+const stringId = "str" as StringId;
+
+const recipient: NumberId = stringId;
+
 const port = 3001;
 app.listen(port, () => console.log(`${__filename} listening on port ${port}`));
