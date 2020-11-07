@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Typography } from "@material-ui/core";
-import { useStore } from "../../lib/store/useStore";
-import { Todo } from "../../shared/state/Todo";
-import { TodoId } from "../../shared/state/TodoId";
+import { useStore } from "../../../lib/store/useStore";
+import { Todo } from "../shared/Todo";
+import { TodoId } from "../shared/TodoId";
 import { TodoExample } from "./TodoExample";
-import { createRepository } from "../../lib/store/createRepository";
-import { createStore } from "../../lib/store/createStore";
-import { createCrudDispatcher } from "../../lib/crud/createCrudDispatcher";
-import { createNumericCrudIdentityFactory } from "../../lib/crud/createNumericCrudIdentityFactory";
-import { createCrudMemoryAdapter } from "../../lib/crud/createCrudMemoryAdapter";
+import { createRepository } from "../../../lib/store/createRepository";
+import { createStore } from "../../../lib/store/createStore";
+import { createCrudDispatcher } from "../../../lib/crud/createCrudDispatcher";
+import { createNumericCrudIdentityFactory } from "../../../lib/crud/createNumericCrudIdentityFactory";
+import { createCrudMemoryAdapter } from "../../../lib/crud/createCrudMemoryAdapter";
 
 export const TodoExampleIsolatedState = () => (
   <>

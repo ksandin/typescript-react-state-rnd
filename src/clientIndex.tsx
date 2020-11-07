@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { App } from "./components/App";
+import { Root } from "./apps/root/Root";
 import reportWebVitals from "./reportWebVitals";
-import { createAppTheme } from "./fixtures/theme";
-import { createAppMenu } from "./fixtures/menu";
+import { createAppTheme } from "./apps/root/theme";
+import { createAppMenu } from "./apps/root/menu";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App theme={createAppTheme()} menu={createAppMenu()} />
+    <Root theme={createAppTheme()} menu={createAppMenu()} />
   </React.StrictMode>,
   document.getElementById("root")
 );

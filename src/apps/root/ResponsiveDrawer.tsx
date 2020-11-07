@@ -13,8 +13,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { MenuCategory } from "../state/MenuCategory";
-import { MenuHighlight } from "../state/MenuHighlight";
+import { MenuCategory } from "./MenuCategory";
+import { MenuHighlight } from "./MenuHighlight";
 
 // This file is based on https://material-ui.com/components/drawers/#responsive-drawer
 

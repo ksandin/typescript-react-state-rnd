@@ -2,10 +2,10 @@ import express from "express";
 import cors from "cors";
 import { MongoMemoryServer } from "mongodb-memory-server";
 import { connect, model, Schema, Document } from "mongoose";
-import { documentSchemaDefinition } from "../lib/mongoose-tsextensions/documentSchemaDefinition";
-import { addCrudRestExpressRoutes } from "../lib/crud/addCrudRestExpressRoutes";
-import { createCrudMongooseAdapter1to1 } from "../lib/crud/createCrudMongooseAdapter1to1";
-import { Todo } from "../shared/state/Todo";
+import { documentSchemaDefinition } from "../../../lib/mongoose-tsextensions/documentSchemaDefinition";
+import { addCrudRestExpressRoutes } from "../../../lib/crud/addCrudRestExpressRoutes";
+import { createCrudMongooseAdapter1to1 } from "../../../lib/crud/createCrudMongooseAdapter1to1";
+import { Todo } from "../shared/Todo";
 
 type TodoDocument = Omit<Todo, "id"> & Document;
 

@@ -6,15 +6,15 @@ import {
 } from "@material-ui/core/styles";
 import { CssBaseline } from "@material-ui/core";
 import { ResponsiveDrawer } from "./ResponsiveDrawer";
-import { MenuCategory } from "../state/MenuCategory";
-import { MenuHighlight } from "../state/MenuHighlight";
+import { MenuCategory } from "./MenuCategory";
+import { MenuHighlight } from "./MenuHighlight";
 
-export type AppProps = {
+export type RootProps = {
   theme: Theme;
   menu: MenuCategory[];
 };
 
-export const App: React.FC<AppProps> = ({ theme, menu }) => {
+export const Root: React.FC<RootProps> = ({ theme, menu }) => {
   const [route, setRoute] = useState<MenuHighlight>([0, 0]);
   const [categoryIndex, childIndex] = route;
   const Page = menu[categoryIndex].options[childIndex].component;

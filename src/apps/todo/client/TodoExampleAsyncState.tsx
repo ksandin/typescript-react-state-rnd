@@ -1,13 +1,13 @@
 import React from "react";
 import { TodoExample } from "./TodoExample";
-import { Todo } from "../../shared/state/Todo";
-import { TodoId } from "../../shared/state/TodoId";
-import { useStore } from "../../lib/store/useStore";
-import { createStore } from "../../lib/store/createStore";
-import { createRepository } from "../../lib/store/createRepository";
-import { createCrudDispatcher } from "../../lib/crud/createCrudDispatcher";
-import { createCrudMemoryAdapter } from "../../lib/crud/createCrudMemoryAdapter";
-import { createNumericCrudIdentityFactory } from "../../lib/crud/createNumericCrudIdentityFactory";
+import { Todo } from "../shared/Todo";
+import { TodoId } from "../shared/TodoId";
+import { useStore } from "../../../lib/store/useStore";
+import { createStore } from "../../../lib/store/createStore";
+import { createRepository } from "../../../lib/store/createRepository";
+import { createCrudDispatcher } from "../../../lib/crud/createCrudDispatcher";
+import { createCrudMemoryAdapter } from "../../../lib/crud/createCrudMemoryAdapter";
+import { createNumericCrudIdentityFactory } from "../../../lib/crud/createNumericCrudIdentityFactory";
 
 const repository = createRepository<TodoId, Todo>();
 const todoStore = createStore(

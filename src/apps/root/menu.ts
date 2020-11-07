@@ -1,12 +1,12 @@
-import { TodoExampleSharedState } from "../components/TodoExampleSharedState";
-import { TodoExampleIsolatedState } from "../components/TodoExampleIsolatedState";
-import { TodoExampleAsyncState } from "../components/TodoExampleAsyncState";
-import { TodoExamplePersistedRemoteMemoryState } from "../components/TodoExamplePersistedRemoteMemoryState";
-import { TodoExamplePersistedLocalStateObserver } from "../components/TodoExamplePersistedLocalStateObserver";
-import { TodoExampleContextState } from "../components/TodoExampleContextState";
-import { TodoExamplePersistedLocalStateAdapter } from "../components/TodoExamplePersistedLocalStateAdapter";
-import { TodoExamplePersistedRemoteMongoDBState } from "../components/TodoExamplePersistedRemoteMongoDBState";
-import { MenuCategory } from "../state/MenuCategory";
+import { TodoExampleSharedState } from "../todo/client/TodoExampleSharedState";
+import { TodoExampleIsolatedState } from "../todo/client/TodoExampleIsolatedState";
+import { TodoExampleAsyncState } from "../todo/client/TodoExampleAsyncState";
+import { TodoExamplePersistedRemoteMemoryState } from "../todo/client/TodoExamplePersistedRemoteMemoryState";
+import { TodoExamplePersistedLocalStateObserver } from "../todo/client/TodoExamplePersistedLocalStateObserver";
+import { TodoExampleContextState } from "../todo/client/TodoExampleContextState";
+import { TodoExamplePersistedLocalStateAdapter } from "../todo/client/TodoExamplePersistedLocalStateAdapter";
+import { TodoExamplePersistedRemoteMongoDBState } from "../todo/client/TodoExamplePersistedRemoteMongoDBState";
+import { MenuCategory } from "./MenuCategory";
 import {
   AccountTree,
   Autorenew,

@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useCallback, useState } from "react";
 import styled from "styled-components";
 import { CircularProgress, TextField } from "@material-ui/core";
-import { Todo } from "../../shared/state/Todo";
-import { createTodo } from "../../shared/state/createTodo";
+import { Todo } from "../shared/Todo";
+import { createTodo } from "../shared/createTodo";
 
 export type CreateTodoFormProps = {
   onCreate: (todo: Todo) => void;

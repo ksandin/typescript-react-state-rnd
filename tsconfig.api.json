@@ -1,9 +1,9 @@
 {
-  "extends": "../../tsconfig.base",
+  "extends": "./tsconfig.base",
   "compilerOptions": {
     "target": "esnext",
     "lib": ["esnext"],
     "esModuleInterop": true
   },
-  "include": [".", "../types"]
+  "include": ["src/apiIndex.ts", "src/apps/*/api", "src/types"]
 }
