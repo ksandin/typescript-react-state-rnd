@@ -18,7 +18,7 @@ import { MenuHighlight } from "./MenuHighlight";
 
 // This file is based on https://material-ui.com/components/drawers/#responsive-drawer
 
-const drawerWidth = 260;
+const drawerWidth = 270;
 
 const useStyles = makeStyles((theme) => ({
   root: {

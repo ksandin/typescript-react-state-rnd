@@ -5,7 +5,7 @@ import { Todo } from "../shared/Todo";
 import { Dispatches } from "../../../lib/store/Dispatches";
 import { TodoId } from "../shared/TodoId";
 
-export type TodoExampleProps = {
+export type TodoAppProps = {
   todos: Todo[];
   dispatches?: Dispatches<"create" | "update" | "delete">;
   createTodo: (todo: Todo) => void;
@@ -14,7 +14,7 @@ export type TodoExampleProps = {
   deleteTodo: (id: TodoId) => void;
 };
 
-export const TodoExample: React.FC<TodoExampleProps> = ({
+export const TodoApp: React.FC<TodoAppProps> = ({
   todos,
   dispatches,
   createTodo,

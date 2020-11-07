@@ -1,2 +1,2 @@
-import "./apps/todo/api/todoExamplePersistedRemoteMemoryStateServer";
-import "./apps/todo/api/todoExamplePersistedRemoteMongoDBStateServer";
+import "./apps/todo/api/restMemoryApi";
+import "./apps/todo/api/restMongooseApi";

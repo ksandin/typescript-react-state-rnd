@@ -1,11 +1,11 @@
-import { TodoExampleSharedState } from "../todo/client/TodoExampleSharedState";
-import { TodoExampleIsolatedState } from "../todo/client/TodoExampleIsolatedState";
-import { TodoExampleAsyncState } from "../todo/client/TodoExampleAsyncState";
-import { TodoExamplePersistedRemoteMemoryState } from "../todo/client/TodoExamplePersistedRemoteMemoryState";
-import { TodoExamplePersistedLocalStateObserver } from "../todo/client/TodoExamplePersistedLocalStateObserver";
-import { TodoExampleContextState } from "../todo/client/TodoExampleContextState";
-import { TodoExamplePersistedLocalStateAdapter } from "../todo/client/TodoExamplePersistedLocalStateAdapter";
-import { TodoExamplePersistedRemoteMongoDBState } from "../todo/client/TodoExamplePersistedRemoteMongoDBState";
+import { SharedStateExample } from "../todo/client/examples/SharedStateExample";
+import { IsolatedStateExample } from "../todo/client/examples/IsolatedStateExample";
+import { AsyncStateExample } from "../todo/client/examples/AsyncStateExample";
+import { RestMemoryExample } from "../todo/client/examples/RestMemoryExample";
+import { LocalStorageObserverExample } from "../todo/client/examples/LocalStorageObserverExample";
+import { ContextStateExample } from "../todo/client/examples/ContextStateExample";
+import { LocalStorageAdapterExample } from "../todo/client/examples/LocalStorageAdapterExample";
+import { RestMongooseExample } from "../todo/client/examples/RestMongooseExample";
 import { MenuCategory } from "./MenuCategory";
 import {
   AccountTree,
@@ -21,40 +21,40 @@ export const createAppMenu = (): MenuCategory[] => [
     name: "Todo App",
     options: [
       {
+        name: "Isolated state",
+        component: IsolatedStateExample,
+        icon: Memory,
+      },
+      { name: "Shared state", component: SharedStateExample, icon: Share },
+      {
+        name: "Context state",
+        component: ContextStateExample,
+        icon: AccountTree,
+      },
+      {
         name: "Async state",
-        component: TodoExampleAsyncState,
+        component: AsyncStateExample,
         icon: Autorenew,
       },
       {
-        name: "Persisted remote state (Memory)",
-        component: TodoExamplePersistedRemoteMemoryState,
+        name: "REST (Memory)",
+        component: RestMemoryExample,
         icon: CloudQueue,
       },
       {
-        name: "Persisted remote state (MongoDB)",
-        component: TodoExamplePersistedRemoteMongoDBState,
+        name: "REST (MongoDB)",
+        component: RestMongooseExample,
         icon: CloudQueue,
       },
       {
-        name: "Persisted local state (Observer)",
-        component: TodoExamplePersistedLocalStateObserver,
+        name: "LocalStorage (Observer)",
+        component: LocalStorageObserverExample,
         icon: Save,
       },
       {
-        name: "Persisted local state (Adapter)",
-        component: TodoExamplePersistedLocalStateAdapter,
+        name: "LocalStorage (Adapter)",
+        component: LocalStorageAdapterExample,
         icon: Save,
-      },
-      {
-        name: "Context state",
-        component: TodoExampleContextState,
-        icon: AccountTree,
-      },
-      { name: "Shared state", component: TodoExampleSharedState, icon: Share },
-      {
-        name: "Isolated state",
-        component: TodoExampleIsolatedState,
-        icon: Memory,
       },
     ],
   },
