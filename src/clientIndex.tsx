@@ -1,13 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Root } from "./apps/root/Root";
 import reportWebVitals from "./reportWebVitals";
-import { createAppTheme } from "./apps/root/theme";
-import { createAppMenu } from "./apps/root/menu";
+import { Root } from "./apps/root/Root";
+import { createAppTheme } from "./apps/root/fixtures/theme";
+import { routes } from "./apps/root/fixtures/routes";
+import { createRouter } from "./apps/root/createRouter";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Root theme={createAppTheme()} menu={createAppMenu()} />
+    <Root
+      theme={createAppTheme()}
+      router={createRouter(routes)}
+      routeConfig={routes}
+    />
   </React.StrictMode>,
   document.getElementById("root")
 );

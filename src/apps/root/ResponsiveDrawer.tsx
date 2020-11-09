@@ -13,8 +13,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { MenuCategory } from "./MenuCategory";
-import { MenuHighlight } from "./MenuHighlight";
+import { useRouter } from "react-router5";
+import { createMenu } from "./createMenu";
+import { useRouteConfig } from "./useRouteConfig";
 
 // This file is based on https://material-ui.com/components/drawers/#responsive-drawer
 
@@ -53,56 +54,47 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export type ResponsiveDrawerProps = {
-  menu: MenuCategory[];
-  menuHighlight: MenuHighlight;
-  onHighlightChange: (highlight: MenuHighlight) => void;
-};
-
-export const ResponsiveDrawer: React.FC<ResponsiveDrawerProps> = ({
-  children,
-  menu,
-  menuHighlight,
-  onHighlightChange,
-}) => {
+export const ResponsiveDrawer: React.FC = ({ children }) => {
+  const { route, configNode, configMap } = useRouteConfig();
+  const router = useRouter();
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
-  const [activeCategoryIndex, activeOptionIndex] = menuHighlight;
-  const title = `${menu[activeCategoryIndex].name} > ${menu[activeCategoryIndex].options[activeOptionIndex].name}`;
+  const menu = createMenu(configMap);
+  const title = configNode ? `${configNode.app} > ${configNode.title}` : "404";
 
   const drawer = (
     <div>
       <div className={classes.toolbar} />
-      {menu.map((category, categoryIndex) => (
-        <React.Fragment key={category.name}>
+      {Object.getOwnPropertyNames(menu).map((appName) => (
+        <React.Fragment key={appName}>
           <ListItem>
-            <ListItemText primary={category.name} />
+            <ListItemText primary={appName} />
           </ListItem>
           <Divider />
           <List>
-            {category.options.map(({ name, icon: Icon }, optionIndex) => {
-              const isSelected =
-                optionIndex === activeOptionIndex &&
-                activeCategoryIndex === categoryIndex;
-              return (
-                <ListItem
-                  button
-                  key={optionIndex}
-                  selected={isSelected}
-                  onClick={() => {
-                    onHighlightChange([categoryIndex, optionIndex]);
-                    setMobileOpen(false);
-                  }}
-                >
-                  <ListItemIcon>
-                    <Icon />
-                  </ListItemIcon>
-                  <ListItemText primary={name} />
-                </ListItem>
-              );
-            })}
+            {menu[appName].map(
+              ({ name: itemName, title: itemTitle, icon: Icon }, index) => {
+                const isSelected = route.name === itemName;
+                return (
+                  <ListItem
+                    button
+                    key={index}
+                    selected={isSelected}
+                    onClick={() => {
+                      router.navigate(itemName);
+                      setMobileOpen(false);
+                    }}
+                  >
+                    <ListItemIcon>
+                      <Icon />
+                    </ListItemIcon>
+                    <ListItemText primary={itemTitle} />
+                  </ListItem>
+                );
+              }
+            )}
           </List>
         </React.Fragment>
       ))}
