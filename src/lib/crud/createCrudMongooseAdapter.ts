@@ -26,7 +26,8 @@ export const createCrudMongooseAdapter = <
       const instanceId = getClientInstanceId(instance);
       const document = await mongooseModel.findByIdAndUpdate(
         instanceId,
-        getUpdateQuery(instance)
+        getUpdateQuery(instance),
+        { new: true }
       );
       if (!document) {
         throw new Error(`Could not find document by id: ${instanceId}`);
