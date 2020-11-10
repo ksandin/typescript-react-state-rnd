@@ -1,16 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import loggerPlugin from "router5-plugin-logger";
 import reportWebVitals from "./reportWebVitals";
 import { Root } from "./apps/root/Root";
 import { createAppTheme } from "./apps/root/fixtures/theme";
-import { createRouter } from "./apps/root/createRouter";
+import { createRouterForConfig } from "./apps/root/createRouterForConfig";
 import { routes } from "./apps/root/fixtures/routes";
+import browserPlugin from "router5-plugin-browser";
 
-const router = createRouter(routes);
-if (process.env.NODE_ENV === "development") {
-  router.usePlugin(loggerPlugin);
-}
+const router = createRouterForConfig(routes);
+router.usePlugin(browserPlugin());
+router.start();
 
 ReactDOM.render(
   <React.StrictMode>
