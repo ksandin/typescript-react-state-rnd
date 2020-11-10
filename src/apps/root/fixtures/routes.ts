@@ -14,6 +14,7 @@ import { RestMemoryExample } from "../../todo/client/examples/RestMemoryExample"
 import { RestMongooseExample } from "../../todo/client/examples/RestMongooseExample";
 import { LocalStorageObserverExample } from "../../todo/client/examples/LocalStorageObserverExample";
 import { LocalStorageAdapterExample } from "../../todo/client/examples/LocalStorageAdapterExample";
+import { CinemaApp } from "../../cinema/CinemaApp";
 import { RouteConfigMap } from "../RouteConfig";
 
 const routeList = [
@@ -79,6 +80,14 @@ const routeList = [
     title: "LocalStorage (Adapter)",
     app: "Todo",
     component: LocalStorageAdapterExample,
+    icon: Save,
+  },
+  {
+    path: "/cinema/demo",
+    name: "cinema-demo",
+    title: "Demo",
+    app: "Cinema",
+    component: CinemaApp,
     icon: Save,
   },
 ];
