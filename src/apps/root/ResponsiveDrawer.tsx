@@ -1,21 +1,16 @@
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { useRouter } from "react-router5";
 import { createMenu } from "./createMenu";
 import { useRouteConfig } from "./useRouteConfig";
+import { Menu } from "./Menu";
 
 // This file is based on https://material-ui.com/components/drawers/#responsive-drawer
 
@@ -55,49 +50,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const ResponsiveDrawer: React.FC = ({ children }) => {
-  const { route, configNode, configMap } = useRouteConfig();
-  const router = useRouter();
+  const { configNode, configMap } = useRouteConfig();
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
-  const menu = createMenu(configMap);
   const title = configNode ? `${configNode.app} > ${configNode.title}` : "404";
 
   const drawer = (
     <div>
       <div className={classes.toolbar} />
-      {Object.getOwnPropertyNames(menu).map((appName) => (
-        <React.Fragment key={appName}>
-          <ListItem>
-            <ListItemText primary={appName} />
-          </ListItem>
-          <Divider />
-          <List>
-            {menu[appName].map(
-              ({ name: itemName, title: itemTitle, icon: Icon }, index) => {
-                const isSelected = route.name === itemName;
-                return (
-                  <ListItem
-                    button
-                    key={index}
-                    selected={isSelected}
-                    onClick={() => {
-                      router.navigate(itemName);
-                      setMobileOpen(false);
-                    }}
-                  >
-                    <ListItemIcon>
-                      <Icon />
-                    </ListItemIcon>
-                    <ListItemText primary={itemTitle} />
-                  </ListItem>
-                );
-              }
-            )}
-          </List>
-        </React.Fragment>
-      ))}
+      <Menu
+        items={createMenu(configMap)}
+        onItemSelected={() => setMobileOpen(false)}
+      />
     </div>
   );
 
