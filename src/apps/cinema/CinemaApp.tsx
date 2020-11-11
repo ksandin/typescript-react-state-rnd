@@ -1,24 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { RouterProvider } from "react-router5";
-import { createRouterForConfig } from "../root/createRouterForConfig";
-import { routes } from "./fixtures/routes";
-import { useRouteConfig } from "../root/useRouteConfig";
-import { RouteConfigContext } from "../root/RouteConfig";
+import { createRouterForConfig } from "../../lib/react-router5-extensions/createRouterForConfig";
+import { useRouterMount } from "../../lib/react-router5-extensions/useRouterMount";
+import { cinemaRoutes } from "./cinemaRoutes";
+import {
+  CinemaRouteConfigContext,
+  useCinemaRouteConfig,
+} from "./CinemaRouteConfig";
 import { AppBar } from "./AppBar";
 
-const router = createRouterForConfig(routes);
-router.start();
-
-export const CinemaApp = () => (
-  <RouterProvider router={router}>
-    <RouteConfigContext.Provider value={routes}>
-      <AppBar />
-      <Page />
-    </RouteConfigContext.Provider>
-  </RouterProvider>
-);
+export const CinemaApp = () => {
+  const [cinemaRouter] = useState(() => createRouterForConfig(cinemaRoutes));
+  useRouterMount(cinemaRouter);
+  return (
+    <RouterProvider router={cinemaRouter}>
+      <CinemaRouteConfigContext.Provider value={cinemaRoutes}>
+        <AppBar />
+        <Page />
+      </CinemaRouteConfigContext.Provider>
+    </RouterProvider>
+  );
+};
 
 const Page = () => {
-  const { configNode } = useRouteConfig();
+  const { configNode } = useCinemaRouteConfig();
   return configNode ? React.createElement(configNode.component) : <>404</>;
 };

@@ -8,9 +8,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { createMenu } from "./createMenu";
-import { useRouteConfig } from "./useRouteConfig";
+import { createMenuItems } from "./createMenuItems";
 import { Menu } from "./Menu";
+import { useRootRouteConfig } from "./RootRouteConfig";
 
 // This file is based on https://material-ui.com/components/drawers/#responsive-drawer
 
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const ResponsiveDrawer: React.FC = ({ children }) => {
-  const { configNode, configMap } = useRouteConfig();
+  const { configNode, configMap } = useRootRouteConfig();
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -61,7 +61,7 @@ export const ResponsiveDrawer: React.FC = ({ children }) => {
     <div>
       <div className={classes.toolbar} />
       <Menu
-        items={createMenu(configMap)}
+        items={createMenuItems(configMap)}
         onItemSelected={() => setMobileOpen(false)}
       />
     </div>

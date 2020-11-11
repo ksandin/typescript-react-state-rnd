@@ -2,18 +2,18 @@ import React from "react";
 import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
 import { Root } from "./apps/root/Root";
-import { createAppTheme } from "./apps/root/fixtures/theme";
-import { createRouterForConfig } from "./apps/root/createRouterForConfig";
-import { routes } from "./apps/root/fixtures/routes";
+import { createAppTheme } from "./apps/root/theme";
+import { createRouterForConfig } from "./lib/react-router5-extensions/createRouterForConfig";
+import { rootRoutes } from "./rootRoutes";
 import browserPlugin from "router5-plugin-browser";
 
-const router = createRouterForConfig(routes);
+const router = createRouterForConfig(rootRoutes);
 router.usePlugin(browserPlugin());
 router.start();
 
 ReactDOM.render(
   <React.StrictMode>
-    <Root theme={createAppTheme()} router={router} routeConfig={routes} />
+    <Root theme={createAppTheme()} router={router} routeConfig={rootRoutes} />
   </React.StrictMode>,
   document.getElementById("root")
 );

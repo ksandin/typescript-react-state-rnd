@@ -1,4 +1,4 @@
-import { IsolatedStateExample } from "../../todo/client/examples/IsolatedStateExample";
+import { IsolatedStateExample } from "./apps/todo/client/examples/IsolatedStateExample";
 import {
   AccountTree,
   Autorenew,
@@ -7,17 +7,20 @@ import {
   Save,
   Share,
 } from "@material-ui/icons";
-import { SharedStateExample } from "../../todo/client/examples/SharedStateExample";
-import { ContextStateExample } from "../../todo/client/examples/ContextStateExample";
-import { AsyncStateExample } from "../../todo/client/examples/AsyncStateExample";
-import { RestMemoryExample } from "../../todo/client/examples/RestMemoryExample";
-import { RestMongooseExample } from "../../todo/client/examples/RestMongooseExample";
-import { LocalStorageObserverExample } from "../../todo/client/examples/LocalStorageObserverExample";
-import { LocalStorageAdapterExample } from "../../todo/client/examples/LocalStorageAdapterExample";
-import { CinemaApp } from "../../cinema/CinemaApp";
-import { RouteConfigMap } from "../RouteConfig";
+import { SharedStateExample } from "./apps/todo/client/examples/SharedStateExample";
+import { ContextStateExample } from "./apps/todo/client/examples/ContextStateExample";
+import { AsyncStateExample } from "./apps/todo/client/examples/AsyncStateExample";
+import { RestMemoryExample } from "./apps/todo/client/examples/RestMemoryExample";
+import { RestMongooseExample } from "./apps/todo/client/examples/RestMongooseExample";
+import { LocalStorageObserverExample } from "./apps/todo/client/examples/LocalStorageObserverExample";
+import { LocalStorageAdapterExample } from "./apps/todo/client/examples/LocalStorageAdapterExample";
+import { CinemaApp } from "./apps/cinema/CinemaApp";
+import {
+  RootRouteConfigMap,
+  RootRouteConfigNode,
+} from "./apps/root/RootRouteConfig";
 
-const routeList = [
+const routeList: RootRouteConfigNode[] = [
   {
     path: "/todo/isolated",
     name: "todo-isolated",
@@ -92,7 +95,7 @@ const routeList = [
   },
 ];
 
-export const routes: RouteConfigMap = routeList.reduce(
+export const rootRoutes: RootRouteConfigMap = routeList.reduce(
   (map, config) => map.set(config.name, config),
   new Map()
 );

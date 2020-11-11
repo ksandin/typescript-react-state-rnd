@@ -4,12 +4,11 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import { RouteConfigNode } from "./RouteConfig";
-import { useRouteConfig } from "./useRouteConfig";
+import { RootRouteConfigNode, useRootRouteConfig } from "./RootRouteConfig";
 import { useRouter } from "react-router5";
 
 export type MenuProps = {
-  items: Record<string, RouteConfigNode[]>;
+  items: Record<string, RootRouteConfigNode[]>;
   onItemSelected?: () => void;
 };
 
@@ -18,7 +17,7 @@ export const Menu: React.FC<MenuProps> = ({
   onItemSelected = () => {},
 }) => {
   const router = useRouter();
-  const { route } = useRouteConfig();
+  const { route } = useRootRouteConfig();
   return (
     <>
       {Object.getOwnPropertyNames(items).map((appName) => (
@@ -30,7 +29,7 @@ export const Menu: React.FC<MenuProps> = ({
           <List>
             {items[appName].map(
               ({ name: itemName, title: itemTitle, icon: Icon }, index) => {
-                const isSelected = route.name === itemName;
+                const isSelected = route && route.name === itemName;
                 return (
                   <ListItem
                     button
