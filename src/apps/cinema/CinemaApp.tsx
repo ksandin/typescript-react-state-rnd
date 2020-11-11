@@ -7,6 +7,7 @@ import {
   useCinemaRouteConfig,
 } from "./CinemaRouteConfig";
 import { AppBar } from "./AppBar";
+import { CookieNotification } from "./CookieNotification";
 
 export const CinemaApp = () => {
   const [cinemaRouter] = useState(() => createRouterForConfig(cinemaRoutes));
@@ -14,11 +15,13 @@ export const CinemaApp = () => {
     cinemaRouter.start();
     return () => cinemaRouter.stop();
   }, [cinemaRouter]);
+
   return (
     <RouterProvider router={cinemaRouter}>
       <CinemaRouteConfigContext.Provider value={cinemaRoutes}>
         <AppBar />
         <Page />
+        <CookieNotification />
       </CinemaRouteConfigContext.Provider>
     </RouterProvider>
   );

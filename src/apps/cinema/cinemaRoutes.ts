@@ -11,6 +11,7 @@ import { BookingTicketSelection } from "./pages/BookingTicketSelection";
 import { Movie } from "./pages/Movie";
 import { Movies } from "./pages/Movies";
 import { Tickets } from "./pages/Tickets";
+import { CookiePolicy } from "./pages/CookiePolicy";
 
 const routeList: CinemaRouteConfigNode[] = [
   {
@@ -66,6 +67,12 @@ const routeList: CinemaRouteConfigNode[] = [
     name: "tickets",
     title: "Tickets",
     component: Tickets,
+  },
+  {
+    path: "/cookie-policy",
+    name: "cookie-policy",
+    title: "Cookie policy",
+    component: CookiePolicy,
   },
 ];
 
