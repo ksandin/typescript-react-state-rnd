@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RouterProvider } from "react-router5";
 import { createRouterForConfig } from "../../lib/react-router5-extensions/createRouterForConfig";
-import { useRouterMount } from "../../lib/react-router5-extensions/useRouterMount";
 import { cinemaRoutes } from "./cinemaRoutes";
 import {
   CinemaRouteConfigContext,
@@ -11,7 +10,10 @@ import { AppBar } from "./AppBar";
 
 export const CinemaApp = () => {
   const [cinemaRouter] = useState(() => createRouterForConfig(cinemaRoutes));
-  useRouterMount(cinemaRouter);
+  useEffect(() => {
+    cinemaRouter.start();
+    return () => cinemaRouter.stop();
+  }, [cinemaRouter]);
   return (
     <RouterProvider router={cinemaRouter}>
       <CinemaRouteConfigContext.Provider value={cinemaRoutes}>
