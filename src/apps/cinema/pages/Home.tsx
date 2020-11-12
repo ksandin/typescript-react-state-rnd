@@ -1,9 +1,9 @@
 import React from "react";
-import { Link } from "../Link";
-import { HeroBanner } from "../HeroBanner";
+import { Link } from "../components/Link";
+import { HeroBanner } from "../components/HeroBanner";
 import { Chip, Typography } from "@material-ui/core";
-import { MoviePlayerDialogPlayButton } from "../MoviePlayerDialogPlayButton";
-import { Center } from "../Center";
+import { MoviePlayerDialogPlayButton } from "../components/MoviePlayerDialogPlayButton";
+import { Center } from "../components/Center";
 
 export const Home = () => {
   return (

@@ -6,8 +6,8 @@ import {
   CinemaRouteConfigContext,
   useCinemaRouteConfig,
 } from "./CinemaRouteConfig";
-import { AppBar } from "./AppBar";
-import { CookieNotification } from "./CookieNotification";
+import { AppBar } from "./components/AppBar";
+import { CookieNotification } from "./components/CookieNotification";
 
 export const CinemaApp = () => {
   const [cinemaRouter] = useState(() => createRouterForConfig(cinemaRoutes));
