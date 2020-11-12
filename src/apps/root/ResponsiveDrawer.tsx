@@ -11,10 +11,9 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { createMenuItems } from "./createMenuItems";
 import { Menu } from "./Menu";
 import { useRootRouteConfig } from "./RootRouteConfig";
+import { drawerWidth } from "./drawerWidth";
 
 // This file is based on https://material-ui.com/components/drawers/#responsive-drawer
-
-const drawerWidth = 270;
 
 const useStyles = makeStyles((theme) => ({
   root: {
