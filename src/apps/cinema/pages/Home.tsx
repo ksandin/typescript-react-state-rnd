@@ -1,10 +1,22 @@
 import React from "react";
 import { Link } from "../Link";
+import { HeroBanner } from "../HeroBanner";
+import { Chip, Typography } from "@material-ui/core";
+import { MoviePlayerDialogPlayButton } from "../MoviePlayerDialogPlayButton";
+import { Center } from "../Center";
 
 export const Home = () => {
   return (
     <div>
-      <div>Home</div>
+      <HeroBanner src="http://lorempixel.com/920/400/sports/">
+        <Center>
+          <MoviePlayerDialogPlayButton />
+        </Center>
+        <Chip label="Premiär 13 november" color="primary" />
+        <Typography variant="h4">
+          <Link routeName="movie">Operation Nordpolen</Link>
+        </Typography>
+      </HeroBanner>
       <Link routeName="movies">Show all movies in a category</Link>
       <br />
       <Link routeName="movie">go to movie page</Link>
