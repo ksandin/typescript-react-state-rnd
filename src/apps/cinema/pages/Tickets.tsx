@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { AvTimer, List } from "@material-ui/icons";
 import { MovieListAlphabetic } from "../components/MovieListAlphabetic";
 import { MovieListTimeline } from "../components/MovieListTimeline";
-import { ToggleButtonGroup } from "../components/ToggleButtonGroup";
-import { Section } from "../components/Section";
+import {
+  DisplayOption,
+  TicketsControls,
+  TicketsOptions,
+} from "../components/TicketsControls";
 
 const displayComponents: Record<DisplayOption, React.ComponentType> = {
   movies: MovieListAlphabetic,
@@ -11,31 +13,17 @@ const displayComponents: Record<DisplayOption, React.ComponentType> = {
 };
 
 export const Tickets = () => {
-  const [display, setDisplay] = useState<DisplayOption>("movies");
-  const DisplayComponent = displayComponents[display];
+  const [options, setOptions] = useState<TicketsOptions>({
+    display: "movies",
+    date: new Date(),
+    cinemas: [],
+    movies: [],
+  });
+  const DisplayComponent = displayComponents[options.display];
   return (
     <>
-      <Section
-        label="Tickets"
-        header={
-          <ToggleButtonGroup<DisplayOption>
-            size="small"
-            value={display}
-            options={[
-              { value: "movies", children: <List /> },
-              { value: "shows", children: <AvTimer /> },
-            ]}
-            onChange={(e, newValue) => {
-              setDisplay(newValue);
-            }}
-          />
-        }
-      >
-        Lorem ipsum dolor sit amet.
-      </Section>
+      <TicketsControls value={options} onChange={setOptions} />
       <DisplayComponent />
     </>
   );
 };
-
-export type DisplayOption = "movies" | "shows";

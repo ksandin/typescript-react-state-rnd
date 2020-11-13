@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { RouterProvider } from "react-router5";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import DateMomentUtils from "@date-io/moment";
 import { createRouterForConfig } from "../../lib/react-router5-extensions/createRouterForConfig";
 import { cinemaRoutes } from "./cinemaRoutes";
 import {
@@ -18,11 +20,13 @@ export const CinemaApp = () => {
 
   return (
     <RouterProvider router={cinemaRouter}>
-      <CinemaRouteConfigContext.Provider value={cinemaRoutes}>
-        <AppBar />
-        <Page />
-        <CookieNotification />
-      </CinemaRouteConfigContext.Provider>
+      <MuiPickersUtilsProvider utils={DateMomentUtils}>
+        <CinemaRouteConfigContext.Provider value={cinemaRoutes}>
+          <AppBar />
+          <Page />
+          <CookieNotification />
+        </CinemaRouteConfigContext.Provider>
+      </MuiPickersUtilsProvider>
     </RouterProvider>
   );
 };
