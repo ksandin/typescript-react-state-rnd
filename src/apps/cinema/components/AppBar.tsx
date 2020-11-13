@@ -18,7 +18,7 @@ export const AppBar = ({ locations = ["Stockholm", "Göteborg"] }) => {
   return (
     <>
       {route && route.path}
-      <MuiAppBar position="relative">
+      <Container>
         <Toolbar>
           <Link color="inherit" routeName="home">
             Home
@@ -36,10 +36,14 @@ export const AppBar = ({ locations = ["Stockholm", "Göteborg"] }) => {
             onChange={handleLocationChange}
           />
         </Toolbar>
-      </MuiAppBar>
+      </Container>
     </>
   );
 };
+
+const Container = styled(MuiAppBar).attrs({ position: "relative" })`
+  z-index: 0;
+`;
 
 const Toolbar = styled(MuiToolbar)`
   & {

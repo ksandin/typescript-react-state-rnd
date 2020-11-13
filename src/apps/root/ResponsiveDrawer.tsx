@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   appBar: {
+    zIndex: 1,
     [theme.breakpoints.up("sm")]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
