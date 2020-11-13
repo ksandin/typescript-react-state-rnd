@@ -17,5 +17,8 @@ export const createAppTheme = () =>
     },
     palette: {
       type: "dark",
+      background: {
+        default: "#101021",
+      },
     },
   });
