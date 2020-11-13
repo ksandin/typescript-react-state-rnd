@@ -4,13 +4,13 @@ import styled from "styled-components";
 
 export type SectionProps = React.HTMLAttributes<HTMLDivElement> & {
   label: string;
-  link?: React.ReactElement;
+  header?: React.ReactElement;
 };
 
 export const Section: React.FC<SectionProps> = ({
   label,
   children,
-  link,
+  header,
   ...props
 }) => (
   <Container {...props}>
@@ -18,7 +18,7 @@ export const Section: React.FC<SectionProps> = ({
       <Typography variant="h5" paragraph={false}>
         {label}
       </Typography>
-      {link}
+      {header}
     </Header>
     {children}
   </Container>

@@ -26,7 +26,7 @@ export const Home = () => (
       <Section
         key={`category${categoryIndex}`}
         label={categoryName}
-        link={<Link routeName="movies">View all</Link>}
+        header={<Link routeName="movies">View all</Link>}
       >
         <MovieCardRow>
           {movies.map((backgroundUrl, movieIndex) => (
