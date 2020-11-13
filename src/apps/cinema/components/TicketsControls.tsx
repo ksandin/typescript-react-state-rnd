@@ -67,7 +67,7 @@ export const TicketsControls: React.FC<TicketsControlsProps> = ({
           { value: "movies", children: <List /> },
           { value: "shows", children: <AvTimer /> },
         ]}
-        onChange={(e, newValue) => change("display", newValue)}
+        onChange={(e, newValue) => newValue && change("display", newValue)}
       />
     </>
   );
