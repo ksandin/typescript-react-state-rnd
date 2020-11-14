@@ -5,7 +5,4 @@ export const globalCSS = {
     margin: 0,
     padding: 0,
   },
-  "#root": {
-    padding: 40,
-  },
 };
