@@ -14,7 +14,7 @@ const displayComponents: Record<MoviesDisplayOption, React.ComponentType> = {
   upcoming: MovieListUpcoming,
 };
 
-export const Movies = () => {
+export const MoviesPage = () => {
   const [options, setOptions] = useState<MoviesOptions>({
     display: "current",
     ageLimit: "All",

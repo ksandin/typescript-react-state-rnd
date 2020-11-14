@@ -14,7 +14,7 @@ const displayComponents: Record<TicketsDisplayOption, React.ComponentType> = {
   shows: MovieListTimeline,
 };
 
-export const Tickets = () => {
+export const TicketsPage = () => {
   const [options, setOptions] = useState<TicketsOptions>({
     display: "movies",
     date: new Date(),

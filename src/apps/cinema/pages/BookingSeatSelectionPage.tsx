@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "../components/Link";
 import { Container } from "../components/Container";
 
-export const BookingSeatSelection = () => {
+export const BookingSeatSelectionPage = () => {
   return (
     <Container>
       <div>BookingSeatSelection</div>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "../components/Container";
 
-export const CookiePolicy = () => {
+export const CookiePolicyPage = () => {
   return (
     <Container>
       <div>CookiePolicy</div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Container } from "../components/Container";
 
-export const BookingFailure = () => {
+export const BookingFailurePage = () => {
   return <Container>BookingFailure</Container>;
 };

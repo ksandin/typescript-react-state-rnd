@@ -11,7 +11,7 @@ import { MovieCard } from "../components/MovieCard";
 import { movieCategories } from "../fixtures/movieCategories";
 import { Container } from "../components/Container";
 
-export const Home = () => (
+export const HomePage = () => (
   <>
     <HomeHeroBanner src="http://lorempixel.com/920/400/transport/">
       <Center>
