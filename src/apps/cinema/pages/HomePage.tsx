@@ -6,7 +6,7 @@ import { HeroBanner } from "../components/HeroBanner";
 import { MoviePlayerDialogPlayButton } from "../components/MoviePlayerDialogPlayButton";
 import { Center } from "../components/Center";
 import { Section } from "../components/Section";
-import { MovieCardRow } from "../components/MovieCardRow";
+import { CardRow } from "../components/CardRow";
 import { MovieCard } from "../components/MovieCard";
 import { movieCategories } from "../fixtures/movieCategories";
 import { Container } from "../components/Container";
@@ -29,13 +29,13 @@ export const HomePage = () => (
           label={categoryName}
           header={<Link routeName="movies">View all</Link>}
         >
-          <MovieCardRow>
+          <CardRow>
             {movies.map((backgroundUrl, movieIndex) => (
               <Link key={`category${movieIndex}`} routeName="movie">
                 <MovieCard backgroundSrc={backgroundUrl} />
               </Link>
             ))}
-          </MovieCardRow>
+          </CardRow>
         </Section>
       ))}
     </Container>
