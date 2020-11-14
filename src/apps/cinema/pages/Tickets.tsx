@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import { MovieListAlphabetic } from "../components/MovieListAlphabetic";
 import { MovieListTimeline } from "../components/MovieListTimeline";
 import {
@@ -23,8 +24,14 @@ export const Tickets = () => {
   const DisplayComponent = displayComponents[options.display];
   return (
     <Container>
-      <TicketsControls value={options} onChange={setOptions} />
+      <Margin>
+        <TicketsControls value={options} onChange={setOptions} />
+      </Margin>
       <DisplayComponent />
     </Container>
   );
 };
+
+const Margin = styled.div`
+  margin-bottom: 16px;
+`;
