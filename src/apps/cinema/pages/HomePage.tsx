@@ -7,7 +7,7 @@ import { MoviePlayerDialogPlayButton } from "../components/MoviePlayerDialogPlay
 import { Center } from "../components/Center";
 import { Section } from "../components/Section";
 import { CardRow } from "../components/CardRow";
-import { MovieCard } from "../components/MovieCard";
+import { Card } from "../components/Card";
 import { movieCategories } from "../fixtures/movieCategories";
 import { Container } from "../components/Container";
 
@@ -32,7 +32,7 @@ export const HomePage = () => (
           <CardRow>
             {movies.map((backgroundUrl, movieIndex) => (
               <Link key={`category${movieIndex}`} routeName="movie">
-                <MovieCard backgroundSrc={backgroundUrl} />
+                <Card backgroundSrc={backgroundUrl} />
               </Link>
             ))}
           </CardRow>

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const MovieCard = styled.div<{ backgroundSrc: string }>`
+export const Card = styled.div<{ backgroundSrc: string }>`
   height: 274px;
   background-image: url(${({ backgroundSrc }) => backgroundSrc});
   background-position: center top;
