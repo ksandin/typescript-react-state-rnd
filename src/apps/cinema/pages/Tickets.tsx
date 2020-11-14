@@ -20,6 +20,11 @@ export const Tickets = () => {
     date: new Date(),
     cinemas: [],
     movies: [],
+    subtitles: "All",
+    ageLimit: "All",
+    language: "All",
+    genres: [],
+    other: [],
   });
   const DisplayComponent = displayComponents[options.display];
   return (
