@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "../components/Link";
 import { Container } from "../components/Container";
 import { Center } from "../components/Center";
 import { MoviePlayerDialogPlayButton } from "../components/MoviePlayerDialogPlayButton";
-import { Chip, List, Typography } from "@material-ui/core";
+import { List, Typography } from "@material-ui/core";
 import { HeroBanner } from "../components/HeroBanner";
 import styled from "styled-components";
 import { MovieDetails } from "../components/MovieDetails";
@@ -11,6 +10,7 @@ import { Card } from "../components/Card";
 import { CardRow } from "../components/CardRow";
 import { ShowListItemsByCinemaName } from "../components/ShowListItemsByCinemaName";
 import { TicketsControls, TicketsOptions } from "../components/TicketsControls";
+import { MovieCardWithDetails } from "../components/MovieCardWithDetails";
 
 export const MoviePage = () => {
   const [options, setOptions] = useState<TicketsOptions>({
@@ -30,10 +30,9 @@ export const MoviePage = () => {
         <Center>
           <MoviePlayerDialogPlayButton />
         </Center>
-        <Chip label="Premiär 13 november" color="primary" />
-        <Typography variant="h4">
-          <Link routeName="movie">Operation Nordpolen</Link>
-        </Typography>
+        <Container>
+          <MovieCardWithDetails />
+        </Container>
       </MoviePageHeroBanner>
       <Container>
         <Typography paragraph>
@@ -51,7 +50,6 @@ export const MoviePage = () => {
           <Card backgroundSrc="http://lorempixel.com/180/280/transport/?_=4" />
           <Card backgroundSrc="http://lorempixel.com/180/280/transport/?_=5" />
         </MoviePageCards>
-
         <Typography variant="h5" paragraph>
           Tickets
         </Typography>
