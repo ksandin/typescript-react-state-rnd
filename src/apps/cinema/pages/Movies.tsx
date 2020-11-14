@@ -6,12 +6,12 @@ import {
   TicketsControls,
   TicketsOptions,
 } from "../components/TicketsControls";
-import { MovieListAlphabetic } from "../components/MovieListAlphabetic";
-import { MovieListTimeline } from "../components/MovieListTimeline";
+import { MovieListUpcoming } from "../components/MovieListUpcoming";
+import { MovieListAlphabeticWithTrailers } from "../components/MovieListAlphabeticWithTrailers";
 
 const displayComponents: Record<DisplayOption, React.ComponentType> = {
-  movies: MovieListAlphabetic,
-  shows: MovieListTimeline,
+  movies: MovieListAlphabeticWithTrailers,
+  shows: MovieListUpcoming,
 };
 
 export const Movies = () => {
