@@ -9,6 +9,7 @@ import { createStore } from "../../../../lib/store/createStore";
 import { createCrudDispatcher } from "../../../../lib/crud/createCrudDispatcher";
 import { createNumericCrudIdentityFactory } from "../../../../lib/crud/createNumericCrudIdentityFactory";
 import { createCrudMemoryAdapter } from "../../../../lib/crud/createCrudMemoryAdapter";
+import { Container } from "../Container";
 
 const createCrudStore = () => {
   const repository = createRepository<TodoId, Todo>();
@@ -26,18 +27,17 @@ const createCrudStore = () => {
   );
 };
 
-// HACK extracting type information from hook
 type TodoStore = ReturnType<typeof createCrudStore>;
 
 export const SharedStateExample = () => {
   const store = createCrudStore();
   return (
-    <>
+    <Container>
       <Typography variant="h6">App 1</Typography>
       <TodoStoreExample store={store} />
       <Typography variant="h6">App 2</Typography>
       <TodoStoreExample store={store} />
-    </>
+    </Container>
   );
 };
 

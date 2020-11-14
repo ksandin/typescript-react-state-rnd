@@ -8,6 +8,7 @@ import { createRepository } from "../../../../lib/store/createRepository";
 import { createCrudDispatcher } from "../../../../lib/crud/createCrudDispatcher";
 import { createCrudMemoryAdapter } from "../../../../lib/crud/createCrudMemoryAdapter";
 import { createNumericCrudIdentityFactory } from "../../../../lib/crud/createNumericCrudIdentityFactory";
+import { Container } from "../Container";
 
 const repository = createRepository<TodoId, Todo>();
 const TodoStoreContext = createContext(
@@ -29,11 +30,13 @@ export const ContextStateExample = () => {
   const store = useContext(TodoStoreContext);
   const [entries, , actions] = useStore(store);
   return (
-    <TodoApp
-      todos={entries.toList().toArray()}
-      createTodo={actions.create}
-      updateTodo={actions.update}
-      deleteTodo={actions.delete}
-    />
+    <Container>
+      <TodoApp
+        todos={entries.toList().toArray()}
+        createTodo={actions.create}
+        updateTodo={actions.update}
+        deleteTodo={actions.delete}
+      />
+    </Container>
   );
 };

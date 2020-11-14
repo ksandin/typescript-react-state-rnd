@@ -7,6 +7,7 @@ import { createCrudDispatcher } from "../../../../lib/crud/createCrudDispatcher"
 import { useStore } from "../../../../lib/store/useStore";
 import { TodoApp } from "../TodoApp";
 import { createCrudRestAdapter } from "../../../../lib/crud/createCrudRestAdapter";
+import { Container } from "../Container";
 
 const createTodoStore = () => {
   const repository = createRepository<TodoId, Todo>();
@@ -26,12 +27,14 @@ export const RestMemoryExample = () => {
   const [store] = useState(createTodoStore);
   const [entries, , actions] = useStore(store);
   return (
-    <TodoApp
-      todos={entries.toList().toArray()}
-      createTodo={actions.create}
-      updateTodo={actions.update}
-      deleteTodo={actions.delete}
-      readAllTodos={actions.readAll}
-    />
+    <Container>
+      <TodoApp
+        todos={entries.toList().toArray()}
+        createTodo={actions.create}
+        updateTodo={actions.update}
+        deleteTodo={actions.delete}
+        readAllTodos={actions.readAll}
+      />
+    </Container>
   );
 };

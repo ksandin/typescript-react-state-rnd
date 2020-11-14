@@ -1,9 +1,10 @@
 import React from "react";
+import { Container } from "../components/Container";
 
 export const CookiePolicy = () => {
   return (
-    <div>
+    <Container>
       <div>CookiePolicy</div>
-    </div>
+    </Container>
   );
 };

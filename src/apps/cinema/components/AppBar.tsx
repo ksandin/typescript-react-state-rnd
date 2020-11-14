@@ -2,13 +2,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "./Link";
 import { AppBar as MuiAppBar, Toolbar as MuiToolbar } from "@material-ui/core";
-import { useRoute } from "react-router5";
 import { LocationPicker } from "./LocationPicker";
 
 export const AppBar = ({ locations = ["Stockholm", "Göteborg"] }) => {
-  const { route } = useRoute();
   const [location, setLocation] = useState(locations[0]);
-
   const handleLocationChange = (e: {}, newValue: string | null) => {
     if (newValue) {
       setLocation(newValue);
@@ -16,28 +13,25 @@ export const AppBar = ({ locations = ["Stockholm", "Göteborg"] }) => {
   };
 
   return (
-    <>
-      {route && route.path}
-      <Container>
-        <Toolbar>
-          <Link color="inherit" routeName="home">
-            Home
-          </Link>
-          <Link color="inherit" routeName="tickets">
-            Tickets
-          </Link>
-          <Link color="inherit" routeName="movies">
-            Movies
-          </Link>
-          <AlignedLocationPicker
-            size="small"
-            value={location}
-            options={locations}
-            onChange={handleLocationChange}
-          />
-        </Toolbar>
-      </Container>
-    </>
+    <Container>
+      <Toolbar>
+        <Link color="inherit" routeName="home">
+          Home
+        </Link>
+        <Link color="inherit" routeName="tickets">
+          Tickets
+        </Link>
+        <Link color="inherit" routeName="movies">
+          Movies
+        </Link>
+        <AlignedLocationPicker
+          size="small"
+          value={location}
+          options={locations}
+          onChange={handleLocationChange}
+        />
+      </Toolbar>
+    </Container>
   );
 };
 

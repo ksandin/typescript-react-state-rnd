@@ -8,6 +8,7 @@ import { createRepository } from "../../../../lib/store/createRepository";
 import { createCrudDispatcher } from "../../../../lib/crud/createCrudDispatcher";
 import { createCrudMemoryAdapter } from "../../../../lib/crud/createCrudMemoryAdapter";
 import { createNumericCrudIdentityFactory } from "../../../../lib/crud/createNumericCrudIdentityFactory";
+import { Container } from "../Container";
 
 const repository = createRepository<TodoId, Todo>();
 const todoStore = createStore(
@@ -28,7 +29,7 @@ const todoStore = createStore(
 export const AsyncStateExample = () => {
   const [entries, dispatches, actions] = useStore(todoStore);
   return (
-    <>
+    <Container>
       <TodoApp
         todos={entries.toList().toArray()}
         createTodo={actions.create}
@@ -37,6 +38,6 @@ export const AsyncStateExample = () => {
         dispatches={dispatches}
       />
       <pre>{JSON.stringify(dispatches, null, 2)}</pre>
-    </>
+    </Container>
   );
 };

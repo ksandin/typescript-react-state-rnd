@@ -6,6 +6,7 @@ import {
   TicketsControls,
   TicketsOptions,
 } from "../components/TicketsControls";
+import { Container } from "../components/Container";
 
 const displayComponents: Record<DisplayOption, React.ComponentType> = {
   movies: MovieListAlphabetic,
@@ -21,9 +22,9 @@ export const Tickets = () => {
   });
   const DisplayComponent = displayComponents[options.display];
   return (
-    <>
+    <Container>
       <TicketsControls value={options} onChange={setOptions} />
       <DisplayComponent />
-    </>
+    </Container>
   );
 };

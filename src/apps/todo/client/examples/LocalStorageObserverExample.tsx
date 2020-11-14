@@ -9,6 +9,7 @@ import { TodoApp } from "../TodoApp";
 import { createNumericCrudIdentityFactory } from "../../../../lib/crud/createNumericCrudIdentityFactory";
 import { createCrudMemoryAdapter } from "../../../../lib/crud/createCrudMemoryAdapter";
 import { automateLocalStorageSerialization } from "../../../../lib/automateLocalStorageSerialization";
+import { Container } from "../Container";
 
 const createTodoStore = () => {
   const repository = createRepository<TodoId, Todo>();
@@ -33,11 +34,13 @@ export const LocalStorageObserverExample = () => {
   const [store] = useState(createTodoStore);
   const [entries, , actions] = useStore(store);
   return (
-    <TodoApp
-      todos={entries.toList().toArray()}
-      createTodo={actions.create}
-      updateTodo={actions.update}
-      deleteTodo={actions.delete}
-    />
+    <Container>
+      <TodoApp
+        todos={entries.toList().toArray()}
+        createTodo={actions.create}
+        updateTodo={actions.update}
+        deleteTodo={actions.delete}
+      />
+    </Container>
   );
 };

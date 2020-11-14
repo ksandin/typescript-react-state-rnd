@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "../components/Link";
+import { Container } from "../components/Container";
 
 export const BookingConfirmation = () => {
   return (
-    <div>
+    <Container>
       <div>BookingConfirmation</div>
       <Link routeName="booking-success">
         finish payment and get redirected back to app success page
@@ -12,6 +13,6 @@ export const BookingConfirmation = () => {
       <Link routeName="booking-failure">
         fail payment and get redirected back to app rejection page
       </Link>
-    </div>
+    </Container>
   );
 };

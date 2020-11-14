@@ -9,6 +9,7 @@ import { Section } from "../components/Section";
 import { MovieCardRow } from "../components/MovieCardRow";
 import { MovieCard } from "../components/MovieCard";
 import { movieCategories } from "../fixtures/movieCategories";
+import { Container } from "../components/Container";
 
 export const Home = () => (
   <>
@@ -21,22 +22,23 @@ export const Home = () => (
         <Link routeName="movie">Operation Nordpolen</Link>
       </Typography>
     </HomeHeroBanner>
-
-    {movieCategories.map(({ categoryName, movies }, categoryIndex) => (
-      <Section
-        key={`category${categoryIndex}`}
-        label={categoryName}
-        header={<Link routeName="movies">View all</Link>}
-      >
-        <MovieCardRow>
-          {movies.map((backgroundUrl, movieIndex) => (
-            <Link key={`category${movieIndex}`} routeName="movie">
-              <MovieCard backgroundSrc={backgroundUrl} />
-            </Link>
-          ))}
-        </MovieCardRow>
-      </Section>
-    ))}
+    <Container>
+      {movieCategories.map(({ categoryName, movies }, categoryIndex) => (
+        <Section
+          key={`category${categoryIndex}`}
+          label={categoryName}
+          header={<Link routeName="movies">View all</Link>}
+        >
+          <MovieCardRow>
+            {movies.map((backgroundUrl, movieIndex) => (
+              <Link key={`category${movieIndex}`} routeName="movie">
+                <MovieCard backgroundSrc={backgroundUrl} />
+              </Link>
+            ))}
+          </MovieCardRow>
+        </Section>
+      ))}
+    </Container>
   </>
 );
 
