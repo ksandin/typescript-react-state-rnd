@@ -6,10 +6,10 @@ import TextField from "@material-ui/core/TextField";
 import { ToggleButtonGroup } from "./ToggleButtonGroup";
 import { AvTimer, List } from "@material-ui/icons";
 
-export type DisplayOption = "movies" | "shows";
+export type TicketsDisplayOption = "movies" | "shows";
 
 export type TicketsOptions = {
-  display: DisplayOption;
+  display: TicketsDisplayOption;
   date: Date;
   cinemas: string[];
   movies: string[];
@@ -144,7 +144,7 @@ export const TicketsControls: React.FC<TicketsControlsProps> = ({
           onChange={(e, newValue) => newValue && change("ageLimit", newValue)}
         />
       </Row>
-      <ToggleButtonGroup<DisplayOption>
+      <ToggleButtonGroup<TicketsDisplayOption>
         size="small"
         value={value.display}
         options={[

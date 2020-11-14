@@ -1,36 +1,30 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import { Container } from "../components/Container";
-import {
-  DisplayOption,
-  TicketsControls,
-  TicketsOptions,
-} from "../components/TicketsControls";
 import { MovieListUpcoming } from "../components/MovieListUpcoming";
 import { MovieListAlphabeticWithTrailers } from "../components/MovieListAlphabeticWithTrailers";
+import {
+  MoviesControls,
+  MoviesDisplayOption,
+  MoviesOptions,
+} from "../components/MoviesControls";
 
-const displayComponents: Record<DisplayOption, React.ComponentType> = {
-  movies: MovieListAlphabeticWithTrailers,
-  shows: MovieListUpcoming,
+const displayComponents: Record<MoviesDisplayOption, React.ComponentType> = {
+  current: MovieListAlphabeticWithTrailers,
+  upcoming: MovieListUpcoming,
 };
 
 export const Movies = () => {
-  const [options, setOptions] = useState<TicketsOptions>({
-    display: "movies",
-    date: new Date(),
-    cinemas: [],
-    movies: [],
-    subtitles: "All",
+  const [options, setOptions] = useState<MoviesOptions>({
+    display: "current",
     ageLimit: "All",
-    language: "All",
     genres: [],
-    other: [],
   });
   const DisplayComponent = displayComponents[options.display];
   return (
     <Container>
       <Margin>
-        <TicketsControls value={options} onChange={setOptions} />
+        <MoviesControls value={options} onChange={setOptions} />
       </Margin>
       <DisplayComponent />
     </Container>

@@ -3,13 +3,13 @@ import styled from "styled-components";
 import { MovieListAlphabetic } from "../components/MovieListAlphabetic";
 import { MovieListTimeline } from "../components/MovieListTimeline";
 import {
-  DisplayOption,
+  TicketsDisplayOption,
   TicketsControls,
   TicketsOptions,
 } from "../components/TicketsControls";
 import { Container } from "../components/Container";
 
-const displayComponents: Record<DisplayOption, React.ComponentType> = {
+const displayComponents: Record<TicketsDisplayOption, React.ComponentType> = {
   movies: MovieListAlphabetic,
   shows: MovieListTimeline,
 };
