@@ -4,7 +4,7 @@ import { Link } from "../components/Link";
 import { Container } from "../components/Container";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
-import { CenterHorizontally } from "../components/CenterHorizontally";
+import { PageActions } from "../components/PageActions";
 import { useSnackbarValidator } from "../hooks/useSnackbarValidator";
 
 export const BookingSeatSelectionPage = () => {
@@ -33,7 +33,7 @@ export const BookingSeatSelectionPage = () => {
         multiple
       />
       <br />
-      <CenterHorizontally>
+      <PageActions>
         <Link routeName="booking-ticket-selection">
           <Button variant="outlined">Return to ticket selection</Button>
         </Link>
@@ -42,7 +42,7 @@ export const BookingSeatSelectionPage = () => {
             Proceed to confirmation
           </Button>
         </Link>
-      </CenterHorizontally>
+      </PageActions>
       {snackbar}
     </Container>
   );
