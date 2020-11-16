@@ -5,9 +5,15 @@ import { Container } from "../components/Container";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
 import { CenterHorizontally } from "../components/CenterHorizontally";
+import { useSnackbarValidator } from "../hooks/useSnackbarValidator";
 
 export const BookingSeatSelectionPage = () => {
   const [seats, setSeats] = useState<string[]>([]);
+  const { snackbar, validate } = useSnackbarValidator(() => {
+    if (seats.length <= 0) {
+      return "You must select at least one seat!";
+    }
+  });
   return (
     <Container>
       <Autocomplete
@@ -32,11 +38,12 @@ export const BookingSeatSelectionPage = () => {
           <Button variant="outlined">Return to ticket selection</Button>
         </Link>
         <Link routeName="booking-confirmation">
-          <Button variant="contained" color="primary">
-            proceed to confirmation
+          <Button variant="contained" color="primary" onClick={validate}>
+            Proceed to confirmation
           </Button>
         </Link>
       </CenterHorizontally>
+      {snackbar}
     </Container>
   );
 };

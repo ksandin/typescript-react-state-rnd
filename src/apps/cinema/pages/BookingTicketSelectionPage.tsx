@@ -1,16 +1,20 @@
 import React, { useState } from "react";
-import { Alert } from "@material-ui/lab";
 import { Link } from "../components/Link";
 import { Container } from "../components/Container";
 import { TicketCountControl } from "../components/TicketCountControl";
-import { Button, List, Snackbar } from "@material-ui/core";
+import { Button, List } from "@material-ui/core";
 import { CenterHorizontally } from "../components/CenterHorizontally";
+import { useSnackbarValidator } from "../hooks/useSnackbarValidator";
 
 export const BookingTicketSelectionPage = () => {
   const [regularCount, setRegularCount] = useState(0);
   const [pensionerCount, setPensionerCount] = useState(0);
   const totalTicketCount = regularCount + pensionerCount;
-  const { snackbar, validate } = useTicketCountValidation(totalTicketCount);
+  const { snackbar, validate } = useSnackbarValidator(() => {
+    if (totalTicketCount <= 0) {
+      return "You must select at least one ticket!";
+    }
+  });
 
   return (
     <Container>
@@ -39,26 +43,4 @@ export const BookingTicketSelectionPage = () => {
       {snackbar}
     </Container>
   );
-};
-
-const useTicketCountValidation = (count: number) => {
-  const [isOpen, setOpen] = useState(false);
-  const handleClose = () => setOpen(false);
-  const isValid = () => count > 0;
-  const validate = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!isValid()) {
-      setOpen(true);
-      // Stops links and parent elements that might have click event handlers
-      e.preventDefault();
-      e.stopPropagation();
-    }
-  };
-  const snackbar = (
-    <Snackbar open={isOpen} autoHideDuration={6000} onClose={handleClose}>
-      <Alert onClose={handleClose} severity="error">
-        You must select at least one ticket!
-      </Alert>
-    </Snackbar>
-  );
-  return { snackbar, validate };
 };
