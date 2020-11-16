@@ -7,7 +7,7 @@ import { PageActions } from "../components/PageActions";
 import { useSnackbarValidator } from "../hooks/useSnackbarValidator";
 
 export const BookingTicketSelectionPage = () => {
-  const [regularCount, setRegularCount] = useState(0);
+  const [regularCount, setRegularCount] = useState(2);
   const [pensionerCount, setPensionerCount] = useState(0);
   const totalTicketCount = regularCount + pensionerCount;
   const { snackbar, validate } = useSnackbarValidator(() => {

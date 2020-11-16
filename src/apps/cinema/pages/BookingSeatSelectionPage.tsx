@@ -7,8 +7,17 @@ import { Button } from "@material-ui/core";
 import { PageActions } from "../components/PageActions";
 import { useSnackbarValidator } from "../hooks/useSnackbarValidator";
 
+const seatOptions = [
+  "Seat 1",
+  "Seat 2 - Extra leg room",
+  "Seat 3",
+  "Seat 4",
+  "Seat 5",
+  "Seat 6",
+];
+
 export const BookingSeatSelectionPage = () => {
-  const [seats, setSeats] = useState<string[]>([]);
+  const [seats, setSeats] = useState<string[]>(seatOptions.slice(0, 2));
   const { snackbar, validate } = useSnackbarValidator(() => {
     if (seats.length <= 0) {
       return "You must select at least one seat!";
@@ -17,14 +26,7 @@ export const BookingSeatSelectionPage = () => {
   return (
     <Container>
       <Autocomplete
-        options={[
-          "Seat 1",
-          "Seat 2 - Extra leg room",
-          "Seat 3",
-          "Seat 4",
-          "Seat 5",
-          "Seat 6",
-        ]}
+        options={seatOptions}
         renderInput={(params) => (
           <TextField {...params} label="Seats" variant="outlined" />
         )}
