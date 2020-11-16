@@ -9,22 +9,41 @@ export type CountControlProps = Omit<
 > & {
   value: number;
   onChange: (newValue: number) => void;
+  acceptNewValue?: (value: number) => boolean;
 };
 
 export const CountControl = ({
   value,
   onChange,
+  acceptNewValue = atLeast0,
   ...props
 }: CountControlProps) => {
-  const increase = () => onChange(value + 1);
-  const decrease = () => onChange(value - 1);
+  const tryChange = (newValue: number) => {
+    if (acceptNewValue(newValue)) {
+      onChange(newValue);
+    }
+  };
+  const increase = () => tryChange(value + 1);
+  const decrease = () => tryChange(value - 1);
+  const canDecrease = acceptNewValue(value - 1);
+  const canIncrease = acceptNewValue(value + 1);
   return (
     <Row {...props}>
-      <Fab color="primary" size="small" onClick={decrease}>
+      <Fab
+        color="primary"
+        disabled={!canDecrease}
+        size="small"
+        onClick={decrease}
+      >
         <Remove />
       </Fab>
       <Count>{value}</Count>
-      <Fab color="primary" size="small" onClick={increase}>
+      <Fab
+        color="primary"
+        disabled={!canIncrease}
+        size="small"
+        onClick={increase}
+      >
         <Add />
       </Fab>
     </Row>
@@ -39,3 +58,5 @@ const Row = styled.div`
 const Count = styled(Typography)`
   margin: 0 16px;
 `;
+
+const atLeast0 = (value: number) => value >= 0;
