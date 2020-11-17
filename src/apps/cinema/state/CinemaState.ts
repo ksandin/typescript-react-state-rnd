@@ -1,1 +1,4 @@
-export type CinemaState = {};
+export type CinemaState = {
+  location: string;
+  locationOptions: string[];
+};

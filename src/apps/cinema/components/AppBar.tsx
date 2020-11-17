@@ -1,11 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Link } from "./Link";
 import { AppBar as MuiAppBar, Toolbar as MuiToolbar } from "@material-ui/core";
 import { LocationPicker } from "./LocationPicker";
+import { useCinemaDispatcher } from "../hooks/useCinemaDispatcher";
+import { useCinemaSelector } from "../hooks/useCinemaSelector";
 
-export const AppBar = ({ locations = ["Stockholm", "Göteborg"] }) => {
-  const [location, setLocation] = useState(locations[0]);
+const useAppBarState = () =>
+  useCinemaSelector(({ location, locationOptions }) => ({
+    location,
+    locationOptions,
+  }));
+
+export const AppBar = () => {
+  const [{ setLocation }] = useCinemaDispatcher();
+  const { location, locationOptions } = useAppBarState();
   const handleLocationChange = (e: {}, newValue: string | null) => {
     if (newValue) {
       setLocation(newValue);
@@ -27,7 +36,7 @@ export const AppBar = ({ locations = ["Stockholm", "Göteborg"] }) => {
         <AlignedLocationPicker
           size="small"
           value={location}
-          options={locations}
+          options={locationOptions}
           onChange={handleLocationChange}
         />
       </Toolbar>
