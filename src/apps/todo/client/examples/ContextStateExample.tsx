@@ -5,23 +5,26 @@ import { Todo } from "../../shared/Todo";
 import { TodoId } from "../../shared/TodoId";
 import { createStore } from "../../../../lib/store/createStore";
 import { createRepository } from "../../../../lib/store/createRepository";
-import { createCrudDispatcher } from "../../../../lib/crud/createCrudDispatcher";
+import { createCrudActions } from "../../../../lib/crud/createCrudActions";
 import { createCrudMemoryAdapter } from "../../../../lib/crud/createCrudMemoryAdapter";
 import { createNumericCrudIdentityFactory } from "../../../../lib/crud/createNumericCrudIdentityFactory";
 import { Container } from "../Container";
 import { useDispatcher } from "../../../../lib/store/useDispatcher";
 import { useSelector } from "../../../../lib/store/useSelector";
+import { createDispatcher } from "../../../../lib/store/createDispatcher";
 
 const repository = createRepository(Map<TodoId, Todo>());
 const TodoStoreContext = createContext(
   createStore(
     repository,
-    createCrudDispatcher(
-      repository,
-      createCrudMemoryAdapter<TodoId, Todo>(
-        createNumericCrudIdentityFactory(
-          (todo) => todo.id,
-          (todo, id) => ({ ...todo, id })
+    createDispatcher(
+      createCrudActions(
+        repository,
+        createCrudMemoryAdapter<TodoId, Todo>(
+          createNumericCrudIdentityFactory(
+            (todo) => todo.id,
+            (todo, id) => ({ ...todo, id })
+          )
         )
       )
     )

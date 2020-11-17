@@ -4,22 +4,25 @@ import { createRepository } from "../../../../lib/store/createRepository";
 import { TodoId } from "../../shared/TodoId";
 import { Todo } from "../../shared/Todo";
 import { createStore } from "../../../../lib/store/createStore";
-import { createCrudDispatcher } from "../../../../lib/crud/createCrudDispatcher";
+import { createCrudActions } from "../../../../lib/crud/createCrudActions";
 import { TodoApp } from "../TodoApp";
 import { createCrudRestAdapter } from "../../../../lib/crud/createCrudRestAdapter";
 import { Container } from "../Container";
 import { useDispatcher } from "../../../../lib/store/useDispatcher";
 import { useSelector } from "../../../../lib/store/useSelector";
+import { createDispatcher } from "../../../../lib/store/createDispatcher";
 
 const createTodoStore = () => {
   const repository = createRepository(Map<TodoId, Todo>());
   return createStore(
     repository,
-    createCrudDispatcher(
-      repository,
-      createCrudRestAdapter<TodoId, Todo>(
-        "http://localhost:3002/todo",
-        (todo) => todo.id
+    createDispatcher(
+      createCrudActions(
+        repository,
+        createCrudRestAdapter<TodoId, Todo>(
+          "http://localhost:3002/todo",
+          (todo) => todo.id
+        )
       )
     )
   );

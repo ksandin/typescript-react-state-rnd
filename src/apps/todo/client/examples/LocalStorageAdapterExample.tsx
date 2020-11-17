@@ -4,26 +4,29 @@ import { createRepository } from "../../../../lib/store/createRepository";
 import { TodoId } from "../../shared/TodoId";
 import { Todo } from "../../shared/Todo";
 import { createStore } from "../../../../lib/store/createStore";
-import { createCrudDispatcher } from "../../../../lib/crud/createCrudDispatcher";
+import { createCrudActions } from "../../../../lib/crud/createCrudActions";
 import { TodoApp } from "../TodoApp";
 import { createNumericCrudIdentityFactory } from "../../../../lib/crud/createNumericCrudIdentityFactory";
 import { createCrudLocalStorageAdapter } from "../../../../lib/crud/createCrudLocalStorageAdapter";
 import { Container } from "../Container";
 import { useDispatcher } from "../../../../lib/store/useDispatcher";
 import { useSelector } from "../../../../lib/store/useSelector";
+import { createDispatcher } from "../../../../lib/store/createDispatcher";
 
 const createTodoStore = () => {
   const repository = createRepository(Map<TodoId, Todo>());
   return createStore(
     repository,
-    createCrudDispatcher(
-      repository,
-      createCrudLocalStorageAdapter<TodoId, Todo>(
-        "localStateAdapterExample",
-        createNumericCrudIdentityFactory(
-          (todo) => todo.id,
-          (todo, id) => ({ ...todo, id }),
-          repository.state
+    createDispatcher(
+      createCrudActions(
+        repository,
+        createCrudLocalStorageAdapter<TodoId, Todo>(
+          "localStateAdapterExample",
+          createNumericCrudIdentityFactory(
+            (todo) => todo.id,
+            (todo, id) => ({ ...todo, id }),
+            repository.state
+          )
         )
       )
     )
