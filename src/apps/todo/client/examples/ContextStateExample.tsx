@@ -1,4 +1,5 @@
 import React, { createContext, useContext } from "react";
+import { Map } from "immutable";
 import { useStore } from "../../../../lib/store/useStore";
 import { TodoApp } from "../TodoApp";
 import { Todo } from "../../shared/Todo";
@@ -10,7 +11,7 @@ import { createCrudMemoryAdapter } from "../../../../lib/crud/createCrudMemoryAd
 import { createNumericCrudIdentityFactory } from "../../../../lib/crud/createNumericCrudIdentityFactory";
 import { Container } from "../Container";
 
-const repository = createRepository<TodoId, Todo>();
+const repository = createRepository(Map<TodoId, Todo>());
 const TodoStoreContext = createContext(
   createStore(
     repository,

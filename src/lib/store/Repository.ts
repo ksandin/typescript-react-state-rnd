@@ -1,7 +1,7 @@
 import { RepositoryEvents } from "./RepositoryEvents";
-import { RepositoryEntries } from "./RepositoryEntries";
 
-export type Repository<Id, Model> = {
-  entries: RepositoryEntries<Id, Model>;
-  events: RepositoryEvents<Id, Model>;
+export type Repository<TState> = {
+  state: TState;
+  events: RepositoryEvents<TState>;
+  update: (newState: TState) => void;
 };

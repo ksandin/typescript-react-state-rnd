@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Map } from "immutable";
 import { createRepository } from "../../../../lib/store/createRepository";
 import { TodoId } from "../../shared/TodoId";
 import { Todo } from "../../shared/Todo";
@@ -11,7 +12,7 @@ import { createCrudLocalStorageAdapter } from "../../../../lib/crud/createCrudLo
 import { Container } from "../Container";
 
 const createTodoStore = () => {
-  const repository = createRepository<TodoId, Todo>();
+  const repository = createRepository(Map<TodoId, Todo>());
   return createStore(
     repository,
     createCrudDispatcher(
@@ -21,7 +22,7 @@ const createTodoStore = () => {
         createNumericCrudIdentityFactory(
           (todo) => todo.id,
           (todo, id) => ({ ...todo, id }),
-          repository.entries
+          repository.state
         )
       )
     )

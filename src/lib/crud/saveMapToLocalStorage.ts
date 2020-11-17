@@ -1,8 +1,8 @@
-import { RepositoryEntries } from "./store/RepositoryEntries";
+import { CrudState } from "./CrudState";
 
 export const saveMapToLocalStorage = <Id, Model>(
   key: string,
-  map: RepositoryEntries<Id, Model>
+  map: CrudState<Id, Model>
 ) => {
   localStorage.setItem(key, JSON.stringify(Array.from(map.entries())));
 };

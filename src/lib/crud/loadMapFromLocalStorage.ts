@@ -1,9 +1,9 @@
-import { RepositoryEntries } from "./store/RepositoryEntries";
+import { CrudState } from "./CrudState";
 import { Map } from "immutable";
 
 export const loadMapFromLocalStorage = <Id, Model>(
   key: string
-): RepositoryEntries<Id, Model> => {
+): CrudState<Id, Model> => {
   const kvPairsString = localStorage.getItem(key);
   if (!kvPairsString) {
     return Map();

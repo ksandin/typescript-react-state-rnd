@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Map } from "immutable";
 import { createRepository } from "../../../../lib/store/createRepository";
 import { TodoId } from "../../shared/TodoId";
 import { Todo } from "../../shared/Todo";
@@ -8,11 +9,11 @@ import { useStore } from "../../../../lib/store/useStore";
 import { TodoApp } from "../TodoApp";
 import { createNumericCrudIdentityFactory } from "../../../../lib/crud/createNumericCrudIdentityFactory";
 import { createCrudMemoryAdapter } from "../../../../lib/crud/createCrudMemoryAdapter";
-import { automateLocalStorageSerialization } from "../../../../lib/automateLocalStorageSerialization";
+import { automateLocalStorageSerialization } from "../../../../lib/crud/automateLocalStorageSerialization";
 import { Container } from "../Container";
 
 const createTodoStore = () => {
-  const repository = createRepository<TodoId, Todo>();
+  const repository = createRepository(Map<TodoId, Todo>());
   automateLocalStorageSerialization("localStateObserverExample", repository);
   return createStore(
     repository,
@@ -22,9 +23,9 @@ const createTodoStore = () => {
         createNumericCrudIdentityFactory(
           (todo) => todo.id,
           (todo, id) => ({ ...todo, id }),
-          repository.entries
+          repository.state
         ),
-        repository.entries
+        repository.state
       )
     )
   );

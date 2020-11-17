@@ -1,11 +1,12 @@
-import { Map } from "immutable";
-import { Repository } from "./Repository";
 import EventEmitter from "events";
-import { RepositoryEntries } from "./RepositoryEntries";
+import { Repository } from "./Repository";
+import { updateRepository } from "./updateRepository";
 
-export const createRepository = <Id, Model>(
-  initialEntries: RepositoryEntries<Id, Model> = Map()
-): Repository<Id, Model> => ({
-  entries: initialEntries,
-  events: new EventEmitter(),
-});
+export const createRepository = <TState>(initialState: TState) => {
+  const repository: Repository<TState> = {
+    state: initialState,
+    events: new EventEmitter(),
+    update: (updatedState) => updateRepository(repository, updatedState),
+  };
+  return repository;
+};

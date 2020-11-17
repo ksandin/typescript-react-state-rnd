@@ -1,16 +1,16 @@
-import { Repository } from "./store/Repository";
-import { updateRepository } from "./store/updateRepository";
+import { Repository } from "../store/Repository";
+import { updateRepository } from "../store/updateRepository";
+import { CrudState } from "./CrudState";
 import { loadMapFromLocalStorage } from "./loadMapFromLocalStorage";
 import { saveMapToLocalStorage } from "./saveMapToLocalStorage";
-import { RepositoryEntries } from "./store/RepositoryEntries";
 
 export const automateLocalStorageSerialization = <Id, Model>(
   localStorageKey: string,
-  repository: Repository<Id, Model>
+  repository: Repository<CrudState<Id, Model>>
 ) => {
   const initialEntries = loadMapFromLocalStorage<Id, Model>(localStorageKey);
   updateRepository(repository, initialEntries);
-  const saveEntries = (entries: RepositoryEntries<Id, Model>) =>
+  const saveEntries = (entries: CrudState<Id, Model>) =>
     saveMapToLocalStorage(localStorageKey, entries);
   repository.events.on("change", saveEntries);
   return () => {

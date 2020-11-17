@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Map } from "immutable";
 import { createRepository } from "../../../../lib/store/createRepository";
 import { TodoId } from "../../shared/TodoId";
 import { Todo } from "../../shared/Todo";
@@ -10,7 +11,7 @@ import { createCrudRestAdapter } from "../../../../lib/crud/createCrudRestAdapte
 import { Container } from "../Container";
 
 const createTodoStore = () => {
-  const repository = createRepository<TodoId, Todo>();
+  const repository = createRepository(Map<TodoId, Todo>());
   return createStore(
     repository,
     createCrudDispatcher(

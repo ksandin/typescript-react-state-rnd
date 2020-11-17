@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Map } from "immutable";
 import { Typography } from "@material-ui/core";
 import { useStore } from "../../../../lib/store/useStore";
 import { Todo } from "../../shared/Todo";
@@ -21,7 +22,7 @@ export const IsolatedStateExample = () => (
 );
 
 const createTodoStore = () => {
-  const repository = createRepository<TodoId, Todo>();
+  const repository = createRepository(Map<TodoId, Todo>());
   return createStore(
     repository,
     createCrudDispatcher(

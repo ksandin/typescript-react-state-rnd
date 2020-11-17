@@ -1,4 +1,5 @@
 import React from "react";
+import { Map } from "immutable";
 import { Typography } from "@material-ui/core";
 import { TodoId } from "../../shared/TodoId";
 import { Todo } from "../../shared/Todo";
@@ -12,7 +13,7 @@ import { createCrudMemoryAdapter } from "../../../../lib/crud/createCrudMemoryAd
 import { Container } from "../Container";
 
 const createCrudStore = () => {
-  const repository = createRepository<TodoId, Todo>();
+  const repository = createRepository(Map<TodoId, Todo>());
   return createStore(
     repository,
     createCrudDispatcher(

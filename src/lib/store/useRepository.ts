@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { Repository } from "./Repository";
-import { RepositoryEntries } from "./RepositoryEntries";
 
-export const useRepository = <Id, Model>(
-  repository: Repository<Id, Model>
-): RepositoryEntries<Id, Model> => {
-  const [state, setState] = useState(repository.entries);
+export const useRepository = <TState>(
+  repository: Repository<TState>
+): TState => {
+  const [state, setState] = useState(repository.state);
 
   useEffect(() => {
     repository.events.on("change", setState);
