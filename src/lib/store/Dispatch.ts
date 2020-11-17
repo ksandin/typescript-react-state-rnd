@@ -1,6 +1,6 @@
-import { ActionStatus } from "./ActionStatus";
+import { DispatchStatus } from "./DispatchStatus";
 
 export type Dispatch = Readonly<{
   pending: number;
-  status: ActionStatus;
+  status: DispatchStatus;
 }>;
