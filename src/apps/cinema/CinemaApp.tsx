@@ -10,24 +10,30 @@ import {
 } from "./CinemaRouteConfig";
 import { AppBar } from "./components/AppBar";
 import { CookieNotification } from "./components/CookieNotification";
+import { CinemaStoreContext } from "./state/CinemaStoreContext";
+import { createCinemaStore } from "./state/createCinemaStore";
+import { defaultCinemaState } from "./fixtures/defaultCinemaState";
 
 export const CinemaApp = () => {
   const [cinemaRouter] = useState(() => createRouterForConfig(cinemaRoutes));
+  const [cinemaStore] = useState(createCinemaStore(defaultCinemaState));
   useEffect(() => {
     cinemaRouter.start();
     return () => cinemaRouter.stop();
   }, [cinemaRouter]);
 
   return (
-    <RouterProvider router={cinemaRouter}>
-      <MuiPickersUtilsProvider utils={DateMomentUtils}>
-        <CinemaRouteConfigContext.Provider value={cinemaRoutes}>
-          <AppBar />
-          <Page />
-          <CookieNotification />
-        </CinemaRouteConfigContext.Provider>
-      </MuiPickersUtilsProvider>
-    </RouterProvider>
+    <CinemaStoreContext.Provider value={cinemaStore}>
+      <RouterProvider router={cinemaRouter}>
+        <MuiPickersUtilsProvider utils={DateMomentUtils}>
+          <CinemaRouteConfigContext.Provider value={cinemaRoutes}>
+            <AppBar />
+            <Page />
+            <CookieNotification />
+          </CinemaRouteConfigContext.Provider>
+        </MuiPickersUtilsProvider>
+      </RouterProvider>
+    </CinemaStoreContext.Provider>
   );
 };
 
