@@ -5,15 +5,15 @@ import { Dispatcher } from "./Dispatcher";
 
 export const useDispatcher = <TActions extends Actions>(
   dispatcher: Dispatcher<TActions>
-): [Dispatches<keyof TActions>, TActions] => {
-  const [state, setState] = useState(dispatcher.dispatches);
+): [TActions, Dispatches<keyof TActions>] => {
+  const [dispatches, setDispatches] = useState(dispatcher.dispatches);
 
   useEffect(() => {
-    dispatcher.events.on("change", setState);
+    dispatcher.events.on("change", setDispatches);
     return () => {
-      dispatcher.events.off("change", setState);
+      dispatcher.events.off("change", setDispatches);
     };
   }, [dispatcher]);
 
-  return [state, dispatcher.actions];
+  return [dispatcher.actions, dispatches];
 };

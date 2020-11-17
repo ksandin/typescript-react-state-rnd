@@ -5,11 +5,12 @@ import { TodoId } from "../../shared/TodoId";
 import { Todo } from "../../shared/Todo";
 import { createStore } from "../../../../lib/store/createStore";
 import { createCrudDispatcher } from "../../../../lib/crud/createCrudDispatcher";
-import { useStore } from "../../../../lib/store/useStore";
 import { TodoApp } from "../TodoApp";
 import { createNumericCrudIdentityFactory } from "../../../../lib/crud/createNumericCrudIdentityFactory";
 import { createCrudLocalStorageAdapter } from "../../../../lib/crud/createCrudLocalStorageAdapter";
 import { Container } from "../Container";
+import { useDispatcher } from "../../../../lib/store/useDispatcher";
+import { useSelector } from "../../../../lib/store/useSelector";
 
 const createTodoStore = () => {
   const repository = createRepository(Map<TodoId, Todo>());
@@ -31,7 +32,8 @@ const createTodoStore = () => {
 
 export const LocalStorageAdapterExample = () => {
   const [store] = useState(createTodoStore);
-  const [entries, , actions] = useStore(store);
+  const [actions] = useDispatcher(store.dispatcher);
+  const entries = useSelector(store.repository, (state) => state);
   return (
     <Container>
       <TodoApp

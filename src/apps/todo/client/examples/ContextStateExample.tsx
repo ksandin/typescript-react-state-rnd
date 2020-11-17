@@ -1,6 +1,5 @@
 import React, { createContext, useContext } from "react";
 import { Map } from "immutable";
-import { useStore } from "../../../../lib/store/useStore";
 import { TodoApp } from "../TodoApp";
 import { Todo } from "../../shared/Todo";
 import { TodoId } from "../../shared/TodoId";
@@ -10,6 +9,8 @@ import { createCrudDispatcher } from "../../../../lib/crud/createCrudDispatcher"
 import { createCrudMemoryAdapter } from "../../../../lib/crud/createCrudMemoryAdapter";
 import { createNumericCrudIdentityFactory } from "../../../../lib/crud/createNumericCrudIdentityFactory";
 import { Container } from "../Container";
+import { useDispatcher } from "../../../../lib/store/useDispatcher";
+import { useSelector } from "../../../../lib/store/useSelector";
 
 const repository = createRepository(Map<TodoId, Todo>());
 const TodoStoreContext = createContext(
@@ -29,7 +30,8 @@ const TodoStoreContext = createContext(
 
 export const ContextStateExample = () => {
   const store = useContext(TodoStoreContext);
-  const [entries, , actions] = useStore(store);
+  const [actions] = useDispatcher(store.dispatcher);
+  const entries = useSelector(store.repository, (state) => state);
   return (
     <Container>
       <TodoApp

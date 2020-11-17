@@ -3,13 +3,14 @@ import { Map } from "immutable";
 import { TodoApp } from "../TodoApp";
 import { Todo } from "../../shared/Todo";
 import { TodoId } from "../../shared/TodoId";
-import { useStore } from "../../../../lib/store/useStore";
 import { createStore } from "../../../../lib/store/createStore";
 import { createRepository } from "../../../../lib/store/createRepository";
 import { createCrudDispatcher } from "../../../../lib/crud/createCrudDispatcher";
 import { createCrudMemoryAdapter } from "../../../../lib/crud/createCrudMemoryAdapter";
 import { createNumericCrudIdentityFactory } from "../../../../lib/crud/createNumericCrudIdentityFactory";
 import { Container } from "../Container";
+import { useDispatcher } from "../../../../lib/store/useDispatcher";
+import { useSelector } from "../../../../lib/store/useSelector";
 
 const repository = createRepository(Map<TodoId, Todo>());
 const todoStore = createStore(
@@ -28,7 +29,8 @@ const todoStore = createStore(
 );
 
 export const AsyncStateExample = () => {
-  const [entries, dispatches, actions] = useStore(todoStore);
+  const [actions, dispatches] = useDispatcher(todoStore.dispatcher);
+  const entries = useSelector(todoStore.repository, (state) => state);
   return (
     <Container>
       <TodoApp

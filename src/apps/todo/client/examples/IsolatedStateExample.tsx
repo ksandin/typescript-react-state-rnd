@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Map } from "immutable";
 import { Typography } from "@material-ui/core";
-import { useStore } from "../../../../lib/store/useStore";
 import { Todo } from "../../shared/Todo";
 import { TodoId } from "../../shared/TodoId";
 import { TodoApp } from "../TodoApp";
@@ -11,6 +10,8 @@ import { createCrudDispatcher } from "../../../../lib/crud/createCrudDispatcher"
 import { createNumericCrudIdentityFactory } from "../../../../lib/crud/createNumericCrudIdentityFactory";
 import { createCrudMemoryAdapter } from "../../../../lib/crud/createCrudMemoryAdapter";
 import { Container } from "../Container";
+import { useDispatcher } from "../../../../lib/store/useDispatcher";
+import { useSelector } from "../../../../lib/store/useSelector";
 
 export const IsolatedStateExample = () => (
   <Container>
@@ -39,7 +40,8 @@ const createTodoStore = () => {
 
 const TodoComponentStoreExample = () => {
   const [store] = useState(createTodoStore);
-  const [entries, , actions] = useStore(store);
+  const [actions] = useDispatcher(store.dispatcher);
+  const entries = useSelector(store.repository, (state) => state);
   return (
     <TodoApp
       todos={entries.toList().toArray()}
