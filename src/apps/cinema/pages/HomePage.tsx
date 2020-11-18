@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Chip, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import { Link } from "../components/Link";
 import { HeroBanner } from "../components/HeroBanner";
 import { MoviePlayerDialogPlayButton } from "../components/MoviePlayerDialogPlayButton";
@@ -10,8 +10,8 @@ import { CardRow } from "../components/CardRow";
 import { Card } from "../components/Card";
 import { Container } from "../components/Container";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
-import { commonDateFormat } from "../functions/commonDateFormat";
 import { CardLabel } from "../components/CardLabel";
+import { PremiereChip } from "../components/PremiereChip";
 
 const useHomePageState = () =>
   useCinemaSelector(
@@ -26,18 +26,15 @@ export const HomePage = () => {
   return (
     <>
       {hero && (
-        <HomeHeroBanner src={hero.imageUrl}>
+        <HomeHeroBanner src={hero.bannerUrl}>
           <Center>
             <MoviePlayerDialogPlayButton />
           </Center>
-          {new Date() < hero.premiere && (
-            <Chip
-              label={`Premiere ${commonDateFormat(hero.premiere)}`}
-              color="primary"
-            />
-          )}
+          <PremiereChip date={hero.premiereDate} />
           <Typography variant="h4">
-            <Link routeName="movie">{hero.name}</Link>
+            <Link routeName="movie" routeParams={{ movieId: hero.movieId }}>
+              {hero.name}
+            </Link>
           </Typography>
         </HomeHeroBanner>
       )}
@@ -49,18 +46,19 @@ export const HomePage = () => {
             header={<Link routeName="movies">View all</Link>}
           >
             <CardRow>
-              {category.recommendations.map(
-                ({ imageUrl, name }, recommendationIndex) => (
+              {category.recommendations
+                .slice(0, 5)
+                .map(({ cardUrl, name, movieId }, recommendationIndex) => (
                   <Link
                     key={`category${recommendationIndex}`}
                     routeName="movie"
+                    routeParams={{ movieId }}
                   >
-                    <Card backgroundSrc={imageUrl}>
+                    <Card backgroundSrc={cardUrl}>
                       <CardLabel>{name}</CardLabel>
                     </Card>
                   </Link>
-                )
-              )}
+                ))}
             </CardRow>
           </Section>
         ))}

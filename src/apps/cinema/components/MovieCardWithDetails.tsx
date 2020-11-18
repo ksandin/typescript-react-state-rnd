@@ -1,21 +1,33 @@
 import React from "react";
 import styled from "styled-components";
-import { Chip, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import { Card } from "./Card";
-import { Link } from "./Link";
+import { commonRuntimeFormat } from "../functions/commonRuntimeFormat";
+import { PremiereChip } from "./PremiereChip";
+import { Movie } from "../state/models/Movie";
 
-export type MovieCardWithDetailsProps = {};
+export type MovieCardWithDetailsProps = Pick<
+  Movie,
+  "name" | "cardUrl" | "premiereDate" | "genres" | "runtime" | "ageLimit"
+>;
 
-export const MovieCardWithDetails: React.FC<MovieCardWithDetailsProps> = () => (
+export const MovieCardWithDetails = ({
+  name,
+  cardUrl,
+  premiereDate,
+  genres,
+  runtime,
+  ageLimit,
+}: MovieCardWithDetailsProps) => (
   <Row>
-    <Card backgroundSrc="http://lorempixel.com/180/280/transport/?_=1" />
+    <Card backgroundSrc={cardUrl} />
     <AlignBottom>
-      <Chip label="Premiär 13 november" color="primary" />
-      <Typography variant="h4">
-        <Link routeName="movie">Operation Nordpolen</Link>
+      <PremiereChip date={premiereDate} />
+      <Typography variant="h4">{name}</Typography>
+      <Typography>{genres.join(", ")}</Typography>
+      <Typography variant="caption">
+        {commonRuntimeFormat(runtime)} | {ageLimit}
       </Typography>
-      <Typography>Horror, Thriller</Typography>
-      <Typography variant="caption">1 hour 28 minutes | 15 years</Typography>
     </AlignBottom>
   </Row>
 );

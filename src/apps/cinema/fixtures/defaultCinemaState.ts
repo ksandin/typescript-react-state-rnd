@@ -1,14 +1,22 @@
-import moment from "moment";
 import { CinemaState } from "../state/CinemaState";
-import { homeCategories } from "./homeCategories";
+import { movies } from "./movies";
 
 export const defaultCinemaState: CinemaState = {
   location: "Stockholm",
   locationOptions: ["Stockholm", "Göteborg"],
-  homeHeroRecommendation: {
-    imageUrl: "http://lorempixel.com/920/400/transport/",
-    name: "Operation Nordpolen",
-    premiere: moment(new Date()).add(3, "days").toDate(),
-  },
-  homeRecommendationCategories: homeCategories,
+  homeHeroRecommendation: movies[5],
+  homeRecommendationCategories: [
+    {
+      name: "Out now",
+      recommendations: movies.slice(0, 5),
+    },
+    {
+      name: "Upcoming recommendations",
+      recommendations: movies.slice(5, 10),
+    },
+    {
+      name: "For children",
+      recommendations: movies.slice(10, 15),
+    },
+  ],
 };

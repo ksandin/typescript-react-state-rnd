@@ -51,7 +51,7 @@ const routeList: CinemaRouteConfigNode[] = [
     component: BookingTicketSelectionPage,
   },
   {
-    path: "/movie",
+    path: "/movie/:movieId",
     name: "movie",
     title: "Movie",
     component: MoviePage,

@@ -11,44 +11,51 @@ import { CardRow } from "../components/CardRow";
 import { ShowListItemsByCinemaName } from "../components/ShowListItemsByCinemaName";
 import { TicketsControls, TicketsOptions } from "../components/TicketsControls";
 import { MovieCardWithDetails } from "../components/MovieCardWithDetails";
+import { useCinemaDispatcher } from "../hooks/useCinemaDispatcher";
+import { useRoute } from "react-router5";
+import { useCallOnce } from "../hooks/useCallOnce";
+import { useCinemaSelector } from "../hooks/useCinemaSelector";
+import { MovieId } from "../state/models/Movie";
 
 export const MoviePage = () => {
-  const [options, setOptions] = useState<TicketsOptions>({
-    display: "movies",
-    date: new Date(),
-    cinemas: [],
-    movies: [],
-    subtitles: "All",
-    ageLimit: "All",
-    language: "All",
-    genres: [],
-    other: [],
-  });
+  const { route } = useRoute();
+  const movie = useCinemaSelector(({ moviePage }) => moviePage);
+  const [options, setOptions] = useState(defaultTicketsOptions);
+  const [{ loadMoviePageState }, dispatches] = useCinemaDispatcher();
+
+  useCallOnce(loadMoviePageState, route.params.movieId as MovieId);
+
+  if (dispatches.loadMoviePageState.status === "pending") {
+    return <span>Loading...</span>;
+  }
+  if (dispatches.loadMoviePageState.status === "rejected" || !movie) {
+    return <span>Movie not found</span>;
+  }
+
   return (
     <>
-      <MoviePageHeroBanner src="http://lorempixel.com/920/400/transport/">
+      <MoviePageHeroBanner src={movie.bannerUrl}>
         <Center>
           <MoviePlayerDialogPlayButton />
         </Center>
         <Container>
-          <MovieCardWithDetails />
+          <MovieCardWithDetails
+            premiereDate={movie.premiereDate}
+            runtime={movie.runtime}
+            name={movie.name}
+            cardUrl={movie.cardUrl}
+            genres={movie.genres}
+            ageLimit={movie.ageLimit}
+          />
         </Container>
       </MoviePageHeroBanner>
       <Container>
-        <Typography paragraph>
-          En populär influencer och hans vänner reser jorden runt och filmar sig
-          själva i extrema situationer. I Ryssland blir de inbjudna till ett
-          mystiskt escape room av en excentrisk miljonär och ser en given
-          videosuccé i sociala medier framför sig. Men inga likes i världen kan
-          köpa dem fria från mardrömmen som väntar ...
-        </Typography>
+        <Typography paragraph>{movie.description}</Typography>
         <MoviePageDetails />
         <MoviePageCards>
-          <Card backgroundSrc="http://lorempixel.com/180/280/transport/?_=1" />
-          <Card backgroundSrc="http://lorempixel.com/180/280/transport/?_=2" />
-          <Card backgroundSrc="http://lorempixel.com/180/280/transport/?_=3" />
-          <Card backgroundSrc="http://lorempixel.com/180/280/transport/?_=4" />
-          <Card backgroundSrc="http://lorempixel.com/180/280/transport/?_=5" />
+          {movie.snapshotUrls.slice(0, 5).map((imageUrl, index) => (
+            <Card key={`card${index}`} backgroundSrc={imageUrl} />
+          ))}
         </MoviePageCards>
         <Typography variant="h5" paragraph>
           Tickets
@@ -73,3 +80,15 @@ const MoviePageDetails = styled(MovieDetails)`
 const MoviePageHeroBanner = styled(HeroBanner)`
   margin-bottom: 32px;
 `;
+
+const defaultTicketsOptions: TicketsOptions = {
+  display: "movies",
+  date: new Date(),
+  cinemas: [],
+  movies: [],
+  subtitles: "All",
+  ageLimit: "All",
+  language: "All",
+  genres: [],
+  other: [],
+};
