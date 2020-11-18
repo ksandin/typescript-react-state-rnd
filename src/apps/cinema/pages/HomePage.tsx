@@ -12,6 +12,8 @@ import { Container } from "../components/Container";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
 import { CardLabel } from "../components/CardLabel";
 import { PremiereChip } from "../components/PremiereChip";
+import { useCinemaDispatcher } from "../hooks/useCinemaDispatcher";
+import { useCallOnce } from "../hooks/useCallOnce";
 
 const useHomePageState = () =>
   useCinemaSelector(
@@ -23,6 +25,16 @@ const useHomePageState = () =>
 
 export const HomePage = () => {
   const { hero, categories } = useHomePageState();
+  const [{ loadHomePageState }, dispatches] = useCinemaDispatcher();
+  useCallOnce(loadHomePageState);
+
+  if (dispatches.loadHomePageState.status === "pending") {
+    return <span>Loading...</span>;
+  }
+  if (dispatches.loadHomePageState.status === "rejected") {
+    return <span>Oops, something went wrong. Please come back later!</span>;
+  }
+
   return (
     <>
       {hero && (
