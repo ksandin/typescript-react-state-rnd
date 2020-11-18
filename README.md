@@ -6,6 +6,8 @@ This project is a playground for experimenting with all things state management 
 
 This project also aims to produce example code for as many state management scenarios as possible (ie. local vs remote state, in-memory vs persisted state, etc.) for a wide range of application complexities (ie. small, medium or large scale applications).
 
+I'm approaching this project in two stages: First custom code, then 3rd party code. Meaning I will build all apps without using 3rd party state management libraries in an attempt to find new workflows and maybe build some useful libraries. However, I'm not trying to replace any community standard state management libraries. At the end of the project I will refactor the apps to use ie. redux, and compare and see what I had missed or if I managed to invent something useful.
+
 > Note that this is primarily a project for myself to practice state management with.
 
 ## The app
