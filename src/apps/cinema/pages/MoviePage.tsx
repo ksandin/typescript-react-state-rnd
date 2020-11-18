@@ -9,18 +9,32 @@ import { MovieDetails } from "../components/MovieDetails";
 import { Card } from "../components/Card";
 import { CardRow } from "../components/CardRow";
 import { ShowListItemsByCinemaName } from "../components/ShowListItemsByCinemaName";
-import { TicketsControls, TicketsOptions } from "../components/TicketsControls";
+import { TicketsControls } from "../components/TicketsControls";
 import { MovieCardWithDetails } from "../components/MovieCardWithDetails";
 import { useCinemaDispatcher } from "../hooks/useCinemaDispatcher";
 import { useRoute } from "react-router5";
 import { useCallOnce } from "../hooks/useCallOnce";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
 import { MovieId } from "../state/models/Movie";
+import { MovieLanguage } from "../state/models/MovieLanguage";
+import { MovieAgeLimit } from "../state/models/MovieAgeLimit";
+import { TicketsOptions } from "../state/models/TicketsOptions";
+import { ControlRow } from "../components/ControlRow";
 
 export const MoviePage = () => {
   const { route } = useRoute();
   const movie = useCinemaSelector(({ moviePage }) => moviePage);
-  const [options, setOptions] = useState(defaultTicketsOptions);
+  const [options, setOptions] = useState<TicketsOptions>({
+    display: "movies",
+    date: new Date(),
+    cinemas: [],
+    movies: [],
+    subtitles: MovieLanguage.All,
+    ageLimit: MovieAgeLimit.All,
+    language: MovieLanguage.All,
+    genres: [],
+    other: [],
+  });
   const [{ loadMoviePageState }, dispatches] = useCinemaDispatcher();
 
   useCallOnce(loadMoviePageState, route.params.movieId as MovieId);
@@ -67,7 +81,14 @@ export const MoviePage = () => {
         <Typography variant="h5" paragraph>
           Tickets
         </Typography>
-        <TicketsControls value={options} onChange={setOptions} />
+        <TicketsControls value={options} onChange={setOptions}>
+          {({ date, cinemas }) => (
+            <ControlRow>
+              {date}
+              {cinemas}
+            </ControlRow>
+          )}
+        </TicketsControls>
         <List>
           <ShowListItemsByCinemaName />
         </List>
@@ -87,15 +108,3 @@ const MoviePageDetails = styled(MovieDetails)`
 const MoviePageHeroBanner = styled(HeroBanner)`
   margin-bottom: 32px;
 `;
-
-const defaultTicketsOptions: TicketsOptions = {
-  display: "movies",
-  date: new Date(),
-  cinemas: [],
-  movies: [],
-  subtitles: "All",
-  ageLimit: "All",
-  language: "All",
-  genres: [],
-  other: [],
-};

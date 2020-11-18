@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import { Autocomplete } from "@material-ui/lab";
 import TextField from "@material-ui/core/TextField";
 import { ToggleButtonGroup } from "./ToggleButtonGroup";
@@ -10,6 +9,7 @@ import {
   MoviesDisplayOption,
   MoviesOptions,
 } from "../state/models/MoviesOptions";
+import { ControlRow } from "./ControlRow";
 
 export type MoviesControlsProps = {
   value: MoviesOptions;
@@ -26,7 +26,7 @@ export const MoviesControls: React.FC<MoviesControlsProps> = ({
   ) => onChange({ ...value, [propName]: propValue });
   return (
     <>
-      <Row>
+      <ControlRow>
         <Autocomplete
           options={Object.values(MovieGenre)}
           renderInput={(params) => (
@@ -44,7 +44,7 @@ export const MoviesControls: React.FC<MoviesControlsProps> = ({
           value={value.ageLimit}
           onChange={(e, newValue) => newValue && change("ageLimit", newValue)}
         />
-      </Row>
+      </ControlRow>
       <ToggleButtonGroup<MoviesDisplayOption>
         size="small"
         value={value.display}
@@ -63,12 +63,3 @@ export const MoviesControls: React.FC<MoviesControlsProps> = ({
     </>
   );
 };
-
-const Row = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 1fr;
-  grid-column-gap: 8px;
-  grid-row-gap: 8px;
-  margin: 8px 0;
-`;

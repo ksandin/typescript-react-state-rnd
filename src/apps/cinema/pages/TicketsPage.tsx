@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { MovieListAlphabetic } from "../components/MovieListAlphabetic";
 import { MovieListTimeline } from "../components/MovieListTimeline";
-import {
-  TicketsDisplayOption,
-  TicketsControls,
-  TicketsOptions,
-} from "../components/TicketsControls";
+import { TicketsControls } from "../components/TicketsControls";
 import { Container } from "../components/Container";
 import { Movie } from "../state/models/Movie";
 import { movies } from "../fixtures/movies";
+import {
+  TicketsDisplayOption,
+  TicketsOptions,
+} from "../state/models/TicketsOptions";
+import { MovieLanguage } from "../state/models/MovieLanguage";
+import { MovieAgeLimit } from "../state/models/MovieAgeLimit";
 
 const displayComponents: Record<
   TicketsDisplayOption,
@@ -25,9 +27,9 @@ export const TicketsPage = () => {
     date: new Date(),
     cinemas: [],
     movies: [],
-    subtitles: "All",
-    ageLimit: "All",
-    language: "All",
+    subtitles: MovieLanguage.All,
+    ageLimit: MovieAgeLimit.All,
+    language: MovieLanguage.All,
     genres: [],
     other: [],
   });

@@ -4,6 +4,7 @@ import { range } from "../functions/range";
 import { MovieAgeLimit } from "../state/models/MovieAgeLimit";
 import { MovieGenre } from "../state/models/MovieGenre";
 import { MovieLanguage } from "../state/models/MovieLanguage";
+import { without } from "lodash";
 
 const description = `En populär influencer och hans vänner reser jorden runt och filmar sig
 själva i extrema situationer. I Ryssland blir de inbjudna till ett
@@ -17,8 +18,8 @@ const premiereDates = [
 ];
 const runTimes = [75, 87, 95, 105, 112];
 const genres = Object.values(MovieGenre);
-const ageLimits = Object.values(MovieAgeLimit);
-const languages = Object.values(MovieLanguage);
+const ageLimits = without(Object.values(MovieAgeLimit), MovieAgeLimit.All);
+const languages = without(Object.values(MovieLanguage), MovieLanguage.All);
 const cast = [
   "Tom Hanks",
   "Robert De Niro",
