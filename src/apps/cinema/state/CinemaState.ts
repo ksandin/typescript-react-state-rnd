@@ -8,4 +8,5 @@ export type CinemaState = {
   homeHeroRecommendation?: MovieRecommendationHero;
   homeRecommendationCategories: MovieRecommendationCategory[];
   moviePage?: Movie;
+  moviesPage: Movie[];
 };

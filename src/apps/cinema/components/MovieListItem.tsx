@@ -12,45 +12,65 @@ import styled from "styled-components";
 import { DividedListItem } from "./DividedListItem";
 import { Link } from "./Link";
 import { MoviePlayerDialogPlayButton } from "./MoviePlayerDialogPlayButton";
-import { Center } from "./Center";
+import { Movie } from "../state/models/Movie";
+import { commonDateFormat } from "../functions/commonDateFormat";
+import { commonRuntimeFormat } from "../functions/commonRuntimeFormat";
 
-export type MovieListItemProps = {
-  playButton?: boolean;
-  releaseDate?: boolean;
+export type MovieListItemProps = Pick<
+  Movie,
+  | "name"
+  | "premiereDate"
+  | "cardUrl"
+  | "runtime"
+  | "ageLimit"
+  | "genres"
+  | "movieId"
+  | "trailerUrl"
+> & {
+  avatarTrailerButton?: boolean;
+  showReleaseDate?: boolean;
 };
 
 export const MovieListItem: React.FC<MovieListItemProps> = ({
   children,
-  playButton = true,
-  releaseDate = false,
+  name,
+  cardUrl,
+  premiereDate,
+  runtime,
+  ageLimit,
+  genres,
+  movieId,
+  trailerUrl,
+  avatarTrailerButton = true,
+  showReleaseDate = false,
 }) => (
   <DividedListItem>
     <ListItem alignItems="flex-start">
       <ListItemAvatar>
-        <MovieListItemAvatar alt="Remy Sharp">
-          {playButton && (
-            <Center>
-              <MoviePlayerDialogPlayButton />
-            </Center>
-          )}
-        </MovieListItemAvatar>
+        <AvatarImage src={cardUrl} alt="Remy Sharp" />
       </ListItemAvatar>
-
+      {avatarTrailerButton && (
+        <AvatarTrailerButton
+          dialogProps={{ moviePlayerProps: { url: trailerUrl } }}
+        />
+      )}
       <ListItemText>
-        {releaseDate && (
+        {showReleaseDate && (
           <Typography variant="caption">
-            <SmallEventIcon /> 16 november
+            <SmallEventIcon /> {commonDateFormat(premiereDate)}
           </Typography>
         )}
         <Typography variant="body1">
-          <Link routeName="movie">After we collided</Link>
+          <Link routeName="movie" routeParams={{ movieId }}>
+            {name}
+          </Link>
         </Typography>
         <Typography
           variant="body2"
           style={{ display: "inline" }}
           color="textPrimary"
         >
-          Romance, Drama | 1 hour 45 minutes | 11 years
+          {genres.join(", ")} | {commonRuntimeFormat(runtime)} | {ageLimit}
         </Typography>
       </ListItemText>
       {children && (
@@ -60,7 +80,13 @@ export const MovieListItem: React.FC<MovieListItemProps> = ({
   </DividedListItem>
 );
 
-const MovieListItemAvatar = styled(Avatar).attrs({ variant: "square" })`
+const AvatarTrailerButton = styled(MoviePlayerDialogPlayButton)`
+  position: absolute;
+  left: 26px;
+  top: 45px;
+`;
+
+const AvatarImage = styled(Avatar).attrs({ variant: "square" })`
   width: 70px;
   height: 100px;
   margin-right: 16px;

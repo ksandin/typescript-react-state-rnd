@@ -8,8 +8,13 @@ import {
   TicketsOptions,
 } from "../components/TicketsControls";
 import { Container } from "../components/Container";
+import { Movie } from "../state/models/Movie";
+import { movies } from "../fixtures/movies";
 
-const displayComponents: Record<TicketsDisplayOption, React.ComponentType> = {
+const displayComponents: Record<
+  TicketsDisplayOption,
+  React.ComponentType<{ movies: Movie[] }>
+> = {
   movies: MovieListAlphabetic,
   shows: MovieListTimeline,
 };
@@ -32,7 +37,7 @@ export const TicketsPage = () => {
       <Margin>
         <TicketsControls value={options} onChange={setOptions} />
       </Margin>
-      <DisplayComponent />
+      <DisplayComponent movies={movies} />
     </Container>
   );
 };

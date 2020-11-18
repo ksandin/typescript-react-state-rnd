@@ -4,14 +4,12 @@ import { Autocomplete } from "@material-ui/lab";
 import TextField from "@material-ui/core/TextField";
 import { ToggleButtonGroup } from "./ToggleButtonGroup";
 import { Typography } from "@material-ui/core";
-
-export type MoviesDisplayOption = "current" | "upcoming";
-
-export type MoviesOptions = {
-  display: MoviesDisplayOption;
-  ageLimit: string;
-  genres: string[];
-};
+import { MovieGenre } from "../state/models/MovieGenre";
+import { MovieAgeLimit } from "../state/models/MovieAgeLimit";
+import {
+  MoviesDisplayOption,
+  MoviesOptions,
+} from "../state/models/MoviesOptions";
 
 export type MoviesControlsProps = {
   value: MoviesOptions;
@@ -30,17 +28,7 @@ export const MoviesControls: React.FC<MoviesControlsProps> = ({
     <>
       <Row>
         <Autocomplete
-          options={[
-            "Action",
-            "Animated",
-            "Kids",
-            "Biopic",
-            "Documentary",
-            "Drama",
-            "Family",
-            "Fantasy",
-            "Comedy",
-          ]}
+          options={Object.values(MovieGenre)}
           renderInput={(params) => (
             <TextField {...params} label="Genres" variant="outlined" />
           )}
@@ -49,7 +37,7 @@ export const MoviesControls: React.FC<MoviesControlsProps> = ({
           multiple
         />
         <Autocomplete
-          options={["All", "Child allowed", "7 years", "11 years", "Unknown"]}
+          options={Object.values(MovieAgeLimit)}
           renderInput={(params) => (
             <TextField {...params} label="Age limit" variant="outlined" />
           )}

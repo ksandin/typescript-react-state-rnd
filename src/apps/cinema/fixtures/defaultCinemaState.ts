@@ -4,4 +4,5 @@ export const defaultCinemaState: CinemaState = {
   location: "Stockholm",
   locationOptions: ["Stockholm", "Göteborg"],
   homeRecommendationCategories: [],
+  moviesPage: [],
 };

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
-import { MovieListItem } from "./MovieListItem";
+import { MovieListItem, MovieListItemProps } from "./MovieListItem";
 import { Button, Collapse } from "@material-ui/core";
 
-export type MovieListItemExpandableProps = {
+export type MovieListItemExpandableProps = MovieListItemProps & {
   expanded?: boolean;
   fixed?: boolean;
 };
@@ -12,6 +12,7 @@ export const MovieListItemExpandable: React.FC<MovieListItemExpandableProps> = (
   children,
   expanded: initialExpanded,
   fixed,
+  ...props
 }) => {
   const [expanded, setExpanded] = useState(initialExpanded);
   const toggle = () => setExpanded(!expanded);
@@ -20,7 +21,7 @@ export const MovieListItemExpandable: React.FC<MovieListItemExpandableProps> = (
   const showToggle = !fixed;
   return (
     <>
-      <MovieListItem>
+      <MovieListItem {...props}>
         {showToggle && (
           <Button
             variant="contained"

@@ -1,32 +1,42 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import { Container } from "../components/Container";
-import { MovieListUpcoming } from "../components/MovieListUpcoming";
-import { MovieListAlphabeticWithTrailers } from "../components/MovieListAlphabeticWithTrailers";
-import {
-  MoviesControls,
-  MoviesDisplayOption,
-  MoviesOptions,
-} from "../components/MoviesControls";
-
-const displayComponents: Record<MoviesDisplayOption, React.ComponentType> = {
-  current: MovieListAlphabeticWithTrailers,
-  upcoming: MovieListUpcoming,
-};
+import { MoviesControls } from "../components/MoviesControls";
+import { MovieListItemWithTrailerButton } from "../components/MovieListItemWithTrailerButton";
+import { List } from "@material-ui/core";
+import { useCinemaSelector } from "../hooks/useCinemaSelector";
+import { useCinemaDispatcher } from "../hooks/useCinemaDispatcher";
+import { useCallOnce } from "../hooks/useCallOnce";
+import { MoviesOptions } from "../state/models/MoviesOptions";
+import { MovieAgeLimit } from "../state/models/MovieAgeLimit";
 
 export const MoviesPage = () => {
-  const [options, setOptions] = useState<MoviesOptions>({
-    display: "current",
-    ageLimit: "All",
-    genres: [],
-  });
-  const DisplayComponent = displayComponents[options.display];
+  const movies = useCinemaSelector(({ moviesPage }) => moviesPage);
+  const [{ loadMoviesPageState }, dispatches] = useCinemaDispatcher();
+  const [options, setOptions] = useState<MoviesOptions>(defaultMoviesOptions);
+  useCallOnce(loadMoviesPageState, options);
+
+  if (dispatches.loadMoviesPageState.status === "pending") {
+    return <span>Loading...</span>;
+  }
+  if (dispatches.loadMoviesPageState.status === "rejected") {
+    return <span>Oops, something went wrong</span>;
+  }
+
   return (
     <Container>
       <Margin>
         <MoviesControls value={options} onChange={setOptions} />
       </Margin>
-      <DisplayComponent />
+      <List>
+        {movies.map((movie) => (
+          <MovieListItemWithTrailerButton
+            key={movie.movieId}
+            showReleaseDate={options.display === "upcoming"}
+            {...movie}
+          />
+        ))}
+      </List>
     </Container>
   );
 };
@@ -34,3 +44,9 @@ export const MoviesPage = () => {
 const Margin = styled.div`
   margin-bottom: 16px;
 `;
+
+const defaultMoviesOptions: MoviesOptions = {
+  display: "current",
+  ageLimit: MovieAgeLimit.All,
+  genres: [],
+};

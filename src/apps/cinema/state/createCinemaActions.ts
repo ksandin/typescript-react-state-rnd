@@ -2,6 +2,7 @@ import { Repository } from "../../../lib/store/Repository";
 import { CinemaState } from "./CinemaState";
 import { movies } from "../fixtures/movies";
 import { MovieId } from "./models/Movie";
+import { MoviesOptions } from "./models/MoviesOptions";
 
 export const createCinemaActions = (repository: Repository<CinemaState>) => ({
   setLocation: async (location: string) =>
@@ -30,6 +31,12 @@ export const createCinemaActions = (repository: Repository<CinemaState>) => ({
     repository.update({
       ...repository.state,
       moviePage: movies.find((candidate) => candidate.movieId === movieId),
+    });
+  },
+  loadMoviesPageState: async (options: MoviesOptions) => {
+    repository.update({
+      ...repository.state,
+      moviesPage: movies,
     });
   },
 });

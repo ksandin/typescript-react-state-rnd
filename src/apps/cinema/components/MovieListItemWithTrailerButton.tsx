@@ -9,8 +9,9 @@ export type MovieListItemWithTrailerButtonProps = MovieListItemProps;
 export const MovieListItemWithTrailerButton: React.FC<MovieListItemWithTrailerButtonProps> = (
   props
 ) => (
-  <MovieListItem playButton={false} {...props}>
+  <MovieListItem avatarTrailerButton={false} {...props}>
     <SmallPlayButton
+      dialogProps={{ moviePlayerProps: { url: props.trailerUrl } }}
       renderButton={(playButton, open) => (
         <Button variant="outlined" onClick={open} startIcon={playButton}>
           Play trailer

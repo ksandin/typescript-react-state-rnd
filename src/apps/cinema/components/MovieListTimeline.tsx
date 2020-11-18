@@ -2,21 +2,21 @@ import { Section } from "./Section";
 import { List } from "@material-ui/core";
 import React from "react";
 import { MovieListItemWithShows } from "./MovieListItemWithShows";
+import { Movie } from "../state/models/Movie";
 
-export const MovieListTimeline = () => (
+export const MovieListTimeline = ({ movies }: { movies: Movie[] }) => (
   <>
     <Section label="20:15">
       <List>
-        <MovieListItemWithShows time={false} expanded fixed />
-        <MovieListItemWithShows time={false} expanded fixed />
-        <MovieListItemWithShows time={false} expanded fixed />
-      </List>
-    </Section>
-    <Section label="21:15">
-      <List>
-        <MovieListItemWithShows expanded fixed />
-        <MovieListItemWithShows expanded fixed />
-        <MovieListItemWithShows expanded fixed />
+        {movies.map((movie) => (
+          <MovieListItemWithShows
+            key={movie.movieId}
+            time={false}
+            expanded
+            fixed
+            {...movie}
+          />
+        ))}
       </List>
     </Section>
   </>
