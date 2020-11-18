@@ -1,7 +1,7 @@
 import { Repository } from "../../../lib/store/Repository";
 import { CinemaState } from "./CinemaState";
 import { movies } from "../fixtures/movies";
-import { MovieId } from "./models/Movie";
+import { Movie, MovieId } from "./models/Movie";
 import { MoviesOptions } from "./models/MoviesOptions";
 
 export const createCinemaActions = (repository: Repository<CinemaState>) => ({
@@ -33,10 +33,15 @@ export const createCinemaActions = (repository: Repository<CinemaState>) => ({
       moviePage: movies.find((candidate) => candidate.movieId === movieId),
     });
   },
-  loadMoviesPageState: async (options: MoviesOptions) => {
+  loadMoviesPageState: async ({ display }: MoviesOptions) => {
     repository.update({
       ...repository.state,
-      moviesPage: movies,
+      moviesPage: movies.filter(movieFilters[display]),
     });
   },
 });
+
+const movieFilters = {
+  upcoming: (movies: Movie) => new Date() < movies.premiereDate,
+  current: (movies: Movie) => new Date() >= movies.premiereDate,
+};

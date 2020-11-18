@@ -11,10 +11,7 @@ videosuccé i sociala medier framför sig. Men inga likes i världen kan
 köpa dem fria från mardrömmen som väntar ...`;
 
 const premiereDates = [
-  moment(new Date()).add(-1, "week").toDate(),
-  moment(new Date()).add(-3, "days").toDate(),
-  new Date(),
-  moment(new Date()).add(3, "days").toDate(),
+  moment(new Date()).subtract(1, "week").toDate(),
   moment(new Date()).add(1, "week").toDate(),
 ];
 const runTimes = [75, 87, 95, 105, 112];
