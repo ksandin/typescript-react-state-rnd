@@ -1,8 +1,6 @@
 import styled from "styled-components";
+import ReactPlayer, { ReactPlayerProps } from "react-player";
 
-export const MoviePlayer = styled.div`
-  width: 100%;
-  background: black;
-  min-height: 250px;
-  min-width: 500px;
-`;
+export type MoviePlayerProps = ReactPlayerProps;
+
+export const MoviePlayer = styled(ReactPlayer)``;

@@ -1,9 +1,9 @@
 import React from "react";
 import { Dialog, DialogProps } from "@material-ui/core";
-import { MoviePlayer } from "./MoviePlayer";
+import { MoviePlayer, MoviePlayerProps } from "./MoviePlayer";
 
 export type MoviePlayerDialogProps = Omit<DialogProps, "onClose"> & {
-  autoPlay?: boolean;
+  moviePlayerProps?: MoviePlayerProps;
   onClose?: (
     event: {},
     reason: "backdropClick" | "escapeKeyDown" | "close"
@@ -12,11 +12,21 @@ export type MoviePlayerDialogProps = Omit<DialogProps, "onClose"> & {
 
 export const MoviePlayerDialog: React.FC<MoviePlayerDialogProps> = ({
   onClose = () => {},
+  moviePlayerProps,
   ...props
 }) => {
   return (
-    <Dialog onClose={onClose} {...props}>
-      <MoviePlayer />
+    <Dialog maxWidth={false} onClose={onClose} {...props}>
+      <MoviePlayer
+        muted
+        playing
+        config={{
+          youtube: {
+            playerVars: { showinfo: 0 },
+          },
+        }}
+        {...moviePlayerProps}
+      />
     </Dialog>
   );
 };
