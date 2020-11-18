@@ -16,7 +16,12 @@ export const MoviePlayerDialog: React.FC<MoviePlayerDialogProps> = ({
   ...props
 }) => {
   return (
-    <Dialog maxWidth={false} onClose={onClose} {...props}>
+    <Dialog
+      PaperProps={{ style: { overflowY: "hidden" } }}
+      maxWidth={false}
+      onClose={onClose}
+      {...props}
+    >
       <MoviePlayer
         muted
         playing
