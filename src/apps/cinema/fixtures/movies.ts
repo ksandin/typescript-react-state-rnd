@@ -10,18 +10,33 @@ mystiskt escape room av en excentrisk miljonär och ser en given
 videosuccé i sociala medier framför sig. Men inga likes i världen kan
 köpa dem fria från mardrömmen som väntar ...`;
 
+const premiereDates = [
+  moment(new Date()).add(-1, "week").toDate(),
+  moment(new Date()).add(-3, "days").toDate(),
+  new Date(),
+  moment(new Date()).add(3, "days").toDate(),
+  moment(new Date()).add(1, "week").toDate(),
+];
+const runTimes = [75, 87, 95, 105, 112];
+const allGenres = Object.values(MovieGenre);
+const allAgeLimits = Object.values(MovieAgeLimit);
+
 export const movies: Movie[] = range(1, 15).map((i) => ({
   bannerUrl: `http://lorempixel.com/920/400/transport/?_=${i}`,
   cardUrl: `http://lorempixel.com/180/280/transport/?_=${i}`,
   name: `Movie ${i}`,
   movieId: i as MovieId,
   description,
-  premiereDate: moment(new Date()).add(3, "days").toDate(),
-  runtime: 97,
-  genres: [MovieGenre.Action, MovieGenre.Drama],
-  ageLimit: MovieAgeLimit.Year15,
+  premiereDate: rotate(premiereDates, i),
+  runtime: rotate(runTimes, i),
+  genres: [rotate(allGenres, i), rotate(allGenres, i + 1)],
+  ageLimit: rotate(allAgeLimits, i),
   trailerUrl: "https://www.youtube.com/watch?v=AaK0AKQFCNY",
   snapshotUrls: range(0, 4).map(
     (n) => `http://lorempixel.com/180/280/transport/?_=snap${i * 5 + n}`
   ),
 }));
+
+function rotate<T>(values: T[], index: number) {
+  return values[index % values.length];
+}
