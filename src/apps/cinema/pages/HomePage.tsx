@@ -40,7 +40,9 @@ export const HomePage = () => {
       {hero && (
         <HomeHeroBanner src={hero.bannerUrl}>
           <Center>
-            <MoviePlayerDialogPlayButton />
+            <MoviePlayerDialogPlayButton
+              dialogProps={{ moviePlayerProps: { url: hero.trailerUrl } }}
+            />
           </Center>
           <PremiereChip date={hero.premiereDate} />
           <Typography variant="h4">

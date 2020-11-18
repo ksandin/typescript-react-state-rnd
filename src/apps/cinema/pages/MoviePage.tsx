@@ -36,7 +36,9 @@ export const MoviePage = () => {
     <>
       <MoviePageHeroBanner src={movie.bannerUrl}>
         <Center>
-          <MoviePlayerDialogPlayButton />
+          <MoviePlayerDialogPlayButton
+            dialogProps={{ moviePlayerProps: { url: movie.trailerUrl } }}
+          />
         </Center>
         <Container>
           <MovieCardWithDetails

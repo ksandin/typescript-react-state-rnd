@@ -20,6 +20,7 @@ export const movies: Movie[] = range(1, 15).map((i) => ({
   runtime: 97,
   genres: [MovieGenre.Action, MovieGenre.Drama],
   ageLimit: MovieAgeLimit.Year15,
+  trailerUrl: "https://www.youtube.com/watch?v=AaK0AKQFCNY",
   snapshotUrls: range(0, 4).map(
     (n) => `http://lorempixel.com/180/280/transport/?_=snap${i * 5 + n}`
   ),

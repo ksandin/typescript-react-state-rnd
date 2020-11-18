@@ -13,5 +13,6 @@ export type Movie = {
   description: string;
   bannerUrl: string;
   cardUrl: string;
+  trailerUrl: string;
   snapshotUrls: string[];
 };
