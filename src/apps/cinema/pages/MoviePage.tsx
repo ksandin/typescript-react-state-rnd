@@ -53,7 +53,12 @@ export const MoviePage = () => {
       </MoviePageHeroBanner>
       <Container>
         <Typography paragraph>{movie.description}</Typography>
-        <MoviePageDetails />
+        <MoviePageDetails
+          premiereDate={movie.premiereDate}
+          cast={movie.cast}
+          director={movie.director}
+          language={movie.language}
+        />
         <MoviePageCards>
           {movie.snapshotUrls.slice(0, 5).map((imageUrl, index) => (
             <Card key={`card${index}`} backgroundSrc={imageUrl} />

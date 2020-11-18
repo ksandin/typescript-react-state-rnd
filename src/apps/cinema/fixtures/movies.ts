@@ -3,6 +3,7 @@ import { Movie, MovieId } from "../state/models/Movie";
 import { range } from "../functions/range";
 import { MovieAgeLimit } from "../state/models/MovieAgeLimit";
 import { MovieGenre } from "../state/models/MovieGenre";
+import { MovieLanguage } from "../state/models/MovieLanguage";
 
 const description = `En populär influencer och hans vänner reser jorden runt och filmar sig
 själva i extrema situationer. I Ryssland blir de inbjudna till ett
@@ -15,8 +16,30 @@ const premiereDates = [
   moment(new Date()).add(1, "week").toDate(),
 ];
 const runTimes = [75, 87, 95, 105, 112];
-const allGenres = Object.values(MovieGenre);
-const allAgeLimits = Object.values(MovieAgeLimit);
+const genres = Object.values(MovieGenre);
+const ageLimits = Object.values(MovieAgeLimit);
+const languages = Object.values(MovieLanguage);
+const cast = [
+  "Tom Hanks",
+  "Robert De Niro",
+  "Leonardo DiCaprio",
+  "Al Pacino",
+  "Denzel Washington",
+  "Robert Downey, Jr.",
+  "Jack Nicholson",
+  "Christian Bale",
+  "Johnny Depp",
+  "Brad Pitt",
+];
+const directors = [
+  "Quentin Tarantino",
+  "Martin Scorsese",
+  "Christopher Nolan",
+  "Stephen Spielberg",
+  "David Fincher",
+  "James Cameron",
+  "Peter Jackson",
+];
 
 export const movies: Movie[] = range(1, 15).map((i) => ({
   bannerUrl: `http://lorempixel.com/920/400/transport/?_=${i}`,
@@ -26,13 +49,21 @@ export const movies: Movie[] = range(1, 15).map((i) => ({
   description,
   premiereDate: rotate(premiereDates, i),
   runtime: rotate(runTimes, i),
-  genres: [rotate(allGenres, i), rotate(allGenres, i + 1)],
-  ageLimit: rotate(allAgeLimits, i),
+  genres: [rotate(genres, i), rotate(genres, i + 1)],
+  ageLimit: rotate(ageLimits, i),
+  language: rotate(languages, i),
+  subtitles: rotate(languages, i + 1),
+  cast: rotateMany(cast, i, 3),
+  director: rotate(directors, i),
   trailerUrl: "https://www.youtube.com/watch?v=AaK0AKQFCNY",
   snapshotUrls: range(0, 4).map(
     (n) => `http://lorempixel.com/180/280/transport/?_=snap${i * 5 + n}`
   ),
 }));
+
+function rotateMany<T>(values: T[], index: number, count: number) {
+  return range(0, count - 1).map((offset) => rotate(values, index + offset));
+}
 
 function rotate<T>(values: T[], index: number) {
   return values[index % values.length];
