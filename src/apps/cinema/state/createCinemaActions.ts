@@ -3,6 +3,7 @@ import { CinemaState } from "./CinemaState";
 import { movies } from "../fixtures/movies";
 import { Movie, MovieId } from "./models/Movie";
 import { MoviesOptions } from "./models/MoviesOptions";
+import { MovieAgeLimit } from "./models/MovieAgeLimit";
 
 export const createCinemaActions = (repository: Repository<CinemaState>) => ({
   setLocation: async (location: string) =>
@@ -33,13 +34,22 @@ export const createCinemaActions = (repository: Repository<CinemaState>) => ({
       moviePage: movies.find((candidate) => candidate.movieId === movieId),
     });
   },
-  loadMoviesPageState: async ({ display }: MoviesOptions) => {
+  loadMoviesPageState: async ({ display, genres, ageLimit }: MoviesOptions) => {
     repository.update({
       ...repository.state,
-      moviesPage: movies.filter(movieFilters[display]),
+      moviesPage: movies
+        .filter(movieFilters[display])
+        .filter((movie) => includesAll(movie.genres, genres))
+        .filter(
+          (movie) =>
+            ageLimit === MovieAgeLimit.All || ageLimit === movie.ageLimit
+        ),
     });
   },
 });
+
+const includesAll = <T>(list: T[], include: T[]) =>
+  include.every((item) => list.includes(item));
 
 const movieFilters = {
   upcoming: (movies: Movie) => new Date() < movies.premiereDate,
