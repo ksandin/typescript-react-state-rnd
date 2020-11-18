@@ -8,18 +8,21 @@ import { Center } from "../components/Center";
 import { Section } from "../components/Section";
 import { CardRow } from "../components/CardRow";
 import { Card } from "../components/Card";
-import { movieCategories } from "../fixtures/movieCategories";
 import { Container } from "../components/Container";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
 import { commonDateFormat } from "../functions/commonDateFormat";
+import { CardLabel } from "../components/CardLabel";
 
 const useHomePageState = () =>
-  useCinemaSelector(({ homeHeroRecommendation }) => ({
-    hero: homeHeroRecommendation,
-  }));
+  useCinemaSelector(
+    ({ homeHeroRecommendation, homeRecommendationCategories }) => ({
+      hero: homeHeroRecommendation,
+      categories: homeRecommendationCategories,
+    })
+  );
 
 export const HomePage = () => {
-  const { hero } = useHomePageState();
+  const { hero, categories } = useHomePageState();
   return (
     <>
       {hero && (
@@ -39,18 +42,25 @@ export const HomePage = () => {
         </HomeHeroBanner>
       )}
       <Container>
-        {movieCategories.map(({ categoryName, movies }, categoryIndex) => (
+        {categories.map((category, categoryIndex) => (
           <Section
             key={`category${categoryIndex}`}
-            label={categoryName}
+            label={category.name}
             header={<Link routeName="movies">View all</Link>}
           >
             <CardRow>
-              {movies.map((backgroundUrl, movieIndex) => (
-                <Link key={`category${movieIndex}`} routeName="movie">
-                  <Card backgroundSrc={backgroundUrl} />
-                </Link>
-              ))}
+              {category.recommendations.map(
+                ({ imageUrl, name }, recommendationIndex) => (
+                  <Link
+                    key={`category${recommendationIndex}`}
+                    routeName="movie"
+                  >
+                    <Card backgroundSrc={imageUrl}>
+                      <CardLabel>{name}</CardLabel>
+                    </Card>
+                  </Link>
+                )
+              )}
             </CardRow>
           </Section>
         ))}

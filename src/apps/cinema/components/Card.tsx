@@ -7,4 +7,5 @@ export const Card = styled.div<{ backgroundSrc: string }>`
   background-position: center top;
   background-size: cover;
   background-repeat: no-repeat;
+  position: relative;
 `;

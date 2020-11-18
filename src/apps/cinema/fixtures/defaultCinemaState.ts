@@ -1,5 +1,6 @@
-import { CinemaState } from "../state/CinemaState";
 import moment from "moment";
+import { CinemaState } from "../state/CinemaState";
+import { homeCategories } from "./homeCategories";
 
 export const defaultCinemaState: CinemaState = {
   location: "Stockholm",
@@ -9,4 +10,5 @@ export const defaultCinemaState: CinemaState = {
     name: "Operation Nordpolen",
     premiere: moment(new Date()).add(3, "days").toDate(),
   },
+  homeRecommendationCategories: homeCategories,
 };
