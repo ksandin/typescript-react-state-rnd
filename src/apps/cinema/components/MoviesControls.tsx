@@ -10,41 +10,55 @@ import {
   MoviesOptions,
 } from "../state/models/MoviesOptions";
 import { ControlRow } from "./ControlRow";
+import { createTemplateComponent } from "../../../lib/createTemplateComponent";
 
-export type MoviesControlsProps = {
-  value: MoviesOptions;
-  onChange: (newValue: MoviesOptions) => void;
-};
+export const MoviesControls = createTemplateComponent(
+  renderControls,
+  ({ display, genres, ageLimit }) => (
+    <>
+      <ControlRow>
+        {genres}
+        {ageLimit}
+      </ControlRow>
+      {display}
+    </>
+  )
+);
 
-export const MoviesControls: React.FC<MoviesControlsProps> = ({
+function renderControls({
   value,
   onChange,
-}) => {
+}: {
+  value: MoviesOptions;
+  onChange: (newValue: MoviesOptions) => void;
+}) {
   const change = <K extends keyof MoviesOptions>(
     propName: K,
     propValue: MoviesOptions[K]
   ) => onChange({ ...value, [propName]: propValue });
-  return (
-    <>
-      <ControlRow>
-        <Autocomplete
-          options={Object.values(MovieGenre)}
-          renderInput={(params) => (
-            <TextField {...params} label="Genres" variant="outlined" />
-          )}
-          value={value.genres}
-          onChange={(e, newValues) => change("genres", newValues)}
-          multiple
-        />
-        <Autocomplete
-          options={Object.values(MovieAgeLimit)}
-          renderInput={(params) => (
-            <TextField {...params} label="Age limit" variant="outlined" />
-          )}
-          value={value.ageLimit}
-          onChange={(e, newValue) => newValue && change("ageLimit", newValue)}
-        />
-      </ControlRow>
+  return {
+    genres: (
+      <Autocomplete
+        options={Object.values(MovieGenre)}
+        renderInput={(params) => (
+          <TextField {...params} label="Genres" variant="outlined" />
+        )}
+        value={value.genres}
+        onChange={(e, newValues) => change("genres", newValues)}
+        multiple
+      />
+    ),
+    ageLimit: (
+      <Autocomplete
+        options={Object.values(MovieAgeLimit)}
+        renderInput={(params) => (
+          <TextField {...params} label="Age limit" variant="outlined" />
+        )}
+        value={value.ageLimit}
+        onChange={(e, newValue) => newValue && change("ageLimit", newValue)}
+      />
+    ),
+    display: (
       <ToggleButtonGroup<MoviesDisplayOption>
         size="small"
         value={value.display}
@@ -60,6 +74,6 @@ export const MoviesControls: React.FC<MoviesControlsProps> = ({
         ]}
         onChange={(e, newValue) => newValue && change("display", newValue)}
       />
-    </>
-  );
-};
+    ),
+  };
+}
