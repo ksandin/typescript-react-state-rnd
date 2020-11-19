@@ -1,12 +1,8 @@
 import React, { ComponentType } from "react";
 
-export const createTemplateComponent = <
-  P,
-  E extends Record<any, JSX.Element>,
-  T extends ComponentType<E>
->(
+export const createTemplateComponent = <P, E extends Record<any, JSX.Element>>(
   renderElements: (props: P) => E,
-  defaultTemplate: T
+  defaultTemplate: ComponentType<E>
 ) => ({
   children: Template = defaultTemplate,
   ...props
