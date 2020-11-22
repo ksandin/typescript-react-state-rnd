@@ -8,5 +8,6 @@ export const createRepository = <TState>(initialState: TState) => {
     events: new EventEmitter(),
     update: (updatedState) => updateRepository(repository, updatedState),
   };
+  repository.events.setMaxListeners(0);
   return repository;
 };

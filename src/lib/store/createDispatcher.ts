@@ -14,6 +14,7 @@ export const createDispatcher = <TActions extends Actions>(
     events: new EventEmitter(),
     actions,
   };
+  dispatcher.events.setMaxListeners(0);
   dispatcher.actions = automateDispatches(dispatcher, actions);
   return dispatcher;
 };
