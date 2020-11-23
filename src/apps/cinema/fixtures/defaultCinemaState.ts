@@ -1,11 +1,7 @@
 import { CinemaState } from "../state/CinemaState";
-import { movies } from "./movies";
-import { cinemas } from "./cinemas";
-import { lounges } from "./lounges";
 
 export const defaultCinemaState: CinemaState = {
-  location: "Stockholm",
-  locationOptions: ["Stockholm", "Göteborg"],
+  locationOptions: [],
   homeRecommendationCategories: [],
   moviesPage: [],
   moviePage: {
@@ -15,7 +11,7 @@ export const defaultCinemaState: CinemaState = {
     shows: [],
     movies: [],
   },
-  movieNames: movies,
-  cinemas: cinemas,
-  lounges: lounges,
+  movieNames: [],
+  cinemas: [],
+  lounges: [],
 };

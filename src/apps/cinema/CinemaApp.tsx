@@ -13,10 +13,12 @@ import { CookieNotification } from "./components/CookieNotification";
 import { CinemaStoreContext } from "./state/CinemaStoreContext";
 import { createCinemaStore } from "./state/createCinemaStore";
 import { defaultCinemaState } from "./fixtures/defaultCinemaState";
+import { useCallOnce } from "./hooks/useCallOnce";
 
 export const CinemaApp = () => {
   const [cinemaRouter] = useState(() => createRouterForConfig(cinemaRoutes));
   const [cinemaStore] = useState(createCinemaStore(defaultCinemaState));
+  useCallOnce(cinemaStore.dispatcher.actions.loadSessionState);
   useEffect(() => {
     cinemaRouter.start();
     return () => cinemaRouter.stop();

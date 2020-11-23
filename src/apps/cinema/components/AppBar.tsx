@@ -35,7 +35,7 @@ export const AppBar = () => {
         </Link>
         <AlignedLocationPicker
           size="small"
-          value={location}
+          value={location || ""}
           options={locationOptions}
           onChange={handleLocationChange}
         />

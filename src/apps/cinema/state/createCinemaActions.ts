@@ -6,10 +6,25 @@ import { MoviesOptions } from "./models/MoviesOptions";
 import { TicketsOptions } from "./models/TicketsOptions";
 import { filterMovies } from "../functions/filterMovies";
 import { searchForShows } from "../functions/searchForShows";
+import { cinemas } from "../fixtures/cinemas";
+import { lounges } from "../fixtures/lounges";
 
 export const createCinemaActions = (repository: Repository<CinemaState>) => ({
   setLocation: async (location: string) =>
     repository.update({ ...repository.state, location }),
+  /**
+   * Session state is state that only needs to be loaded once per user session
+   */
+  loadSessionState: async () => {
+    repository.update({
+      ...repository.state,
+      location: "Stockholm",
+      locationOptions: ["Stockholm", "Göteborg"],
+      movieNames: movies,
+      cinemas: cinemas,
+      lounges: lounges,
+    });
+  },
   loadHomePageState: async () => {
     repository.update({
       ...repository.state,

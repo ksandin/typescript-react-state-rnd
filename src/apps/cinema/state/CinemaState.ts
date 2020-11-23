@@ -7,7 +7,7 @@ import { Cinema } from "./models/Cinema";
 import { Lounge } from "./models/Lounge";
 
 export type CinemaState = {
-  location: string;
+  location?: string;
   locationOptions: string[];
 
   // Expected to be loaded per-page
