@@ -8,6 +8,9 @@ export const defaultCinemaState: CinemaState = {
   locationOptions: ["Stockholm", "Göteborg"],
   homeRecommendationCategories: [],
   moviesPage: [],
+  moviePage: {
+    shows: [],
+  },
   ticketsPage: {
     shows: [],
     movies: [],

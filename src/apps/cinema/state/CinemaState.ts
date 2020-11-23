@@ -13,7 +13,10 @@ export type CinemaState = {
   // Expected to be loaded per-page
   homeHeroRecommendation?: MovieRecommendationHero;
   homeRecommendationCategories: MovieRecommendationCategory[];
-  moviePage?: Movie;
+  moviePage: {
+    shows: Show[];
+    movie?: Movie;
+  };
   moviesPage: MoviesPageMovie[];
   ticketsPage: {
     shows: Show[];

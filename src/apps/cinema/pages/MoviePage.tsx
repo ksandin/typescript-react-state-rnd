@@ -23,7 +23,7 @@ import { ControlRow } from "../components/ControlRow";
 
 export const MoviePage = () => {
   const { route } = useRoute();
-  const movie = useCinemaSelector(({ moviePage }) => moviePage);
+  const { movie, shows } = useCinemaSelector(({ moviePage }) => moviePage);
   const [options, setOptions] = useState<TicketsOptions>({
     display: "movies",
     date: new Date(),
@@ -36,7 +36,7 @@ export const MoviePage = () => {
   });
   const [{ loadMoviePageState }, dispatches] = useCinemaDispatcher();
 
-  useCallOnce(loadMoviePageState, route.params.movieId as MovieId);
+  useCallOnce(loadMoviePageState, route.params.movieId as MovieId, options);
 
   if (dispatches.loadMoviePageState.status === "pending") {
     return <span>Loading...</span>;
@@ -89,7 +89,7 @@ export const MoviePage = () => {
           )}
         </TicketsControls>
         <List>
-          <ShowListItemsByCinemaName shows={[]} />
+          <ShowListItemsByCinemaName shows={shows} />
         </List>
       </Container>
     </>

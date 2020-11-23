@@ -1,13 +1,11 @@
-import { uniq } from "lodash";
 import { Repository } from "../../../lib/store/Repository";
 import { CinemaState } from "./CinemaState";
 import { movies } from "../fixtures/movies";
 import { MovieId } from "./models/Movie";
 import { MoviesOptions } from "./models/MoviesOptions";
 import { TicketsOptions } from "./models/TicketsOptions";
-import { shows } from "../fixtures/shows";
 import { filterMovies } from "../functions/filterMovies";
-import { filterShows } from "../functions/filterShows";
+import { searchForShows } from "../functions/searchForShows";
 
 export const createCinemaActions = (repository: Repository<CinemaState>) => ({
   setLocation: async (location: string) =>
@@ -32,10 +30,20 @@ export const createCinemaActions = (repository: Repository<CinemaState>) => ({
       ],
     });
   },
-  loadMoviePageState: async (movieId: MovieId) => {
+  loadMoviePageState: async (
+    movieId: MovieId,
+    options: Omit<TicketsOptions, "movies">
+  ) => {
+    const { shows } = searchForShows({
+      ...options,
+      movies: [movieId],
+    });
     repository.update({
       ...repository.state,
-      moviePage: movies.find((candidate) => candidate.movieId === movieId),
+      moviePage: {
+        movie: movies.find((candidate) => candidate.movieId === movieId),
+        shows,
+      },
     });
   },
   loadMoviesPageState: async (options: MoviesOptions) => {
@@ -45,19 +53,9 @@ export const createCinemaActions = (repository: Repository<CinemaState>) => ({
     });
   },
   loadTicketsPageState: async (options: TicketsOptions) => {
-    const selectedShows = filterShows(shows, movies, options);
-    const selectedMovies = uniq(
-      selectedShows.map(
-        ({ movieId }) => movies.find((movie) => movie.movieId === movieId)!
-      )
-    );
-
     repository.update({
       ...repository.state,
-      ticketsPage: {
-        shows: selectedShows,
-        movies: selectedMovies,
-      },
+      ticketsPage: searchForShows(options),
     });
   },
 });
