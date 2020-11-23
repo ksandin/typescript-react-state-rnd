@@ -3,9 +3,9 @@ import { useEffect } from "react";
 /**
  * Calls the specified function once on mount or when its arguments change.
  */
-export const useCallOnce = <T extends (...args: P[]) => any, P>(
+export const useCallOnce = <T extends (...args: any[]) => any>(
   fn: T,
-  ...args: P[]
+  ...args: Parameters<T>
 ) => {
   useEffect(() => {
     fn(...args);
