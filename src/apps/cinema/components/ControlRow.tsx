@@ -6,5 +6,5 @@ export const ControlRow = styled.div<{ columns?: number }>`
   grid-template-rows: 1fr;
   grid-column-gap: 8px;
   grid-row-gap: 8px;
-  margin: 8px 0;
+  margin: 16px 0;
 `;
