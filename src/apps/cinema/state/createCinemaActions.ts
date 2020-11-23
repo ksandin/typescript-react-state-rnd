@@ -1,9 +1,13 @@
+import { uniq } from "lodash";
 import { Repository } from "../../../lib/store/Repository";
 import { CinemaState } from "./CinemaState";
 import { movies } from "../fixtures/movies";
-import { Movie, MovieId } from "./models/Movie";
+import { MovieId } from "./models/Movie";
 import { MoviesOptions } from "./models/MoviesOptions";
-import { MovieAgeLimit } from "./models/MovieAgeLimit";
+import { TicketsOptions } from "./models/TicketsOptions";
+import { shows } from "../fixtures/shows";
+import { filterMovies } from "../functions/filterMovies";
+import { filterShows } from "../functions/filterShows";
 
 export const createCinemaActions = (repository: Repository<CinemaState>) => ({
   setLocation: async (location: string) =>
@@ -34,24 +38,26 @@ export const createCinemaActions = (repository: Repository<CinemaState>) => ({
       moviePage: movies.find((candidate) => candidate.movieId === movieId),
     });
   },
-  loadMoviesPageState: async ({ display, genres, ageLimit }: MoviesOptions) => {
+  loadMoviesPageState: async (options: MoviesOptions) => {
     repository.update({
       ...repository.state,
-      moviesPage: movies
-        .filter(movieFilters[display])
-        .filter((movie) => includesAll(movie.genres, genres))
-        .filter(
-          (movie) =>
-            ageLimit === MovieAgeLimit.All || ageLimit === movie.ageLimit
-        ),
+      moviesPage: filterMovies(movies, options),
+    });
+  },
+  loadTicketsPageState: async (options: TicketsOptions) => {
+    const selectedShows = filterShows(shows, movies, options);
+    const selectedMovies = uniq(
+      selectedShows.map(
+        ({ movieId }) => movies.find((movie) => movie.movieId === movieId)!
+      )
+    );
+
+    repository.update({
+      ...repository.state,
+      ticketsPage: {
+        shows: selectedShows,
+        movies: selectedMovies,
+      },
     });
   },
 });
-
-const includesAll = <T>(list: T[], include: T[]) =>
-  include.every((item) => list.includes(item));
-
-const movieFilters = {
-  upcoming: (movies: Movie) => new Date() < movies.premiereDate,
-  current: (movies: Movie) => new Date() >= movies.premiereDate,
-};

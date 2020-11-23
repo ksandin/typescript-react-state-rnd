@@ -9,13 +9,14 @@ import {
 } from "./ShowListItemsByCinemaName";
 
 export type MovieListItemWithShowsProps = MovieListItemExpandableProps &
-  Pick<ShowListItemsByCinemaNameProps, "time">;
+  Pick<ShowListItemsByCinemaNameProps, "shows" | "itemProps">;
 
 export const MovieListItemWithShows: React.FC<MovieListItemWithShowsProps> = ({
-  time,
+  shows,
+  itemProps,
   ...props
 }) => (
   <MovieListItemExpandable {...props}>
-    <ShowListItemsByCinemaName time={time} />
+    <ShowListItemsByCinemaName shows={shows} itemProps={itemProps} />
   </MovieListItemExpandable>
 );

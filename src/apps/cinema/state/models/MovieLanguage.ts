@@ -4,5 +4,5 @@ export enum MovieLanguage {
   Spanish = "Spanish",
   French = "French",
   German = "German",
-  Swedish = "Fantasy",
+  Swedish = "Swedish",
 }

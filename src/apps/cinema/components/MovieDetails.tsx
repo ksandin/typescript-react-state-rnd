@@ -21,7 +21,7 @@ export const MovieDetails = ({
     <Typography>{director}</Typography>
     <Typography variant="caption">Cast:</Typography>
     <Typography>{cast.join(", ")}</Typography>
-    <Typography variant="caption">Language:</Typography>
+    <Typography variant="caption">Original Language:</Typography>
     <Typography>{language}</Typography>
     <Typography variant="caption">Premiere:</Typography>
     <Typography>{commonDateFormat(premiereDate, true)}</Typography>

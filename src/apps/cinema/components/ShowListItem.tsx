@@ -10,39 +10,57 @@ import {
 import { Link } from "./Link";
 import { ChevronRight } from "@material-ui/icons";
 import { DividedListItem } from "./DividedListItem";
+import { Show } from "../state/models/Show";
+import { useCinemaSelector } from "../hooks/useCinemaSelector";
+import { commonTimeFormat } from "../functions/commonTimeFormat";
 
-export type ShowListItemProps = { time?: boolean };
+export type ShowListItemProps = Pick<
+  Show,
+  "loungeId" | "date" | "language" | "subtitles" | "showId"
+> & { time?: boolean };
 
-export const ShowListItem: React.FC<ShowListItemProps> = ({ time = true }) => (
-  <DividedListItem>
-    <ListItem alignItems="flex-start">
-      {time && (
-        <ListItemAvatar>
-          <Typography>20:10</Typography>
-        </ListItemAvatar>
-      )}
-      <ListItemText
-        primary="Lounge 10"
-        secondary={
-          <>
-            <Typography
-              component="span"
-              variant="body2"
-              style={{ display: "inline" }}
-              color="textPrimary"
-            >
-              English (Swedish subtitles), VIP!
-            </Typography>
-          </>
-        }
-      />
-      <ListItemSecondaryAction>
-        <Link routeName="booking-ticket-selection">
-          <Button variant="outlined" endIcon={<ChevronRight />}>
-            Buy tickets
-          </Button>
-        </Link>
-      </ListItemSecondaryAction>
-    </ListItem>
-  </DividedListItem>
-);
+export const ShowListItem: React.FC<ShowListItemProps> = ({
+  loungeId,
+  date,
+  language,
+  subtitles,
+  time = true,
+}) => {
+  const lounge = useCinemaSelector(({ lounges }) =>
+    lounges.find((lounge) => lounge.loungeId === loungeId)
+  );
+
+  return (
+    <DividedListItem>
+      <ListItem alignItems="flex-start">
+        {time && (
+          <ListItemAvatar>
+            <Typography>{commonTimeFormat(date)}</Typography>
+          </ListItemAvatar>
+        )}
+        <ListItemText
+          primary={lounge?.name}
+          secondary={
+            <>
+              <Typography
+                component="span"
+                variant="body2"
+                style={{ display: "inline" }}
+                color="textPrimary"
+              >
+                {language} ({subtitles} subtitles)
+              </Typography>
+            </>
+          }
+        />
+        <ListItemSecondaryAction>
+          <Link routeName="booking-ticket-selection">
+            <Button variant="outlined" endIcon={<ChevronRight />}>
+              Buy tickets
+            </Button>
+          </Link>
+        </ListItemSecondaryAction>
+      </ListItem>
+    </DividedListItem>
+  );
+};

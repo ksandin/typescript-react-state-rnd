@@ -33,7 +33,6 @@ export const MoviePage = () => {
     ageLimit: MovieAgeLimit.All,
     language: MovieLanguage.All,
     genres: [],
-    other: [],
   });
   const [{ loadMoviePageState }, dispatches] = useCinemaDispatcher();
 
@@ -90,7 +89,7 @@ export const MoviePage = () => {
           )}
         </TicketsControls>
         <List>
-          <ShowListItemsByCinemaName />
+          <ShowListItemsByCinemaName shows={[]} />
         </List>
       </Container>
     </>

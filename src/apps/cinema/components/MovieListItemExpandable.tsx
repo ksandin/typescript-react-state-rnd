@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
 import { MovieListItem, MovieListItemProps } from "./MovieListItem";
-import { Button, Collapse } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 
 export type MovieListItemExpandableProps = MovieListItemProps & {
   expanded?: boolean;
@@ -33,7 +33,7 @@ export const MovieListItemExpandable: React.FC<MovieListItemExpandableProps> = (
           </Button>
         )}
       </MovieListItem>
-      <Collapse in={expanded}>{children}</Collapse>
+      {expanded && children}
     </>
   );
 };

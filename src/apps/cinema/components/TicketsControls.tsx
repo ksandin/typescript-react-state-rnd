@@ -13,37 +13,36 @@ import { MovieLanguage } from "../state/models/MovieLanguage";
 import { MovieAgeLimit } from "../state/models/MovieAgeLimit";
 import { createTemplateComponent } from "../../../lib/createTemplateComponent";
 import { ControlRow } from "./ControlRow";
+import { useCinemaSelector } from "../hooks/useCinemaSelector";
 
-export const TicketsControls = createTemplateComponent(
-  renderControls,
-  (elements) => (
-    <>
-      <ControlRow>
-        {elements.date}
-        {elements.cinemas}
-        {elements.movies}
-      </ControlRow>
-      <ControlRow>
-        {elements.other}
-        {elements.genres}
-        {elements.language}
-      </ControlRow>
-      <ControlRow>
-        {elements.subtitles}
-        {elements.ageLimit}
-      </ControlRow>
-      {elements.display}
-    </>
-  )
-);
+export const TicketsControls = createTemplateComponent(Controls, (elements) => (
+  <>
+    <ControlRow columns={4}>
+      {elements.date}
+      {elements.cinemas}
+      {elements.movies}
+      {elements.genres}
+    </ControlRow>
+    <ControlRow>
+      {elements.ageLimit}
+      {elements.language}
+      {elements.subtitles}
+    </ControlRow>
+    {elements.display}
+  </>
+));
 
-function renderControls({
+function Controls({
   value,
   onChange,
 }: {
   value: TicketsOptions;
   onChange: (newValue: TicketsOptions) => void;
 }) {
+  const { movies, cinemas } = useCinemaSelector(({ movieNames, cinemas }) => ({
+    movies: movieNames,
+    cinemas,
+  }));
   const change = <K extends keyof TicketsOptions>(
     propName: K,
     propValue: TicketsOptions[K]
@@ -55,7 +54,7 @@ function renderControls({
         value={value.display}
         options={[
           { value: "movies", children: <List /> },
-          { value: "shows", children: <AvTimer /> },
+          { value: "timeline", children: <AvTimer /> },
         ]}
         onChange={(e, newValue) => newValue && change("display", newValue)}
       />
@@ -74,42 +73,37 @@ function renderControls({
     ),
     cinemas: (
       <Autocomplete
-        options={["Filmstaden Heron City", "Filmstaden Kista"]}
+        options={cinemas}
         renderInput={(params) => (
           <TextField {...params} label="Cinemas" variant="outlined" />
         )}
-        value={value.cinemas}
-        onChange={(e, newValues) => change("cinemas", newValues)}
+        getOptionLabel={(cinema) => cinema.name}
+        value={value.cinemas.map(
+          (id) => cinemas.find((c) => c.cinemaId === id)!
+        )}
+        onChange={(e, newValues) =>
+          change(
+            "cinemas",
+            newValues.map((c) => c.cinemaId)
+          )
+        }
         multiple
       />
     ),
     movies: (
       <Autocomplete
-        options={["Freaky", "Tenet"]}
+        options={movies}
         renderInput={(params) => (
           <TextField {...params} label="Movies" variant="outlined" />
         )}
-        value={value.movies}
-        onChange={(e, newValues) => change("movies", newValues)}
-        multiple
-      />
-    ),
-    other: (
-      <Autocomplete
-        options={[
-          "100kr",
-          "Pram cinema",
-          "Family",
-          "IMAX",
-          "Classics",
-          "Kids cinema",
-          "Visual interpretation",
-        ]}
-        renderInput={(params) => (
-          <TextField {...params} label="Other" variant="outlined" />
-        )}
-        value={value.other}
-        onChange={(e, newValues) => change("other", newValues)}
+        getOptionLabel={(movie) => movie.name}
+        value={value.movies.map((id) => movies.find((c) => c.movieId === id)!)}
+        onChange={(e, newValues) =>
+          change(
+            "movies",
+            newValues.map((c) => c.movieId)
+          )
+        }
         multiple
       />
     ),

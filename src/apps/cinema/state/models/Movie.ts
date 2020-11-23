@@ -17,7 +17,6 @@ export type Movie = {
   trailerUrl: string;
   snapshotUrls: string[];
   language: MovieLanguage;
-  subtitles: MovieLanguage;
   cast: string[];
   director: string;
 };
