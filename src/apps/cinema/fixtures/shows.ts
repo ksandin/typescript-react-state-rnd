@@ -16,12 +16,12 @@ let id = 0 as ShowId;
 export const shows: Show[] = [];
 range(0, 6).forEach((day) => {
   for (const lounge of lounges) {
-    const movie = rotate(movies, id);
     const dayStart = moment(new Date()).startOf("day").add(day, "day").toDate();
     const lastShow = moment(dayStart).add(timeMax, "hours").toDate();
     let dateCursor = moment(dayStart).add(timeMin, "hours").toDate();
 
     while (dateCursor <= lastShow) {
+      const movie = rotate(movies, id);
       shows.push({
         showId: id,
         loungeId: lounge.loungeId,
