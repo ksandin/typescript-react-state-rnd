@@ -5,6 +5,7 @@ import { MoviesPageMovie } from "./models/MoviesPageMovie";
 import { Show } from "./models/Show";
 import { Cinema } from "./models/Cinema";
 import { Lounge } from "./models/Lounge";
+import { TicketType } from "./models/TicketType";
 
 export type CinemaState = {
   location?: string;
@@ -27,4 +28,5 @@ export type CinemaState = {
   cinemas: Cinema[];
   lounges: Lounge[];
   movieNames: Pick<Movie, "name" | "movieId">[];
+  ticketTypes: TicketType[];
 };

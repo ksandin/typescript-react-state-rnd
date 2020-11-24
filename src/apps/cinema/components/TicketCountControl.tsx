@@ -6,6 +6,8 @@ import {
   ListItemText,
 } from "@material-ui/core";
 import { CountControl, CountControlProps } from "./CountControl";
+import { Price } from "../state/models/Price";
+import { commonPriceFormat } from "../functions/commonPriceFormat";
 
 export type TicketCountControlProps<
   D extends React.ElementType = "li",
@@ -13,7 +15,7 @@ export type TicketCountControlProps<
 > = Omit<ListItemProps<D, P>, "onChange"> &
   Pick<CountControlProps, "value" | "onChange"> & {
     type: string;
-    price: string;
+    price: Price;
   };
 
 export const TicketCountControl = <D extends React.ElementType = "li", P = {}>({
@@ -24,7 +26,7 @@ export const TicketCountControl = <D extends React.ElementType = "li", P = {}>({
   ...props
 }: TicketCountControlProps<D, P>) => (
   <ListItem {...props}>
-    <ListItemText primary={type} secondary={price} />
+    <ListItemText primary={type} secondary={commonPriceFormat(price)} />
     <ListItemSecondaryAction>
       <CountControl value={value} onChange={onChange} />
     </ListItemSecondaryAction>

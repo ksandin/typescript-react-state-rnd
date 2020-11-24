@@ -8,6 +8,8 @@ import { filterMovies } from "../functions/filterMovies";
 import { searchForShows } from "../functions/searchForShows";
 import { cinemas } from "../fixtures/cinemas";
 import { lounges } from "../fixtures/lounges";
+import { Price } from "./models/Price";
+import { TicketTypeId } from "./models/TicketType";
 
 export const createCinemaActions = (repository: Repository<CinemaState>) => ({
   setLocation: async (location: string) =>
@@ -23,6 +25,18 @@ export const createCinemaActions = (repository: Repository<CinemaState>) => ({
       movieNames: movies,
       cinemas: cinemas,
       lounges: lounges,
+      ticketTypes: [
+        {
+          name: "Regular ticket",
+          ticketTypeId: 1 as TicketTypeId,
+          price: 120 as Price,
+        },
+        {
+          name: "Pensioner ticket",
+          ticketTypeId: 2 as TicketTypeId,
+          price: 90 as Price,
+        },
+      ],
     });
   },
   loadHomePageState: async () => {

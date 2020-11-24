@@ -14,4 +14,5 @@ export const defaultCinemaState: CinemaState = {
   movieNames: [],
   cinemas: [],
   lounges: [],
+  ticketTypes: [],
 };

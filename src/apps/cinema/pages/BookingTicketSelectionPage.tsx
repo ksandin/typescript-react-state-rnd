@@ -5,32 +5,31 @@ import { TicketCountControl } from "../components/TicketCountControl";
 import { Button, List } from "@material-ui/core";
 import { PageActions } from "../components/PageActions";
 import { useSnackbarValidator } from "../hooks/useSnackbarValidator";
+import { totalCounts } from "../functions/totalCounts";
+import { useCinemaSelector } from "../hooks/useCinemaSelector";
 
 export const BookingTicketSelectionPage = () => {
-  const [regularCount, setRegularCount] = useState(2);
-  const [pensionerCount, setPensionerCount] = useState(0);
-  const totalTicketCount = regularCount + pensionerCount;
+  const ticketTypes = useCinemaSelector(({ ticketTypes }) => ticketTypes);
+  const [counts, setCounts] = useState<Record<string, number>>({});
   const { snackbar, validate } = useSnackbarValidator(() => {
-    if (totalTicketCount <= 0) {
+    if (totalCounts(counts) <= 0) {
       return "You must select at least one ticket!";
     }
   });
-
   return (
     <Container>
       <List>
-        <TicketCountControl
-          type="Regular ticket"
-          price="135kr/ea"
-          value={regularCount}
-          onChange={setRegularCount}
-        />
-        <TicketCountControl
-          type="Pensioner ticket"
-          price="108kr/ea"
-          value={pensionerCount}
-          onChange={setPensionerCount}
-        />
+        {ticketTypes.map(({ name, ticketTypeId, price }) => (
+          <TicketCountControl
+            key={ticketTypeId}
+            type={name}
+            price={price}
+            value={counts[ticketTypeId] || 0}
+            onChange={(count) =>
+              setCounts({ ...counts, [ticketTypeId]: count })
+            }
+          />
+        ))}
       </List>
       <br />
       <PageActions>
