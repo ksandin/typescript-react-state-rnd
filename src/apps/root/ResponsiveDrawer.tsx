@@ -12,29 +12,35 @@ import { createMenuItems } from "./createMenuItems";
 import { Menu } from "./Menu";
 import { useRootRouteConfig } from "./RootRouteConfig";
 import { drawerWidth } from "./drawerWidth";
+import { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
 
 // This file is based on https://material-ui.com/components/drawers/#responsive-drawer
+
+const breakpoint = {
+  up: { value: "lg" as Breakpoint, hiddenProps: { lgUp: true } },
+  down: { value: "md" as Breakpoint, hiddenProps: { mdDown: true } },
+};
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
   },
   drawer: {
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up(breakpoint.up.value)]: {
       width: drawerWidth,
       flexShrink: 0,
     },
   },
   appBar: {
     zIndex: 1,
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up(breakpoint.up.value)]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
     },
   },
   menuButton: {
     marginRight: theme.spacing(2),
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up(breakpoint.up.value)]: {
       display: "none",
     },
   },
@@ -90,7 +96,7 @@ export const ResponsiveDrawer: React.FC = ({ children }) => {
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Hidden smUp implementation="css">
+        <Hidden {...breakpoint.up.hiddenProps} implementation="css">
           <Drawer
             container={container}
             variant="temporary"
@@ -107,7 +113,7 @@ export const ResponsiveDrawer: React.FC = ({ children }) => {
             {drawer}
           </Drawer>
         </Hidden>
-        <Hidden xsDown implementation="css">
+        <Hidden {...breakpoint.down.hiddenProps} implementation="css">
           <Drawer
             classes={{
               paper: classes.drawerPaper,
