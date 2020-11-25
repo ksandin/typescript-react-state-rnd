@@ -19,6 +19,7 @@ export const CinemaApp = () => {
   const [cinemaRouter] = useState(() => createRouterForConfig(cinemaRoutes));
   const [cinemaStore] = useState(createCinemaStore(defaultCinemaState));
   useCallOnce(cinemaStore.dispatcher.actions.loadSessionState);
+  useCallOnce(cinemaStore.dispatcher.actions.resetBooking);
   useEffect(() => {
     cinemaRouter.start();
     return () => cinemaRouter.stop();

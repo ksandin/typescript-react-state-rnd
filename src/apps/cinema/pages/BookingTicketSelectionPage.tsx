@@ -1,18 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "../components/Link";
 import { Container } from "../components/Container";
 import { TicketCountControl } from "../components/TicketCountControl";
 import { Button, List } from "@material-ui/core";
 import { PageActions } from "../components/PageActions";
 import { useSnackbarValidator } from "../hooks/useSnackbarValidator";
-import { totalCounts } from "../functions/totalCounts";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
+import { totalCounts } from "../functions/totalCounts";
+import { useCinemaDispatcher } from "../hooks/useCinemaDispatcher";
+
+const usePageState = () =>
+  useCinemaSelector(({ ticketTypes, booking }) => ({
+    ticketTypes,
+    booking,
+  }));
 
 export const BookingTicketSelectionPage = () => {
-  const ticketTypes = useCinemaSelector(({ ticketTypes }) => ticketTypes);
-  const [counts, setCounts] = useState<Record<string, number>>({});
+  const { ticketTypes, booking } = usePageState();
+  const [{ setBookingTickets }] = useCinemaDispatcher();
+
   const { snackbar, validate } = useSnackbarValidator(() => {
-    if (totalCounts(counts) <= 0) {
+    if (totalCounts(booking.tickets) <= 0) {
       return "You must select at least one ticket!";
     }
   });
@@ -24,9 +32,9 @@ export const BookingTicketSelectionPage = () => {
             key={ticketTypeId}
             type={name}
             price={price}
-            value={counts[ticketTypeId] || 0}
+            value={booking.tickets.get(ticketTypeId) || 0}
             onChange={(count) =>
-              setCounts({ ...counts, [ticketTypeId]: count })
+              setBookingTickets(booking.tickets.set(ticketTypeId, count))
             }
           />
         ))}

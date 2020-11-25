@@ -1,3 +1,4 @@
+import { Map } from "immutable";
 import { CinemaState } from "../state/CinemaState";
 
 export const defaultCinemaState: CinemaState = {
@@ -15,4 +16,7 @@ export const defaultCinemaState: CinemaState = {
   cinemas: [],
   lounges: [],
   ticketTypes: [],
+  booking: {
+    tickets: Map(),
+  },
 };

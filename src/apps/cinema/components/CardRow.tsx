@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Card } from "./Card";
 
 export const CardRow = styled.div`
   display: grid;
@@ -6,4 +7,7 @@ export const CardRow = styled.div`
   grid-template-rows: 1fr;
   grid-column-gap: 12px;
   grid-row-gap: 0;
+  & ${Card} {
+    min-width: 0;
+  }
 `;

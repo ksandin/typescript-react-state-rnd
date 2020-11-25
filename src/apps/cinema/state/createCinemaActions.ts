@@ -10,6 +10,8 @@ import { cinemas } from "../fixtures/cinemas";
 import { lounges } from "../fixtures/lounges";
 import { Price } from "./models/Price";
 import { TicketTypeId } from "./models/TicketType";
+import { Map } from "immutable";
+import { TicketCounts } from "./models/TicketCounts";
 
 export const createCinemaActions = (repository: Repository<CinemaState>) => ({
   setLocation: async (location: string) =>
@@ -25,6 +27,7 @@ export const createCinemaActions = (repository: Repository<CinemaState>) => ({
       movieNames: movies,
       cinemas: cinemas,
       lounges: lounges,
+      defaultTicketTypeId: 1 as TicketTypeId,
       ticketTypes: [
         {
           name: "Regular ticket",
@@ -37,6 +40,26 @@ export const createCinemaActions = (repository: Repository<CinemaState>) => ({
           price: 90 as Price,
         },
       ],
+    });
+  },
+  resetBooking: async () => {
+    const { defaultTicketTypeId } = repository.state;
+    repository.update({
+      ...repository.state,
+      booking: {
+        tickets: defaultTicketTypeId
+          ? Map<TicketTypeId, number>().set(defaultTicketTypeId, 2)
+          : Map(),
+      },
+    });
+  },
+  setBookingTickets: async (tickets: TicketCounts) => {
+    repository.update({
+      ...repository.state,
+      booking: {
+        ...repository.state.booking,
+        tickets: tickets,
+      },
     });
   },
   loadHomePageState: async () => {

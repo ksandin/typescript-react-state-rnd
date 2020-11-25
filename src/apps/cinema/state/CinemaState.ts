@@ -5,7 +5,8 @@ import { MoviesPageMovie } from "./models/MoviesPageMovie";
 import { Show } from "./models/Show";
 import { Cinema } from "./models/Cinema";
 import { Lounge } from "./models/Lounge";
-import { TicketType } from "./models/TicketType";
+import { TicketType, TicketTypeId } from "./models/TicketType";
+import { Booking } from "./models/Booking";
 
 export type CinemaState = {
   location?: string;
@@ -23,10 +24,12 @@ export type CinemaState = {
     shows: Show[];
     movies: Movie[];
   };
+  booking: Booking;
 
   // Expected to be loaded once per user session
   cinemas: Cinema[];
   lounges: Lounge[];
   movieNames: Pick<Movie, "name" | "movieId">[];
   ticketTypes: TicketType[];
+  defaultTicketTypeId?: TicketTypeId;
 };

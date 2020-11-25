@@ -5,7 +5,7 @@ import { Add, Remove } from "@material-ui/icons";
 
 export type CountControlProps = Omit<
   React.HTMLAttributes<HTMLDivElement>,
-  "onChange"
+  "onChange" | "value"
 > & {
   value: number;
   onChange: (newValue: number) => void;
