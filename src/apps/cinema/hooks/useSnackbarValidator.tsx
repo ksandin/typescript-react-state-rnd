@@ -14,7 +14,9 @@ export const useSnackbarValidator = (getError: () => string | undefined) => {
       // Stops links and parent elements that might have click event handlers
       e.preventDefault();
       e.stopPropagation();
+      return false;
     }
+    return true;
   };
   const snackbar = (
     <Snackbar open={isOpen} autoHideDuration={6000} onClose={handleClose}>
