@@ -25,6 +25,7 @@ const routeList: CinemaRouteConfigNode[] = [
     name: "booking-confirmation",
     title: "Booking Confirmation",
     component: BookingConfirmationPage,
+    isBookingSessionPage: true,
   },
   {
     path: "/booking/failure",
@@ -37,6 +38,7 @@ const routeList: CinemaRouteConfigNode[] = [
     name: "booking-seat-selection",
     title: "Booking Seat Selection",
     component: BookingSeatSelectionPage,
+    isBookingSessionPage: true,
   },
   {
     path: "/booking/success",
@@ -49,6 +51,7 @@ const routeList: CinemaRouteConfigNode[] = [
     name: "booking-ticket-selection",
     title: "Booking Ticket Selection",
     component: BookingTicketSelectionPage,
+    isBookingSessionPage: true,
   },
   {
     path: "/movie/:movieId",
