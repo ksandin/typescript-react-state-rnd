@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Autocomplete } from "@material-ui/lab";
 import { Link } from "../components/Link";
 import { Container } from "../components/Container";
@@ -6,37 +6,46 @@ import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
 import { PageActions } from "../components/PageActions";
 import { useSnackbarValidator } from "../hooks/useSnackbarValidator";
-
-const seatOptions = [
-  "Seat 1",
-  "Seat 2 - Extra leg room",
-  "Seat 3",
-  "Seat 4",
-  "Seat 5",
-  "Seat 6",
-];
+import { useCinemaSelector } from "../hooks/useCinemaSelector";
+import { loungeSeatName } from "../functions/loungeSeatName";
+import { useCinemaDispatcher } from "../hooks/useCinemaDispatcher";
+import { without } from "lodash";
 
 export const BookingSeatSelectionPage = () => {
-  const [seats, setSeats] = useState<string[]>(seatOptions.slice(0, 2));
+  const bookingSession = useCinemaSelector((state) => state.bookingSession);
+  const [{ updateBooking }] = useCinemaDispatcher();
   const { snackbar, validate } = useSnackbarValidator(() => {
-    if (seats.length <= 0) {
+    if (selectedSeats.length <= 0) {
       return "You must select at least one seat!";
     }
   });
+  if (!bookingSession) {
+    return <span>No booking session available</span>;
+  }
+  const {
+    allSeats,
+    reservedSeats,
+    booking: { seats: selectedSeats, showId },
+  } = bookingSession;
+  const availableSeats = without(allSeats, ...reservedSeats);
   return (
     <Container>
       <Autocomplete
-        options={seatOptions}
+        options={availableSeats}
         renderInput={(params) => (
           <TextField {...params} label="Seats" variant="outlined" />
         )}
-        value={seats}
-        onChange={(e, newValues) => setSeats(newValues)}
+        getOptionLabel={loungeSeatName}
+        value={selectedSeats}
+        onChange={(e, newValues) => updateBooking({ seats: newValues })}
         multiple
       />
       <br />
       <PageActions>
-        <Link routeName="booking-ticket-selection">
+        <Link
+          routeName="booking-ticket-selection"
+          routeParams={{ showId, keepBooking: true }}
+        >
           <Button variant="outlined">Return to ticket selection</Button>
         </Link>
         <Link routeName="booking-confirmation">

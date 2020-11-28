@@ -25,6 +25,7 @@ export const ShowListItem: React.FC<ShowListItemProps> = ({
   language,
   subtitles,
   time = true,
+  showId,
 }) => {
   const lounge = useCinemaSelector(({ lounges }) =>
     lounges.find((lounge) => lounge.loungeId === loungeId)
@@ -54,7 +55,7 @@ export const ShowListItem: React.FC<ShowListItemProps> = ({
           }
         />
         <ListItemSecondaryAction>
-          <Link routeName="booking-ticket-selection">
+          <Link routeName="booking-ticket-selection" routeParams={{ showId }}>
             <Button variant="outlined" endIcon={<ChevronRight />}>
               Buy tickets
             </Button>

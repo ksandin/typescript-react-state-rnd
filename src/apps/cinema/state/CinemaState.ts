@@ -6,7 +6,7 @@ import { Show } from "./models/Show";
 import { Cinema } from "./models/Cinema";
 import { Lounge } from "./models/Lounge";
 import { TicketType, TicketTypeId } from "./models/TicketType";
-import { Booking } from "./models/Booking";
+import { BookingSession } from "./models/BookingSession";
 
 export type CinemaState = {
   location?: string;
@@ -24,7 +24,7 @@ export type CinemaState = {
     shows: Show[];
     movies: Movie[];
   };
-  booking: Booking;
+  bookingSession?: BookingSession;
 
   // Expected to be loaded once per user session
   cinemas: Cinema[];

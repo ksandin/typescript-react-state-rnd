@@ -10,8 +10,13 @@ import { cinemas } from "../fixtures/cinemas";
 import { lounges } from "../fixtures/lounges";
 import { Price } from "./models/Price";
 import { TicketTypeId } from "./models/TicketType";
-import { Map } from "immutable";
-import { TicketCounts } from "./models/TicketCounts";
+import { LoungeSeat } from "./models/LoungeSeat";
+import { ShowId } from "./models/Show";
+import { shows } from "../fixtures/shows";
+import { bookings } from "../fixtures/bookings";
+import { range } from "../functions/range";
+import { Booking } from "./models/Booking";
+import { createBooking } from "../functions/createBooking";
 
 export const createCinemaActions = (repository: Repository<CinemaState>) => ({
   setLocation: async (location: string) =>
@@ -40,26 +45,6 @@ export const createCinemaActions = (repository: Repository<CinemaState>) => ({
           price: 90 as Price,
         },
       ],
-    });
-  },
-  resetBooking: async () => {
-    const { defaultTicketTypeId } = repository.state;
-    repository.update({
-      ...repository.state,
-      booking: {
-        tickets: defaultTicketTypeId
-          ? Map<TicketTypeId, number>().set(defaultTicketTypeId, 2)
-          : Map(),
-      },
-    });
-  },
-  setBookingTickets: async (tickets: TicketCounts) => {
-    repository.update({
-      ...repository.state,
-      booking: {
-        ...repository.state.booking,
-        tickets: tickets,
-      },
     });
   },
   loadHomePageState: async () => {
@@ -110,4 +95,46 @@ export const createCinemaActions = (repository: Repository<CinemaState>) => ({
       ticketsPage: searchForShows(options),
     });
   },
+  updateBooking: async (props: Partial<Booking>) => {
+    if (!repository.state.bookingSession) {
+      console.warn("Can't set booked seats without a booking session");
+      return;
+    }
+    repository.update({
+      ...repository.state,
+      bookingSession: {
+        ...repository.state.bookingSession,
+        booking: {
+          ...repository.state.bookingSession.booking,
+          ...props,
+        },
+      },
+    });
+  },
+  newBookingSession: async (showId: ShowId) => {
+    const seats = await api_getSeatsForShow(showId);
+    repository.update({
+      ...repository.state,
+      bookingSession: {
+        booking: createBooking(showId, repository.state.defaultTicketTypeId),
+        ...seats,
+      },
+    });
+  },
 });
+
+// NOTE api_ is a placeholder to help remember that this is a function that should be implemented completely in the api
+
+const api_getSeatsForShow = async (showId: ShowId) => {
+  const show = shows.find((show) => show.showId === showId);
+  const lounge = show
+    ? lounges.find((lounge) => lounge.loungeId === show.loungeId)
+    : undefined;
+  const allSeats = lounge ? (range(1, lounge.seats) as LoungeSeat[]) : [];
+  const showBookings = bookings.filter((booking) => booking.showId === showId);
+  const reservedSeats = showBookings.reduce(
+    (seats, booking) => [...seats, ...booking.seats],
+    [] as LoungeSeat[]
+  );
+  return { allSeats, reservedSeats };
+};

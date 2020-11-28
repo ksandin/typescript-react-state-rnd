@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "../components/Link";
 import { Container } from "../components/Container";
 import { TicketCountControl } from "../components/TicketCountControl";
@@ -8,22 +8,50 @@ import { useSnackbarValidator } from "../hooks/useSnackbarValidator";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
 import { totalCounts } from "../functions/totalCounts";
 import { useCinemaDispatcher } from "../hooks/useCinemaDispatcher";
+import { useRoute } from "react-router5";
+import { ShowId } from "../state/models/Show";
 
 const usePageState = () =>
-  useCinemaSelector(({ ticketTypes, booking }) => ({
+  useCinemaSelector(({ ticketTypes, bookingSession }) => ({
     ticketTypes,
-    booking,
+    booking: bookingSession?.booking,
   }));
 
+export type BookingTicketSelectionRouteParams = {
+  showId: ShowId;
+  keepBooking?: boolean;
+};
+
 export const BookingTicketSelectionPage = () => {
+  const { route } = useRoute();
+  const {
+    showId,
+    keepBooking,
+  } = route.params as BookingTicketSelectionRouteParams;
   const { ticketTypes, booking } = usePageState();
-  const [{ setBookingTickets }] = useCinemaDispatcher();
+  const [
+    { updateBooking, newBookingSession },
+    dispatches,
+  ] = useCinemaDispatcher();
+  useEffect(() => {
+    if (!keepBooking) {
+      newBookingSession(showId);
+    }
+  }, [keepBooking, newBookingSession, showId]);
 
   const { snackbar, validate } = useSnackbarValidator(() => {
-    if (totalCounts(booking.tickets) <= 0) {
+    if (!booking || totalCounts(booking.tickets) <= 0) {
       return "You must select at least one ticket!";
     }
   });
+
+  if (dispatches.newBookingSession.status === "pending") {
+    return <span>Loading...</span>;
+  }
+  if (!booking) {
+    return <span>Oops, something went wrong</span>;
+  }
+
   return (
     <Container>
       <List>
@@ -34,7 +62,9 @@ export const BookingTicketSelectionPage = () => {
             price={price}
             value={booking.tickets.get(ticketTypeId) || 0}
             onChange={(count) =>
-              setBookingTickets(booking.tickets.set(ticketTypeId, count))
+              updateBooking({
+                tickets: booking.tickets.set(ticketTypeId, count),
+              })
             }
           />
         ))}
