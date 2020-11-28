@@ -9,7 +9,6 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Card } from "./Card";
-import { Link } from "./Link";
 
 export const BookingConfirmationSummary = () => (
   <>
@@ -17,9 +16,7 @@ export const BookingConfirmationSummary = () => (
       <Card backgroundSrc="http://lorempixel.com/180/280/transport/?_=1" />
       <AlignBottom>
         <Chip label="Premiär 13 november" color="primary" />
-        <Typography variant="h6">
-          <Link routeName="movie">Operation Nordpolen</Link>
-        </Typography>
+        <Typography variant="h6">Operation Nordpolen</Typography>
         <Typography>Tomorrow, tuesday 20:15</Typography>
         <Typography>Filmstaden Heron City</Typography>
         <Typography>Lounge 6</Typography>
