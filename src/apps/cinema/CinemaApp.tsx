@@ -14,12 +14,11 @@ import { CinemaStoreContext } from "./state/CinemaStoreContext";
 import { createCinemaStore } from "./state/createCinemaStore";
 import { defaultCinemaState } from "./fixtures/defaultCinemaState";
 import { useCallOnce } from "./hooks/useCallOnce";
-import { cinemaReactions } from "./cinemaReactions";
 
 export const CinemaApp = () => {
   const [cinemaRouter] = useState(() => createRouterForConfig(cinemaRoutes));
   const [cinemaStore] = useState(createCinemaStore(defaultCinemaState));
-  useCallOnce(cinemaReactions, cinemaStore, cinemaRouter, cinemaRoutes);
+  useCallOnce(cinemaStore.dispatcher.actions.loadSessionState);
 
   useEffect(() => {
     cinemaRouter.start();

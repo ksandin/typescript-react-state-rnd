@@ -7,7 +7,6 @@ import { Router5ConfigNode } from "../../lib/react-router5-extensions/Router5Con
 export interface CinemaRouteConfigNode extends Router5ConfigNode {
   title: string;
   component: ComponentType;
-  isBookingSessionPage?: boolean;
 }
 
 export type CinemaRouteConfigMap = Router5ConfigMap<CinemaRouteConfigNode>;
