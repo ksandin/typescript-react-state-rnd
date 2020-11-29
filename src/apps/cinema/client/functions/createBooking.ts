@@ -5,11 +5,15 @@ import { Booking } from "../state/models/Booking";
 
 export const createBooking = (
   showId: ShowId,
-  defaultTicketTypeId?: TicketTypeId
+  defaultTicketTypeId?: TicketTypeId,
+  availableTickets: number = 2
 ): Booking => ({
   showId,
   tickets: defaultTicketTypeId
-    ? Map<TicketTypeId, number>().set(defaultTicketTypeId, 2)
+    ? Map<TicketTypeId, number>().set(
+        defaultTicketTypeId,
+        Math.min(2, availableTickets)
+      )
     : Map(),
   seats: [],
 });

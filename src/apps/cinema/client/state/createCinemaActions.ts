@@ -123,14 +123,19 @@ export const createCinemaActions = (repository: Repository<CinemaState>) => ({
       console.warn("Could not fetch booking confirmation details");
       return;
     }
+    const availableSeats = without(allSeats, ...reservedSeats);
     repository.update({
       ...repository.state,
       bookingSession: {
         details,
-        booking: createBooking(showId, repository.state.defaultTicketTypeId),
+        booking: createBooking(
+          showId,
+          repository.state.defaultTicketTypeId,
+          availableSeats.length
+        ),
         allSeats,
         reservedSeats,
-        availableSeats: without(allSeats, ...reservedSeats),
+        availableSeats,
       },
     });
   },
