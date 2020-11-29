@@ -4,7 +4,6 @@ import {
   CinemaRouteConfigNode,
 } from "./CinemaRouteConfig";
 import { BookingConfirmationPage } from "./pages/BookingConfirmationPage";
-import { BookingFailurePage } from "./pages/BookingFailurePage";
 import { BookingSeatSelectionPage } from "./pages/BookingSeatSelectionPage";
 import { BookingSuccessPage } from "./pages/BookingSuccessPage";
 import { BookingTicketSelectionPage } from "./pages/BookingTicketSelectionPage";
@@ -25,12 +24,6 @@ const routeList: CinemaRouteConfigNode[] = [
     name: "booking-confirmation",
     title: "Booking Confirmation",
     component: BookingConfirmationPage,
-  },
-  {
-    path: "/booking/failure",
-    name: "booking-failure",
-    title: "Booking Failure",
-    component: BookingFailurePage,
   },
   {
     path: "/booking/seats",

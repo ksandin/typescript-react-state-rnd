@@ -17,6 +17,9 @@ import { bookings } from "../fixtures/bookings";
 import { range } from "../functions/range";
 import { Booking } from "./models/Booking";
 import { createBooking } from "../functions/createBooking";
+import { without } from "lodash";
+import { totalCounts } from "../functions/totalCounts";
+import { BookingConfirmationDetails } from "./models/BookingConfirmationDetails";
 
 export const createCinemaActions = (repository: Repository<CinemaState>) => ({
   setLocation: async (location: string) =>
@@ -112,18 +115,78 @@ export const createCinemaActions = (repository: Repository<CinemaState>) => ({
     });
   },
   newBookingSession: async (showId: ShowId) => {
-    const seats = await api_getSeatsForShow(showId);
+    const [seats, details] = await Promise.all([
+      await api_getSeatsForShow(showId),
+      await api_getBookingConfirmationDetails(showId),
+    ]);
+    if (!details) {
+      console.warn("Could not fetch booking confirmation details");
+      return;
+    }
     repository.update({
       ...repository.state,
       bookingSession: {
+        details,
         booking: createBooking(showId, repository.state.defaultTicketTypeId),
         ...seats,
       },
     });
   },
+  makeBooking: async () => {
+    if (!repository.state.bookingSession) {
+      console.warn("Can't make booking without a booking session");
+      return;
+    }
+
+    const error = await api_makeBooking(
+      repository.state.bookingSession.booking
+    );
+
+    if (error) {
+      return error;
+    }
+
+    repository.update({
+      ...repository.state,
+      bookingSession: undefined,
+    });
+  },
 });
 
 // NOTE api_ is a placeholder to help remember that this is a function that should be implemented completely in the api
+
+const api_getBookingConfirmationDetails = async (
+  showId: ShowId
+): Promise<BookingConfirmationDetails | undefined> => {
+  const show = shows.find((show) => show.showId === showId);
+  const movie = movies.find((movie) => movie.movieId === show?.movieId);
+  const cinema = cinemas.find((cinema) => cinema.cinemaId === show?.cinemaId);
+  const lounge = lounges.find((lounge) => lounge.loungeId === show?.loungeId);
+  if (show && movie && cinema && lounge) {
+    return {
+      movieName: movie.name,
+      movieCardUrl: movie.cardUrl,
+      movieRuntime: movie.runtime,
+      moviePremiereDate: movie.premiereDate,
+      showDate: show.date,
+      cinemaName: cinema.name,
+      loungeName: lounge.name,
+    };
+  }
+};
+
+const api_makeBooking = async (booking: Booking) => {
+  const { allSeats, reservedSeats } = await api_getSeatsForShow(booking.showId);
+  const remainingSeats = without(allSeats, ...reservedSeats);
+  if (totalCounts(booking.tickets) > remainingSeats.length) {
+    return "Not enough tickets available";
+  }
+  const unallowedSeats = without(booking.seats, ...remainingSeats);
+  if (unallowedSeats.length > 0) {
+    return `Seats not allowed: ${unallowedSeats}`;
+  }
+  bookings.push(booking);
+};
 
 const api_getSeatsForShow = async (showId: ShowId) => {
   const show = shows.find((show) => show.showId === showId);
