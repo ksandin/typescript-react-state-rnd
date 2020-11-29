@@ -1,5 +1,4 @@
 import React from "react";
-import { without } from "lodash";
 import { Autocomplete } from "@material-ui/lab";
 import { Link } from "../components/Link";
 import { Container } from "../components/Container";
@@ -25,11 +24,9 @@ export const BookingSeatSelectionPage = () => {
     return <span>No booking session available</span>;
   }
   const {
-    allSeats,
-    reservedSeats,
+    availableSeats,
     booking: { seats: selectedSeats, showId },
   } = bookingSession;
-  const availableSeats = without(allSeats, ...reservedSeats);
   return (
     <Container>
       <Autocomplete

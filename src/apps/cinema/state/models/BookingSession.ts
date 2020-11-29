@@ -5,6 +5,7 @@ import { BookingConfirmationDetails } from "./BookingConfirmationDetails";
 export type BookingSession = {
   booking: Booking;
   reservedSeats: LoungeSeat[];
+  availableSeats: LoungeSeat[];
   allSeats: LoungeSeat[];
   details?: BookingConfirmationDetails;
 };

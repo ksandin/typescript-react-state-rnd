@@ -13,7 +13,7 @@ export type TicketCountControlProps<
   D extends React.ElementType = "li",
   P = {}
 > = Omit<ListItemProps<D, P>, "onChange"> &
-  Pick<CountControlProps, "value" | "onChange"> & {
+  Pick<CountControlProps, "value" | "onChange" | "acceptNewValue"> & {
     type: string;
     price: Price;
   };
@@ -23,12 +23,17 @@ export const TicketCountControl = <D extends React.ElementType = "li", P = {}>({
   price,
   value,
   onChange,
+  acceptNewValue,
   ...props
 }: TicketCountControlProps<D, P>) => (
   <ListItem {...props}>
     <ListItemText primary={type} secondary={commonPriceFormat(price)} />
     <ListItemSecondaryAction>
-      <CountControl value={value} onChange={onChange} />
+      <CountControl
+        value={value}
+        onChange={onChange}
+        acceptNewValue={acceptNewValue}
+      />
     </ListItemSecondaryAction>
   </ListItem>
 );

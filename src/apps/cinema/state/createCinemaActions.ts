@@ -115,7 +115,7 @@ export const createCinemaActions = (repository: Repository<CinemaState>) => ({
     });
   },
   newBookingSession: async (showId: ShowId) => {
-    const [seats, details] = await Promise.all([
+    const [{ allSeats, reservedSeats }, details] = await Promise.all([
       await api_getSeatsForShow(showId),
       await api_getBookingConfirmationDetails(showId),
     ]);
@@ -128,7 +128,9 @@ export const createCinemaActions = (repository: Repository<CinemaState>) => ({
       bookingSession: {
         details,
         booking: createBooking(showId, repository.state.defaultTicketTypeId),
-        ...seats,
+        allSeats,
+        reservedSeats,
+        availableSeats: without(allSeats, ...reservedSeats),
       },
     });
   },
