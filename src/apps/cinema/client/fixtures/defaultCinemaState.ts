@@ -1,7 +1,6 @@
 import { CinemaState } from "../state/CinemaState";
 
 export const defaultCinemaState: CinemaState = {
-  locationOptions: [],
   homeRecommendationCategories: [],
   moviesPage: [],
   moviePage: {

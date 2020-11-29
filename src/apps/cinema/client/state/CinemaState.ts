@@ -9,9 +9,6 @@ import { TicketType, TicketTypeId } from "./models/TicketType";
 import { BookingSession } from "./models/BookingSession";
 
 export type CinemaState = {
-  location?: string;
-  locationOptions: string[];
-
   // Expected to be loaded per-page
   homeHeroRecommendation?: MovieRecommendationHero;
   homeRecommendationCategories: MovieRecommendationCategory[];

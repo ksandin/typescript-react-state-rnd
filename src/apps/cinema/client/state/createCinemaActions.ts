@@ -22,16 +22,12 @@ import { totalCounts } from "../functions/totalCounts";
 import { BookingConfirmationDetails } from "./models/BookingConfirmationDetails";
 
 export const createCinemaActions = (repository: Repository<CinemaState>) => ({
-  setLocation: async (location: string) =>
-    repository.update({ ...repository.state, location }),
   /**
    * Session state is state that only needs to be loaded once per user session
    */
   loadSessionState: async () => {
     repository.update({
       ...repository.state,
-      location: "Stockholm",
-      locationOptions: ["Stockholm", "Göteborg"],
       movieNames: movies,
       cinemas: cinemas,
       lounges: lounges,
