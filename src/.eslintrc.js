@@ -2,6 +2,7 @@ const path = require("path");
 const { getDirectories } = require("./lib/getDirectories");
 const {
   restrictCrossDependencies,
+  restrictDependencies,
 } = require("./lib/restrictCrossDependencies");
 
 const appFolder = path.resolve(__dirname, "apps");
@@ -16,6 +17,8 @@ module.exports = {
       (overrides, appName) => [
         ...overrides,
         ...restrictCrossDependencies(`apps/${appName}`, ["api", "client"]),
+        // Restricts shared from importing from client/api
+        restrictDependencies(`apps/${appName}/shared/**`, ["api", "client"]),
       ],
       []
     ),

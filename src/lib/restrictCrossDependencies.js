@@ -1,16 +1,26 @@
-module.exports.restrictCrossDependencies = (folder, subFolders) =>
+const restrictCrossDependencies = (folder, subFolders) =>
   subFolders.map((subFolderName) => {
     const others = new Set(subFolders);
     others.delete(subFolderName);
-    return {
-      files: [`${folder}/${subFolderName}/**`],
-      rules: {
-        "no-restricted-imports": [
-          "error",
-          {
-            patterns: Array.from(others).map((other) => `**/${other}/**`),
-          },
-        ],
-      },
-    };
+    return restrictDependencies(
+      `${folder}/${subFolderName}`,
+      Array.from(others)
+    );
   });
+
+const restrictDependencies = (folder, dependencies) => ({
+  files: [`${folder}/**`],
+  rules: {
+    "no-restricted-imports": [
+      "error",
+      {
+        patterns: dependencies.map((dependency) => `**/${dependency}/**`),
+      },
+    ],
+  },
+});
+
+module.exports = {
+  restrictCrossDependencies,
+  restrictDependencies,
+};
