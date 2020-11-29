@@ -4,10 +4,10 @@ import { Typography } from "@material-ui/core";
 import { Card } from "./Card";
 import { commonDateFormat } from "../functions/commonDateFormat";
 import { commonRuntimeFormat } from "../functions/commonRuntimeFormat";
-import { BookingConfirmationDetails } from "../state/models/BookingConfirmationDetails";
+import { BookingConfirmationDetails } from "../../shared/models/BookingConfirmationDetails";
 import { PremiereChip } from "./PremiereChip";
 import { TicketList } from "./TicketList";
-import { TicketCounts } from "../state/models/TicketCounts";
+import { TicketCounts } from "../../shared/models/TicketCounts";
 
 export type BookingConfirmationSummaryProps = BookingConfirmationDetails & {
   tickets: TicketCounts;

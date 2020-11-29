@@ -6,12 +6,12 @@ import {
   colors,
   uniqueNamesGenerator,
 } from "unique-names-generator";
-import { Movie, MovieId } from "../state/models/Movie";
-import { range } from "../functions/range";
-import { MovieAgeLimit } from "../state/models/MovieAgeLimit";
-import { MovieGenre } from "../state/models/MovieGenre";
-import { MovieLanguage } from "../state/models/MovieLanguage";
-import { rotate, rotateMany } from "../functions/rotate";
+import { Movie, MovieId } from "../../shared/models/Movie";
+import { range } from "../../shared/functions/range";
+import { MovieAgeLimit } from "../../shared/models/MovieAgeLimit";
+import { MovieGenre } from "../../shared/models/MovieGenre";
+import { MovieLanguage } from "../../shared/models/MovieLanguage";
+import { rotate, rotateMany } from "../../shared/functions/rotate";
 
 const description = `En populär influencer och hans vänner reser jorden runt och filmar sig
 själva i extrema situationer. I Ryssland blir de inbjudna till ett

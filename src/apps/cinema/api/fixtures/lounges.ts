@@ -1,5 +1,5 @@
-import { Lounge, LoungeId } from "../state/models/Lounge";
-import { range } from "../functions/range";
+import { Lounge, LoungeId } from "../../shared/models/Lounge";
+import { range } from "../../shared/functions/range";
 import { cinemas } from "./cinemas";
 
 let loungeId = 0 as LoungeId;

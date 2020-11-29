@@ -1,6 +1,6 @@
 import { without } from "lodash";
 import { useEffect } from "react";
-import { BookingSession } from "../state/models/BookingSession";
+import { BookingSession } from "../../shared/models/BookingSession";
 import { CinemaActions } from "../state/CinemaActions";
 import { totalCounts } from "../functions/totalCounts";
 

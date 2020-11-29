@@ -1,9 +1,9 @@
 module.exports.restrictCrossDependencies = (folder, subFolders) =>
-  subFolders.map((appName) => {
+  subFolders.map((subFolderName) => {
     const others = new Set(subFolders);
-    others.delete(appName);
+    others.delete(subFolderName);
     return {
-      files: [`${folder}/${appName}/**`],
+      files: [`${folder}/${subFolderName}/**`],
       rules: {
         "no-restricted-imports": [
           "error",

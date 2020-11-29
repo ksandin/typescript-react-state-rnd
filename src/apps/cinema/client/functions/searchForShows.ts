@@ -1,7 +1,7 @@
-import { TicketsOptions } from "../state/models/TicketsOptions";
+import { TicketsOptions } from "../../shared/models/TicketsOptions";
 import { filterShows } from "./filterShows";
-import { shows } from "../fixtures/shows";
-import { movies } from "../fixtures/movies";
+import { shows } from "../../api/fixtures/shows";
+import { movies } from "../../api/fixtures/movies";
 import { uniq } from "lodash";
 
 export const searchForShows = (options: TicketsOptions) => {

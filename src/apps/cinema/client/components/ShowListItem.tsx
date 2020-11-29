@@ -10,7 +10,7 @@ import {
 import { Link } from "./Link";
 import { ChevronRight } from "@material-ui/icons";
 import { DividedListItem } from "./DividedListItem";
-import { Show } from "../state/models/Show";
+import { Show } from "../../shared/models/Show";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
 import { commonTimeFormat } from "../functions/commonTimeFormat";
 

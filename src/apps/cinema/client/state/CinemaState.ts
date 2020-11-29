@@ -1,12 +1,12 @@
-import { MovieRecommendationHero } from "./models/MovieRecommendationHero";
-import { MovieRecommendationCategory } from "./models/MovieRecommendationCategory";
-import { Movie } from "./models/Movie";
-import { MoviesPageMovie } from "./models/MoviesPageMovie";
-import { Show } from "./models/Show";
-import { Cinema } from "./models/Cinema";
-import { Lounge } from "./models/Lounge";
-import { TicketType, TicketTypeId } from "./models/TicketType";
-import { BookingSession } from "./models/BookingSession";
+import { MovieRecommendationHero } from "../../shared/models/MovieRecommendationHero";
+import { MovieRecommendationCategory } from "../../shared/models/MovieRecommendationCategory";
+import { Movie } from "../../shared/models/Movie";
+import { MoviesPageMovie } from "../../shared/models/MoviesPageMovie";
+import { Show } from "../../shared/models/Show";
+import { Cinema } from "../../shared/models/Cinema";
+import { Lounge } from "../../shared/models/Lounge";
+import { TicketType, TicketTypeId } from "../../shared/models/TicketType";
+import { BookingSession } from "../../shared/models/BookingSession";
 
 export type CinemaState = {
   // Expected to be loaded per-page

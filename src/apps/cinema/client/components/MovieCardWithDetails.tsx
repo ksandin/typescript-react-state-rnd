@@ -4,7 +4,7 @@ import { Typography } from "@material-ui/core";
 import { Card } from "./Card";
 import { commonRuntimeFormat } from "../functions/commonRuntimeFormat";
 import { PremiereChip } from "./PremiereChip";
-import { Movie } from "../state/models/Movie";
+import { Movie } from "../../shared/models/Movie";
 
 export type MovieCardWithDetailsProps = Pick<
   Movie,

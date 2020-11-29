@@ -4,17 +4,17 @@ import { MovieListAlphabetic } from "../components/MovieListAlphabetic";
 import { MovieListTimeline } from "../components/MovieListTimeline";
 import { TicketsControls } from "../components/TicketsControls";
 import { Container } from "../components/Container";
-import { Movie } from "../state/models/Movie";
+import { Movie } from "../../shared/models/Movie";
 import {
   TicketsDisplayOption,
   TicketsOptions,
-} from "../state/models/TicketsOptions";
-import { MovieLanguage } from "../state/models/MovieLanguage";
-import { MovieAgeLimit } from "../state/models/MovieAgeLimit";
+} from "../../shared/models/TicketsOptions";
+import { MovieLanguage } from "../../shared/models/MovieLanguage";
+import { MovieAgeLimit } from "../../shared/models/MovieAgeLimit";
 import { useCinemaDispatcher } from "../hooks/useCinemaDispatcher";
 import { useCallOnce } from "../hooks/useCallOnce";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
-import { Show } from "../state/models/Show";
+import { Show } from "../../shared/models/Show";
 
 const displayComponents: Record<
   TicketsDisplayOption,

@@ -1,7 +1,7 @@
 import { Map } from "immutable";
-import { ShowId } from "../state/models/Show";
-import { TicketTypeId } from "../state/models/TicketType";
-import { Booking } from "../state/models/Booking";
+import { ShowId } from "../../shared/models/Show";
+import { TicketTypeId } from "../../shared/models/TicketType";
+import { Booking } from "../../shared/models/Booking";
 
 export const createBooking = (
   showId: ShowId,

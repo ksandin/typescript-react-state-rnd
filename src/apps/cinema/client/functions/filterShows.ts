@@ -1,9 +1,9 @@
 import moment from "moment";
 import { filterMovies } from "./filterMovies";
-import { Show } from "../state/models/Show";
-import { TicketsOptions } from "../state/models/TicketsOptions";
-import { MovieLanguage } from "../state/models/MovieLanguage";
-import { Movie } from "../state/models/Movie";
+import { Show } from "../../shared/models/Show";
+import { TicketsOptions } from "../../shared/models/TicketsOptions";
+import { MovieLanguage } from "../../shared/models/MovieLanguage";
+import { Movie } from "../../shared/models/Movie";
 
 export const filterShows = (
   shows: Show[],

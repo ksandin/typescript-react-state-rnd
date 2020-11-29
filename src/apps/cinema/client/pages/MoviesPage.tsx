@@ -7,8 +7,8 @@ import { List } from "@material-ui/core";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
 import { useCinemaDispatcher } from "../hooks/useCinemaDispatcher";
 import { useCallOnce } from "../hooks/useCallOnce";
-import { MoviesOptions } from "../state/models/MoviesOptions";
-import { MovieAgeLimit } from "../state/models/MovieAgeLimit";
+import { MoviesOptions } from "../../shared/models/MoviesOptions";
+import { MovieAgeLimit } from "../../shared/models/MovieAgeLimit";
 
 export const MoviesPage = () => {
   const movies = useCinemaSelector(({ moviesPage }) => moviesPage);

@@ -8,5 +8,16 @@ const appFolder = path.resolve(__dirname, "apps");
 const appNames = getDirectories(appFolder);
 
 module.exports = {
-  overrides: restrictCrossDependencies("apps", appNames),
+  overrides: [
+    // Restricts dependencies between apps
+    ...restrictCrossDependencies("apps", appNames),
+    // Restricts dependencies between client/api in each app
+    ...appNames.reduce(
+      (overrides, appName) => [
+        ...overrides,
+        ...restrictCrossDependencies(`apps/${appName}`, ["api", "client"]),
+      ],
+      []
+    ),
+  ],
 };

@@ -1,7 +1,7 @@
-import { Movie } from "../state/models/Movie";
-import { MoviesOptions } from "../state/models/MoviesOptions";
+import { Movie } from "../../shared/models/Movie";
+import { MoviesOptions } from "../../shared/models/MoviesOptions";
 import { includesAll } from "./includesAll";
-import { MovieAgeLimit } from "../state/models/MovieAgeLimit";
+import { MovieAgeLimit } from "../../shared/models/MovieAgeLimit";
 
 export const filterMovies = (
   movies: Movie[],

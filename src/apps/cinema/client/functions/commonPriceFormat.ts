@@ -1,3 +1,3 @@
-import { Price } from "../state/models/Price";
+import { Price } from "../../shared/models/Price";
 
 export const commonPriceFormat = (price: Price) => `$${price}`;

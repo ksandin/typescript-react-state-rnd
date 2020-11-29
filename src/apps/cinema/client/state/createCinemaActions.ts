@@ -1,25 +1,25 @@
 import { Repository } from "../../../../lib/store/Repository";
 import { CinemaState } from "./CinemaState";
-import { movies } from "../fixtures/movies";
-import { MovieId } from "./models/Movie";
-import { MoviesOptions } from "./models/MoviesOptions";
-import { TicketsOptions } from "./models/TicketsOptions";
+import { movies } from "../../api/fixtures/movies";
+import { MovieId } from "../../shared/models/Movie";
+import { MoviesOptions } from "../../shared/models/MoviesOptions";
+import { TicketsOptions } from "../../shared/models/TicketsOptions";
 import { filterMovies } from "../functions/filterMovies";
 import { searchForShows } from "../functions/searchForShows";
-import { cinemas } from "../fixtures/cinemas";
-import { lounges } from "../fixtures/lounges";
-import { Price } from "./models/Price";
-import { TicketTypeId } from "./models/TicketType";
-import { LoungeSeat } from "./models/LoungeSeat";
-import { ShowId } from "./models/Show";
-import { shows } from "../fixtures/shows";
-import { bookings } from "../fixtures/bookings";
-import { range } from "../functions/range";
-import { Booking } from "./models/Booking";
+import { cinemas } from "../../api/fixtures/cinemas";
+import { lounges } from "../../api/fixtures/lounges";
+import { Price } from "../../shared/models/Price";
+import { TicketTypeId } from "../../shared/models/TicketType";
+import { LoungeSeat } from "../../shared/models/LoungeSeat";
+import { ShowId } from "../../shared/models/Show";
+import { shows } from "../../api/fixtures/shows";
+import { bookings } from "../../api/fixtures/bookings";
+import { range } from "../../shared/functions/range";
+import { Booking } from "../../shared/models/Booking";
 import { createBooking } from "../functions/createBooking";
 import { without } from "lodash";
 import { totalCounts } from "../functions/totalCounts";
-import { BookingConfirmationDetails } from "./models/BookingConfirmationDetails";
+import { BookingConfirmationDetails } from "../../shared/models/BookingConfirmationDetails";
 
 export const createCinemaActions = (repository: Repository<CinemaState>) => ({
   /**

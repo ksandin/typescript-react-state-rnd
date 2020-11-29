@@ -1,6 +1,6 @@
 import { without } from "lodash";
-import { Cinema, CinemaId } from "../state/models/Cinema";
-import { MovieLanguage } from "../state/models/MovieLanguage";
+import { Cinema, CinemaId } from "../../shared/models/Cinema";
+import { MovieLanguage } from "../../shared/models/MovieLanguage";
 
 const languages = without(Object.values(MovieLanguage), MovieLanguage.All);
 

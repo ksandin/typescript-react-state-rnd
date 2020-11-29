@@ -9,7 +9,7 @@ import { useCinemaSelector } from "../hooks/useCinemaSelector";
 import { totalCounts } from "../functions/totalCounts";
 import { useCinemaDispatcher } from "../hooks/useCinemaDispatcher";
 import { useRoute } from "react-router5";
-import { ShowId } from "../state/models/Show";
+import { ShowId } from "../../shared/models/Show";
 
 const usePageState = () =>
   useCinemaSelector(({ ticketTypes, bookingSession }) => ({

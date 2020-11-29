@@ -3,12 +3,12 @@ import { Autocomplete } from "@material-ui/lab";
 import TextField from "@material-ui/core/TextField";
 import { ToggleButtonGroup } from "./ToggleButtonGroup";
 import { Typography } from "@material-ui/core";
-import { MovieGenre } from "../state/models/MovieGenre";
-import { MovieAgeLimit } from "../state/models/MovieAgeLimit";
+import { MovieGenre } from "../../shared/models/MovieGenre";
+import { MovieAgeLimit } from "../../shared/models/MovieAgeLimit";
 import {
   MoviesDisplayOption,
   MoviesOptions,
-} from "../state/models/MoviesOptions";
+} from "../../shared/models/MoviesOptions";
 import { ControlRow } from "./ControlRow";
 import { createTemplateComponent } from "../../../../lib/createTemplateComponent";
 

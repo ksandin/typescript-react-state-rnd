@@ -7,10 +7,10 @@ import { AvTimer, List } from "@material-ui/icons";
 import {
   TicketsDisplayOption,
   TicketsOptions,
-} from "../state/models/TicketsOptions";
-import { MovieGenre } from "../state/models/MovieGenre";
-import { MovieLanguage } from "../state/models/MovieLanguage";
-import { MovieAgeLimit } from "../state/models/MovieAgeLimit";
+} from "../../shared/models/TicketsOptions";
+import { MovieGenre } from "../../shared/models/MovieGenre";
+import { MovieLanguage } from "../../shared/models/MovieLanguage";
+import { MovieAgeLimit } from "../../shared/models/MovieAgeLimit";
 import { createTemplateComponent } from "../../../../lib/createTemplateComponent";
 import { ControlRow } from "./ControlRow";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";

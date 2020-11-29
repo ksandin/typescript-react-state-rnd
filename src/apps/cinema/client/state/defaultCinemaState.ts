@@ -1,4 +1,4 @@
-import { CinemaState } from "../state/CinemaState";
+import { CinemaState } from "./CinemaState";
 
 export const defaultCinemaState: CinemaState = {
   homeRecommendationCategories: [],

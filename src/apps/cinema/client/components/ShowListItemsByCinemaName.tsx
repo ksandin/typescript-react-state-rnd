@@ -3,7 +3,7 @@ import { groupBy } from "lodash";
 import { ShowListItem, ShowListItemProps } from "./ShowListItem";
 import styled from "styled-components";
 import { Typography } from "@material-ui/core";
-import { Show } from "../state/models/Show";
+import { Show } from "../../shared/models/Show";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
 
 export type ShowListItemsByCinemaNameProps = {

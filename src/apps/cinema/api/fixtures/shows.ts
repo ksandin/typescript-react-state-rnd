@@ -1,10 +1,10 @@
 import moment from "moment";
-import { range } from "../functions/range";
-import { Show, ShowId } from "../state/models/Show";
+import { range } from "../../shared/functions/range";
+import { Show, ShowId } from "../../shared/models/Show";
 import { movies } from "./movies";
 import { without } from "lodash";
-import { MovieLanguage } from "../state/models/MovieLanguage";
-import { rotate } from "../functions/rotate";
+import { MovieLanguage } from "../../shared/models/MovieLanguage";
+import { rotate } from "../../shared/functions/rotate";
 import { lounges } from "./lounges";
 
 const languages = without(Object.values(MovieLanguage), MovieLanguage.All);

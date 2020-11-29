@@ -12,7 +12,7 @@ import { AppBar } from "./components/AppBar";
 import { CookieNotification } from "./components/CookieNotification";
 import { CinemaStoreContext } from "./state/CinemaStoreContext";
 import { createCinemaStore } from "./state/createCinemaStore";
-import { defaultCinemaState } from "./fixtures/defaultCinemaState";
+import { defaultCinemaState } from "./state/defaultCinemaState";
 import { useCallOnce } from "./hooks/useCallOnce";
 
 export const CinemaApp = () => {

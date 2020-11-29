@@ -12,7 +12,7 @@ import styled from "styled-components";
 import { DividedListItem } from "./DividedListItem";
 import { Link } from "./Link";
 import { MoviePlayerDialogPlayButton } from "./MoviePlayerDialogPlayButton";
-import { Movie } from "../state/models/Movie";
+import { Movie } from "../../shared/models/Movie";
 import { commonDateFormat } from "../functions/commonDateFormat";
 import { commonRuntimeFormat } from "../functions/commonRuntimeFormat";
 

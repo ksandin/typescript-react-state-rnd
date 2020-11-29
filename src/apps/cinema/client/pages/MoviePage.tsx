@@ -15,10 +15,10 @@ import { useCinemaDispatcher } from "../hooks/useCinemaDispatcher";
 import { useRoute } from "react-router5";
 import { useCallOnce } from "../hooks/useCallOnce";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
-import { MovieId } from "../state/models/Movie";
-import { MovieLanguage } from "../state/models/MovieLanguage";
-import { MovieAgeLimit } from "../state/models/MovieAgeLimit";
-import { TicketsOptions } from "../state/models/TicketsOptions";
+import { MovieId } from "../../shared/models/Movie";
+import { MovieLanguage } from "../../shared/models/MovieLanguage";
+import { MovieAgeLimit } from "../../shared/models/MovieAgeLimit";
+import { TicketsOptions } from "../../shared/models/TicketsOptions";
 import { ControlRow } from "../components/ControlRow";
 
 export const MoviePage = () => {

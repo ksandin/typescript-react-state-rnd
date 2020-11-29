@@ -6,7 +6,7 @@ import {
   ListItemText,
 } from "@material-ui/core";
 import { CountControl, CountControlProps } from "./CountControl";
-import { Price } from "../state/models/Price";
+import { Price } from "../../shared/models/Price";
 import { commonPriceFormat } from "../functions/commonPriceFormat";
 
 export type TicketCountControlProps<
