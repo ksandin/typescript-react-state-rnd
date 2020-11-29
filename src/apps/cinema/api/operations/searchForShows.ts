@@ -1,6 +1,6 @@
 import moment from "moment";
 import { uniq } from "lodash";
-import { TicketsOptions } from "../../shared/models/TicketsOptions";
+import { SearchForShowsOptions } from "../../shared/requests/SearchForShowsOptions";
 import { SearchForShowsResponse } from "../../shared/responses/SearchForShowsResponse";
 import { shows } from "../fixtures/shows";
 import { movies } from "../fixtures/movies";
@@ -10,7 +10,7 @@ import { MovieLanguage } from "../../shared/models/MovieLanguage";
 import { filterMovies } from "./searchForMovies";
 
 export const searchForShows = (
-  options: TicketsOptions
+  options: SearchForShowsOptions
 ): SearchForShowsResponse => {
   const selectedShows = filterShows(shows, movies, options);
   const selectedMovies = uniq(
@@ -36,7 +36,7 @@ const filterShows = (
     movies: movieFilters,
     language,
     subtitles,
-  }: TicketsOptions
+  }: SearchForShowsOptions
 ) =>
   shows.filter((show) => {
     const movie = moviesForShows.find(

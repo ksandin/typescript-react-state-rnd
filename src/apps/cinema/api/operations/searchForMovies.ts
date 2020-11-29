@@ -1,17 +1,17 @@
 import { Movie } from "../../shared/models/Movie";
-import { MoviesOptions } from "../../shared/models/MoviesOptions";
+import { SearchForMoviesOptions } from "../../shared/requests/SearchForMoviesOptions";
 import { includesAll } from "../../shared/functions/includesAll";
 import { MovieAgeLimit } from "../../shared/models/MovieAgeLimit";
 import { movies } from "../fixtures/movies";
 import { SearchForMoviesResponse } from "../../shared/responses/SearchForMoviesResponse";
 
 export const searchForMovies = (
-  options: MoviesOptions
+  options: SearchForMoviesOptions
 ): SearchForMoviesResponse => filterMovies(movies, options);
 
 export const filterMovies = (
   movies: Movie[],
-  { display, genres, ageLimit }: MoviesOptions
+  { display, genres, ageLimit }: SearchForMoviesOptions
 ) =>
   movies.filter(
     (movie) =>

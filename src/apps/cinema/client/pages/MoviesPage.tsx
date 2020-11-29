@@ -7,13 +7,15 @@ import { List } from "@material-ui/core";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
 import { useCinemaDispatcher } from "../hooks/useCinemaDispatcher";
 import { useCallOnce } from "../hooks/useCallOnce";
-import { MoviesOptions } from "../../shared/models/MoviesOptions";
+import { SearchForMoviesOptions } from "../../shared/requests/SearchForMoviesOptions";
 import { MovieAgeLimit } from "../../shared/models/MovieAgeLimit";
 
 export const MoviesPage = () => {
   const movies = useCinemaSelector(({ moviesPage }) => moviesPage);
   const [{ loadMoviesPageState }, dispatches] = useCinemaDispatcher();
-  const [options, setOptions] = useState<MoviesOptions>(defaultMoviesOptions);
+  const [options, setOptions] = useState<SearchForMoviesOptions>(
+    defaultMoviesOptions
+  );
   useCallOnce(loadMoviesPageState, options);
 
   if (dispatches.loadMoviesPageState.status === "pending") {
@@ -45,7 +47,7 @@ const Margin = styled.div`
   margin-bottom: 16px;
 `;
 
-const defaultMoviesOptions: MoviesOptions = {
+const defaultMoviesOptions: SearchForMoviesOptions = {
   display: "current",
   ageLimit: MovieAgeLimit.All,
   genres: [],

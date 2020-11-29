@@ -2,8 +2,8 @@ import { without } from "lodash";
 import { Repository } from "../../../../lib/store/Repository";
 import { CinemaState } from "../../shared/models/CinemaState";
 import { MovieId } from "../../shared/models/Movie";
-import { MoviesOptions } from "../../shared/models/MoviesOptions";
-import { TicketsOptions } from "../../shared/models/TicketsOptions";
+import { SearchForMoviesOptions } from "../../shared/requests/SearchForMoviesOptions";
+import { SearchForShowsOptions } from "../../shared/requests/SearchForShowsOptions";
 import { ShowId } from "../../shared/models/Show";
 import { Booking } from "../../shared/models/Booking";
 import { createBooking } from "../../shared/state/createBooking";
@@ -39,9 +39,9 @@ export const createCinemaActions = (repository: Repository<CinemaState>) => ({
   },
   loadMoviePageState: async (
     movieId: MovieId,
-    extraOptions: Omit<TicketsOptions, "movies">
+    extraOptions: Omit<SearchForShowsOptions, "movies">
   ) => {
-    const options: TicketsOptions = {
+    const options: SearchForShowsOptions = {
       ...extraOptions,
       movies: [movieId],
     };
@@ -57,7 +57,7 @@ export const createCinemaActions = (repository: Repository<CinemaState>) => ({
       },
     });
   },
-  loadMoviesPageState: async (options: MoviesOptions) => {
+  loadMoviesPageState: async (options: SearchForMoviesOptions) => {
     const movies = await postJson<SearchForMoviesResponse>(
       apiUrl("movies"),
       options
@@ -67,7 +67,7 @@ export const createCinemaActions = (repository: Repository<CinemaState>) => ({
       moviesPage: movies,
     });
   },
-  loadTicketsPageState: async (options: TicketsOptions) => {
+  loadTicketsPageState: async (options: SearchForShowsOptions) => {
     const showsAndMovies = await postJson<SearchForShowsResponse>(
       apiUrl("shows"),
       options

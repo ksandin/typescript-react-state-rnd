@@ -18,13 +18,13 @@ import { useCinemaSelector } from "../hooks/useCinemaSelector";
 import { MovieId } from "../../shared/models/Movie";
 import { MovieLanguage } from "../../shared/models/MovieLanguage";
 import { MovieAgeLimit } from "../../shared/models/MovieAgeLimit";
-import { TicketsOptions } from "../../shared/models/TicketsOptions";
+import { SearchForShowsOptions } from "../../shared/requests/SearchForShowsOptions";
 import { ControlRow } from "../components/ControlRow";
 
 export const MoviePage = () => {
   const { route } = useRoute();
   const { movie, shows } = useCinemaSelector(({ moviePage }) => moviePage);
-  const [options, setOptions] = useState<TicketsOptions>({
+  const [options, setOptions] = useState<SearchForShowsOptions>({
     display: "movies",
     date: new Date(),
     cinemas: [],

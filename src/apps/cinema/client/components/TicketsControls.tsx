@@ -5,9 +5,9 @@ import TextField from "@material-ui/core/TextField";
 import { ToggleButtonGroup } from "./ToggleButtonGroup";
 import { AvTimer, List } from "@material-ui/icons";
 import {
-  TicketsDisplayOption,
-  TicketsOptions,
-} from "../../shared/models/TicketsOptions";
+  ShowDisplayOption,
+  SearchForShowsOptions,
+} from "../../shared/requests/SearchForShowsOptions";
 import { MovieGenre } from "../../shared/models/MovieGenre";
 import { MovieLanguage } from "../../shared/models/MovieLanguage";
 import { MovieAgeLimit } from "../../shared/models/MovieAgeLimit";
@@ -36,20 +36,20 @@ function Controls({
   value,
   onChange,
 }: {
-  value: TicketsOptions;
-  onChange: (newValue: TicketsOptions) => void;
+  value: SearchForShowsOptions;
+  onChange: (newValue: SearchForShowsOptions) => void;
 }) {
   const { movies, cinemas } = useCinemaSelector(({ movieNames, cinemas }) => ({
     movies: movieNames,
     cinemas,
   }));
-  const change = <K extends keyof TicketsOptions>(
+  const change = <K extends keyof SearchForShowsOptions>(
     propName: K,
-    propValue: TicketsOptions[K]
+    propValue: SearchForShowsOptions[K]
   ) => onChange({ ...value, [propName]: propValue });
   return {
     display: (
-      <ToggleButtonGroup<TicketsDisplayOption>
+      <ToggleButtonGroup<ShowDisplayOption>
         size="small"
         value={value.display}
         options={[

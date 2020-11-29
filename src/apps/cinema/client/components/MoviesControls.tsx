@@ -6,9 +6,9 @@ import { Typography } from "@material-ui/core";
 import { MovieGenre } from "../../shared/models/MovieGenre";
 import { MovieAgeLimit } from "../../shared/models/MovieAgeLimit";
 import {
-  MoviesDisplayOption,
-  MoviesOptions,
-} from "../../shared/models/MoviesOptions";
+  MovieDisplayOption,
+  SearchForMoviesOptions,
+} from "../../shared/requests/SearchForMoviesOptions";
 import { ControlRow } from "./ControlRow";
 import { createTemplateComponent } from "../../../../lib/createTemplateComponent";
 
@@ -29,12 +29,12 @@ function renderControls({
   value,
   onChange,
 }: {
-  value: MoviesOptions;
-  onChange: (newValue: MoviesOptions) => void;
+  value: SearchForMoviesOptions;
+  onChange: (newValue: SearchForMoviesOptions) => void;
 }) {
-  const change = <K extends keyof MoviesOptions>(
+  const change = <K extends keyof SearchForMoviesOptions>(
     propName: K,
-    propValue: MoviesOptions[K]
+    propValue: SearchForMoviesOptions[K]
   ) => onChange({ ...value, [propName]: propValue });
   return {
     genres: (
@@ -59,7 +59,7 @@ function renderControls({
       />
     ),
     display: (
-      <ToggleButtonGroup<MoviesDisplayOption>
+      <ToggleButtonGroup<MovieDisplayOption>
         size="small"
         value={value.display}
         options={[

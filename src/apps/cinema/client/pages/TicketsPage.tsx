@@ -6,9 +6,9 @@ import { TicketsControls } from "../components/TicketsControls";
 import { Container } from "../components/Container";
 import { Movie } from "../../shared/models/Movie";
 import {
-  TicketsDisplayOption,
-  TicketsOptions,
-} from "../../shared/models/TicketsOptions";
+  ShowDisplayOption,
+  SearchForShowsOptions,
+} from "../../shared/requests/SearchForShowsOptions";
 import { MovieLanguage } from "../../shared/models/MovieLanguage";
 import { MovieAgeLimit } from "../../shared/models/MovieAgeLimit";
 import { useCinemaDispatcher } from "../hooks/useCinemaDispatcher";
@@ -17,7 +17,7 @@ import { useCinemaSelector } from "../hooks/useCinemaSelector";
 import { Show } from "../../shared/models/Show";
 
 const displayComponents: Record<
-  TicketsDisplayOption,
+  ShowDisplayOption,
   React.ComponentType<{ movies: Movie[]; shows: Show[] }>
 > = {
   movies: MovieListAlphabetic,
@@ -25,7 +25,7 @@ const displayComponents: Record<
 };
 
 export const TicketsPage = () => {
-  const [options, setOptions] = useState<TicketsOptions>({
+  const [options, setOptions] = useState<SearchForShowsOptions>({
     display: "movies",
     date: new Date(),
     cinemas: [],
