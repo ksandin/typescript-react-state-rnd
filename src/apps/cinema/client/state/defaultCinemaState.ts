@@ -1,4 +1,4 @@
-import { CinemaState } from "./CinemaState";
+import { CinemaState } from "../../shared/models/CinemaState";
 
 export const defaultCinemaState: CinemaState = {
   homeRecommendationCategories: [],

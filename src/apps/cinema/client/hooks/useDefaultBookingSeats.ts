@@ -2,7 +2,7 @@ import { without } from "lodash";
 import { useEffect } from "react";
 import { BookingSession } from "../../shared/models/BookingSession";
 import { CinemaActions } from "../state/CinemaActions";
-import { totalCounts } from "../functions/totalCounts";
+import { totalCounts } from "../../shared/functions/totalCounts";
 
 export const useDefaultBookingSeats = (
   bookingSession: BookingSession | undefined,

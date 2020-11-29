@@ -1,11 +1,31 @@
 import moment from "moment";
-import { filterMovies } from "./filterMovies";
-import { Show } from "../../shared/models/Show";
+import { uniq } from "lodash";
 import { TicketsOptions } from "../../shared/models/TicketsOptions";
-import { MovieLanguage } from "../../shared/models/MovieLanguage";
+import { SearchForShowsResponse } from "../../shared/responses/SearchForShowsResponse";
+import { shows } from "../fixtures/shows";
+import { movies } from "../fixtures/movies";
+import { Show } from "../../shared/models/Show";
 import { Movie } from "../../shared/models/Movie";
+import { MovieLanguage } from "../../shared/models/MovieLanguage";
+import { filterMovies } from "./searchForMovies";
 
-export const filterShows = (
+export const searchForShows = (
+  options: TicketsOptions
+): SearchForShowsResponse => {
+  const selectedShows = filterShows(shows, movies, options);
+  const selectedMovies = uniq(
+    selectedShows.map(
+      ({ movieId }) => movies.find((movie) => movie.movieId === movieId)!
+    )
+  );
+
+  return {
+    shows: selectedShows,
+    movies: selectedMovies,
+  };
+};
+
+const filterShows = (
   shows: Show[],
   moviesForShows: Movie[],
   {

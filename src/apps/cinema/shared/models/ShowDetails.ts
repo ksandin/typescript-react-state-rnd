@@ -3,7 +3,7 @@ import { Show } from "./Show";
 import { Cinema } from "./Cinema";
 import { Lounge } from "./Lounge";
 
-export type BookingConfirmationDetails = {
+export type ShowDetails = {
   movieName: Movie["name"];
   movieCardUrl: Movie["cardUrl"];
   movieRuntime: Movie["runtime"];

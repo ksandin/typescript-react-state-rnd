@@ -6,7 +6,7 @@ import { Button, List } from "@material-ui/core";
 import { PageActions } from "../components/PageActions";
 import { useSnackbarValidator } from "../hooks/useSnackbarValidator";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
-import { totalCounts } from "../functions/totalCounts";
+import { totalCounts } from "../../shared/functions/totalCounts";
 import { useCinemaDispatcher } from "../hooks/useCinemaDispatcher";
 import { useRoute } from "react-router5";
 import { ShowId } from "../../shared/models/Show";

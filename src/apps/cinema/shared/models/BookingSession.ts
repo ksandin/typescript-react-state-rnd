@@ -1,11 +1,11 @@
 import { LoungeSeat } from "./LoungeSeat";
 import { Booking } from "./Booking";
-import { BookingConfirmationDetails } from "./BookingConfirmationDetails";
+import { ShowDetails } from "./ShowDetails";
 
 export type BookingSession = {
   booking: Booking;
   reservedSeats: LoungeSeat[];
   availableSeats: LoungeSeat[];
   allSeats: LoungeSeat[];
-  details?: BookingConfirmationDetails;
+  details?: ShowDetails;
 };

@@ -52,12 +52,15 @@ export const BookingConfirmationPage = () => {
         >
           Make booking
         </ProgressButton>
-        {dispatches.makeBooking.error}
+        {dispatches.makeBooking.error &&
+          errorString(dispatches.makeBooking.error)}
       </PageActions>
       {snackbar}
     </Container>
   );
 };
+
+const errorString = (e: any) => (e && e.message) || e + "";
 
 const useEmailValidator = (email: string) =>
   useSnackbarValidator(() => {
