@@ -3,6 +3,7 @@ import { Actions } from "./Actions";
 import { Dispatcher } from "./Dispatcher";
 import { automateDispatches } from "./automateDispatches";
 import { createDispatches } from "./createDispatches";
+import { DispatcherActions } from "./DispatcherActions";
 
 export const createDispatcher = <TActions extends Actions>(
   actions: TActions
@@ -12,7 +13,7 @@ export const createDispatcher = <TActions extends Actions>(
       Object.getOwnPropertyNames(actions)
     ),
     events: new EventEmitter(),
-    actions,
+    actions: (undefined as unknown) as DispatcherActions<TActions>,
   };
   dispatcher.events.setMaxListeners(0);
   dispatcher.actions = automateDispatches(dispatcher, actions);

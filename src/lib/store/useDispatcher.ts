@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { Actions } from "./Actions";
 import { Dispatches } from "./Dispatches";
 import { Dispatcher } from "./Dispatcher";
+import { DispatcherActions } from "./DispatcherActions";
 
 export const useDispatcher = <TActions extends Actions>(
   dispatcher: Dispatcher<TActions>
-): [TActions, Dispatches<keyof TActions>] => {
+): [DispatcherActions<TActions>, Dispatches<keyof TActions>] => {
   const [dispatches, setDispatches] = useState(dispatcher.dispatches);
 
   useEffect(() => {
