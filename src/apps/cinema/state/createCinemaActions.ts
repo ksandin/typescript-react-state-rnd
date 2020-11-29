@@ -143,7 +143,7 @@ export const createCinemaActions = (repository: Repository<CinemaState>) => ({
     );
 
     if (error) {
-      return error;
+      throw new Error(error);
     }
 
     repository.update({

@@ -12,17 +12,14 @@ import { useCinemaSelector } from "../hooks/useCinemaSelector";
 
 export const BookingConfirmationPage = () => {
   const router = useRouter();
-  const [bookingError, setBookingError] = useState<string>();
   const [email, setEmail] = useState("your@email.com");
   const { snackbar, validate } = useEmailValidator(email);
   const bookingSession = useCinemaSelector((state) => state.bookingSession);
   const [{ makeBooking }, dispatches] = useCinemaDispatcher();
   const submitBooking = async (e: React.MouseEvent<HTMLButtonElement>) => {
     if (validate(e)) {
-      const error = await makeBooking();
-      if (error) {
-        setBookingError(error);
-      } else {
+      const { type } = await makeBooking.withError();
+      if (type === "success") {
         router.navigate("booking-success");
       }
     }
@@ -55,7 +52,7 @@ export const BookingConfirmationPage = () => {
         >
           Make booking
         </ProgressButton>
-        {bookingError}
+        {dispatches.makeBooking.error}
       </PageActions>
       {snackbar}
     </Container>
