@@ -14,7 +14,7 @@ import { RestMemoryExample } from "./apps/todo/client/examples/RestMemoryExample
 import { RestMongooseExample } from "./apps/todo/client/examples/RestMongooseExample";
 import { LocalStorageObserverExample } from "./apps/todo/client/examples/LocalStorageObserverExample";
 import { LocalStorageAdapterExample } from "./apps/todo/client/examples/LocalStorageAdapterExample";
-import { CinemaApp } from "./apps/cinema/CinemaApp";
+import { CinemaApp } from "./apps/cinema/client/CinemaApp";
 import {
   RootRouteConfigMap,
   RootRouteConfigNode,

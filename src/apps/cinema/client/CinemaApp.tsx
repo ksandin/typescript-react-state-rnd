@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { RouterProvider } from "react-router5";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateMomentUtils from "@date-io/moment";
-import { createRouterForConfig } from "../../lib/react-router5-extensions/createRouterForConfig";
+import { createRouterForConfig } from "../../../lib/react-router5-extensions/createRouterForConfig";
 import { cinemaRoutes } from "./cinemaRoutes";
 import {
   CinemaRouteConfigContext,

@@ -11,7 +11,7 @@ import {
 import { MovieGenre } from "../state/models/MovieGenre";
 import { MovieLanguage } from "../state/models/MovieLanguage";
 import { MovieAgeLimit } from "../state/models/MovieAgeLimit";
-import { createTemplateComponent } from "../../../lib/createTemplateComponent";
+import { createTemplateComponent } from "../../../../lib/createTemplateComponent";
 import { ControlRow } from "./ControlRow";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
 

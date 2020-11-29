@@ -10,7 +10,7 @@ import {
   MoviesOptions,
 } from "../state/models/MoviesOptions";
 import { ControlRow } from "./ControlRow";
-import { createTemplateComponent } from "../../../lib/createTemplateComponent";
+import { createTemplateComponent } from "../../../../lib/createTemplateComponent";
 
 export const MoviesControls = createTemplateComponent(
   renderControls,

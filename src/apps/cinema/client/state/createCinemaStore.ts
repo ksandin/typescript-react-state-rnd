@@ -1,7 +1,7 @@
 import { CinemaState } from "./CinemaState";
-import { createRepository } from "../../../lib/store/createRepository";
-import { createStore } from "../../../lib/store/createStore";
-import { createDispatcher } from "../../../lib/store/createDispatcher";
+import { createRepository } from "../../../../lib/store/createRepository";
+import { createStore } from "../../../../lib/store/createStore";
+import { createDispatcher } from "../../../../lib/store/createDispatcher";
 import { createCinemaActions } from "./createCinemaActions";
 
 export const createCinemaStore = (state: CinemaState) => {

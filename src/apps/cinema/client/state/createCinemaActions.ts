@@ -1,4 +1,4 @@
-import { Repository } from "../../../lib/store/Repository";
+import { Repository } from "../../../../lib/store/Repository";
 import { CinemaState } from "./CinemaState";
 import { movies } from "../fixtures/movies";
 import { MovieId } from "./models/Movie";

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useDispatcher } from "../../../lib/store/useDispatcher";
+import { useDispatcher } from "../../../../lib/store/useDispatcher";
 import { CinemaStoreContext } from "../state/CinemaStoreContext";
 
 export const useCinemaDispatcher = () => {
