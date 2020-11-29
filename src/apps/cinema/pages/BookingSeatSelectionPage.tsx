@@ -1,4 +1,5 @@
 import React from "react";
+import { without } from "lodash";
 import { Autocomplete } from "@material-ui/lab";
 import { Link } from "../components/Link";
 import { Container } from "../components/Container";
@@ -9,11 +10,12 @@ import { useSnackbarValidator } from "../hooks/useSnackbarValidator";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
 import { loungeSeatName } from "../functions/loungeSeatName";
 import { useCinemaDispatcher } from "../hooks/useCinemaDispatcher";
-import { without } from "lodash";
+import { useDefaultBookingSeats } from "../hooks/useDefaultBookingSeats";
 
 export const BookingSeatSelectionPage = () => {
   const bookingSession = useCinemaSelector((state) => state.bookingSession);
   const [{ updateBooking }] = useCinemaDispatcher();
+  useDefaultBookingSeats(bookingSession, updateBooking);
   const { snackbar, validate } = useSnackbarValidator(() => {
     if (selectedSeats.length <= 0) {
       return "You must select at least one seat!";
