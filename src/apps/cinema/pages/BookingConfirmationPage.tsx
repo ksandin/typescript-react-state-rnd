@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "../components/Link";
 import { Container } from "../components/Container";
 import { Button, TextField, Typography } from "@material-ui/core";
@@ -10,23 +10,11 @@ import { ProgressButton } from "../components/ProgressButton";
 import { useRouter } from "react-router5";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
 
-const emailRegex = /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/;
-
 export const BookingConfirmationPage = () => {
   const router = useRouter();
   const [bookingError, setBookingError] = useState<string>();
-  const [email, setEmail] = useState("test@test.com");
-  const handleEmailChange = (
-    e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => setEmail(e.target.value);
-  const { snackbar, validate } = useSnackbarValidator(() => {
-    if (!email) {
-      return "You have to enter an e-mail address";
-    }
-    if (!emailRegex.test(email)) {
-      return "You have to enter a valid e-mail address";
-    }
-  });
+  const [email, setEmail] = useState("your@email.com");
+  const { snackbar, validate } = useEmailValidator(email);
   const bookingSession = useCinemaSelector((state) => state.bookingSession);
   const [{ makeBooking }, dispatches] = useCinemaDispatcher();
   const submitBooking = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -50,7 +38,11 @@ export const BookingConfirmationPage = () => {
           {...bookingSession?.details}
         />
       )}
-      <TextField label="E-mail" value={email} onChange={handleEmailChange} />
+      <TextField
+        label="E-mail"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
       <PageActions>
         <Link routeName="booking-seat-selection">
           <Button variant="outlined">Return to seat selection</Button>
@@ -69,3 +61,15 @@ export const BookingConfirmationPage = () => {
     </Container>
   );
 };
+
+const useEmailValidator = (email: string) =>
+  useSnackbarValidator(() => {
+    if (!email) {
+      return "You have to enter an e-mail address";
+    }
+    if (!emailRegex.test(email)) {
+      return "You have to enter a valid e-mail address";
+    }
+  });
+
+const emailRegex = /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/;
