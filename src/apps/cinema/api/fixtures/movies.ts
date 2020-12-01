@@ -6,6 +6,7 @@ import {
   colors,
   uniqueNamesGenerator,
 } from "unique-names-generator";
+import { Types } from "mongoose";
 import { Movie, MovieId } from "../../shared/models/Movie";
 import { range } from "../../shared/functions/range";
 import { MovieAgeLimit } from "../../shared/models/MovieAgeLimit";
@@ -62,7 +63,7 @@ export const movies: Movie[] = range(1, 15).map((i) => ({
   bannerUrl: `http://lorempixel.com/920/400/transport/?_=${i}`,
   cardUrl: `http://lorempixel.com/180/280/transport/?_=${i}`,
   name: randomName(i),
-  movieId: i as MovieId,
+  movieId: Types.ObjectId().toString() as MovieId,
   description,
   premiereDate: rotate(premiereDates, i),
   runtime: rotate(runTimes, i),

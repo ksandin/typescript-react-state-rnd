@@ -1,0 +1,72 @@
+import { Schema } from "mongoose";
+import { documentSchemaDefinition } from "../../../../lib/mongoose-tsextensions/documentSchemaDefinition";
+import { MovieAgeLimit } from "../../shared/models/MovieAgeLimit";
+import { MovieGenre } from "../../shared/models/MovieGenre";
+import { MovieLanguage } from "../../shared/models/MovieLanguage";
+import { MovieDocument } from "../documents/MovieDocument";
+
+export const MovieSchema = new Schema(
+  documentSchemaDefinition<MovieDocument>({
+    movieId: {
+      type: Schema.Types.ObjectId,
+      index: true,
+      required: true,
+      unique: true,
+    },
+    ageLimit: {
+      type: String,
+      enum: Object.values(MovieAgeLimit),
+      required: true,
+    },
+    genres: {
+      type: [String],
+      enum: Object.values(MovieGenre),
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    runtime: {
+      type: Number,
+      required: true,
+    },
+    premiereDate: {
+      type: Date,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    bannerUrl: {
+      type: String,
+      required: true,
+    },
+    cardUrl: {
+      type: String,
+      required: true,
+    },
+    trailerUrl: {
+      type: String,
+      required: true,
+    },
+    snapshotUrls: {
+      type: [String],
+      required: true,
+    },
+    language: {
+      type: String,
+      enum: Object.values(MovieLanguage),
+      required: true,
+    },
+    cast: {
+      type: [String],
+      required: true,
+    },
+    director: {
+      type: String,
+      required: true,
+    },
+  })
+);

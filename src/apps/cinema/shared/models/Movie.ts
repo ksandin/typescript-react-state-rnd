@@ -2,7 +2,7 @@ import { MovieGenre } from "./MovieGenre";
 import { MovieAgeLimit } from "./MovieAgeLimit";
 import { MovieLanguage } from "./MovieLanguage";
 
-export type MovieId = Opaque<number, "MovieId">;
+export type MovieId = Opaque<string, "MovieId">;
 
 export type Movie = {
   movieId: MovieId;
