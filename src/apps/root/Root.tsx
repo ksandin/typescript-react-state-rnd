@@ -5,14 +5,15 @@ import {
   ThemeProvider as MuiThemeProvider,
 } from "@material-ui/core/styles";
 import { CssBaseline } from "@material-ui/core";
-import { ResponsiveDrawer } from "./ResponsiveDrawer";
 import { Router } from "router5";
 import { RouterProvider } from "react-router5";
+import { ResponsiveDrawer } from "./ResponsiveDrawer";
 import {
   RootRouteConfigContext,
   RootRouteConfigMap,
   useRootRouteConfig,
 } from "./RootRouteConfig";
+import { GlobalStyle } from "./GlobalStyle";
 
 export type RootProps = {
   theme: Theme;
@@ -25,6 +26,7 @@ export const Root: React.FC<RootProps> = ({ theme, router, routeConfig }) => (
     <RouterProvider router={router}>
       <MuiThemeProvider theme={theme}>
         <SCThemeProvider theme={theme}>
+          <GlobalStyle />
           <CssBaseline />
           <ResponsiveDrawer>
             <Page />
