@@ -35,7 +35,7 @@ function startExpress(models: CinemaModels) {
   const jsonParser = bodyParser.json();
 
   app.get("/session", async (req, res) => {
-    res.json(await getUserSession(models.MovieModel));
+    res.json(await getUserSession(models));
   });
 
   app.get("/home", (req, res) => {

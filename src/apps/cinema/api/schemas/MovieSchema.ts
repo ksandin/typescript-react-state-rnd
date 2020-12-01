@@ -1,14 +1,15 @@
-import { Schema } from "mongoose";
 import { documentSchemaDefinition } from "../../../../lib/mongoose-tsextensions/documentSchemaDefinition";
 import { MovieAgeLimit } from "../../shared/models/MovieAgeLimit";
 import { MovieGenre } from "../../shared/models/MovieGenre";
 import { MovieLanguage } from "../../shared/models/MovieLanguage";
 import { MovieDocument } from "../documents/MovieDocument";
+import { NamedSchema } from "../../../../lib/mongoose-tsextensions/NamedSchema";
 
-export const MovieSchema = new Schema(
+export const MovieSchema = new NamedSchema(
+  "Movie",
   documentSchemaDefinition<MovieDocument>({
     movieId: {
-      type: Schema.Types.ObjectId,
+      type: NamedSchema.Types.ObjectId,
       index: true,
       required: true,
       unique: true,
