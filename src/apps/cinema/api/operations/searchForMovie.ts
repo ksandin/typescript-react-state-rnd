@@ -1,4 +1,4 @@
-import { MovieId } from "../../shared/models/Movie";
+import { MovieId } from "../../shared/types/Movie";
 import { SearchForMovieResponse } from "../../shared/responses/SearchForMovieResponse";
 import { movies } from "../fixtures/movies";
 

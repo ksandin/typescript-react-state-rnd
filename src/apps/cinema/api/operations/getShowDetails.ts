@@ -1,5 +1,5 @@
-import { ShowId } from "../../shared/models/Show";
-import { ShowDetails } from "../../shared/models/ShowDetails";
+import { ShowId } from "../../shared/types/Show";
+import { ShowDetails } from "../../shared/types/ShowDetails";
 import { shows } from "../fixtures/shows";
 import { movies } from "../fixtures/movies";
 import { cinemas } from "../fixtures/cinemas";

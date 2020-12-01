@@ -1,19 +1,19 @@
 import { without } from "lodash";
 import { Repository } from "../../../../lib/store/Repository";
-import { CinemaState } from "../../shared/models/CinemaState";
-import { MovieId } from "../../shared/models/Movie";
+import { CinemaState } from "../../shared/types/CinemaState";
+import { MovieId } from "../../shared/types/Movie";
 import { SearchForMoviesOptions } from "../../shared/requests/SearchForMoviesOptions";
 import { SearchForShowsOptions } from "../../shared/requests/SearchForShowsOptions";
-import { ShowId } from "../../shared/models/Show";
-import { Booking } from "../../shared/models/Booking";
+import { ShowId } from "../../shared/types/Show";
+import { Booking } from "../../shared/types/Booking";
 import { createBooking } from "../../shared/state/createBooking";
-import { ShowDetails } from "../../shared/models/ShowDetails";
-import { UserSession } from "../../shared/models/UserSession";
+import { ShowDetails } from "../../shared/types/ShowDetails";
+import { UserSession } from "../../shared/types/UserSession";
 import { SearchForShowsResponse } from "../../shared/responses/SearchForShowsResponse";
 import { SearchForMovieResponse } from "../../shared/responses/SearchForMovieResponse";
 import { SearchForMoviesResponse } from "../../shared/responses/SearchForMoviesResponse";
 import { GetSeatsForShowResponse } from "../../shared/responses/GetSeatsForShowResponse";
-import { HomeState } from "../../shared/models/HomeState";
+import { HomeState } from "../../shared/types/HomeState";
 import { fetchJson } from "../functions/fetchJson";
 import { postJson } from "../functions/postJson";
 

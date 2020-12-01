@@ -1,3 +1,3 @@
-import { Movie } from "../models/Movie";
+import { Movie } from "../types/Movie";
 
 export type SearchForMovieResponse = Movie | undefined;

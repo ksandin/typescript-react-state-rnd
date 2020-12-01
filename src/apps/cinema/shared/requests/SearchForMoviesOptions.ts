@@ -1,5 +1,5 @@
-import { MovieAgeLimit } from "../models/MovieAgeLimit";
-import { MovieGenre } from "../models/MovieGenre";
+import { MovieAgeLimit } from "../types/MovieAgeLimit";
+import { MovieGenre } from "../types/MovieGenre";
 
 export type MovieDisplayOption = "current" | "upcoming";
 

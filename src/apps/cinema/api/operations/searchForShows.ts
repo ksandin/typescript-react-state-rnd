@@ -4,9 +4,9 @@ import { SearchForShowsOptions } from "../../shared/requests/SearchForShowsOptio
 import { SearchForShowsResponse } from "../../shared/responses/SearchForShowsResponse";
 import { shows } from "../fixtures/shows";
 import { movies } from "../fixtures/movies";
-import { Show } from "../../shared/models/Show";
-import { Movie } from "../../shared/models/Movie";
-import { MovieLanguage } from "../../shared/models/MovieLanguage";
+import { Show } from "../../shared/types/Show";
+import { Movie } from "../../shared/types/Movie";
+import { MovieLanguage } from "../../shared/types/MovieLanguage";
 import { filterMovies } from "./searchForMovies";
 
 export const searchForShows = (

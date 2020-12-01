@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { Event } from "@material-ui/icons";
 import styled from "styled-components";
-import { Movie } from "../../shared/models/Movie";
+import { Movie } from "../../shared/types/Movie";
 import { commonDateFormat } from "../functions/commonDateFormat";
 import { commonRuntimeFormat } from "../functions/commonRuntimeFormat";
 import { DividedListItem } from "./DividedListItem";

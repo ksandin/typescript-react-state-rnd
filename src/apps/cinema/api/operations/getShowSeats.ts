@@ -1,9 +1,9 @@
-import { ShowId } from "../../shared/models/Show";
+import { ShowId } from "../../shared/types/Show";
 import { GetSeatsForShowResponse } from "../../shared/responses/GetSeatsForShowResponse";
 import { shows } from "../fixtures/shows";
 import { lounges } from "../fixtures/lounges";
 import { range } from "../../shared/functions/range";
-import { LoungeSeat } from "../../shared/models/LoungeSeat";
+import { LoungeSeat } from "../../shared/types/LoungeSeat";
 import { bookings } from "../fixtures/bookings";
 
 export const getShowSeats = (showId: ShowId): GetSeatsForShowResponse => {

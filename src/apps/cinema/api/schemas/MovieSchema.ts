@@ -1,7 +1,7 @@
 import { documentSchemaDefinition } from "../../../../lib/mongoose-tsextensions/documentSchemaDefinition";
-import { MovieAgeLimit } from "../../shared/models/MovieAgeLimit";
-import { MovieGenre } from "../../shared/models/MovieGenre";
-import { MovieLanguage } from "../../shared/models/MovieLanguage";
+import { MovieAgeLimit } from "../../shared/types/MovieAgeLimit";
+import { MovieGenre } from "../../shared/types/MovieGenre";
+import { MovieLanguage } from "../../shared/types/MovieLanguage";
 import { MovieDocument } from "../documents/MovieDocument";
 import { NamedSchema } from "../../../../lib/mongoose-tsextensions/NamedSchema";
 

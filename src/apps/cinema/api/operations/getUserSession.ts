@@ -1,4 +1,4 @@
-import { UserSession } from "../../shared/models/UserSession";
+import { UserSession } from "../../shared/types/UserSession";
 import { CinemaModels } from "../createModels";
 import { typesafeProjection } from "../../../../lib/mongoose-tsextensions/typesafeProjection";
 
@@ -20,7 +20,7 @@ export const getUserSession = async ({
     movieNames,
     cinemas,
     lounges,
-    defaultTicketTypeId: ticketTypes[0].ticketTypeId,
+    defaultTicketTypeId: ticketTypes[0]?.ticketTypeId,
     ticketTypes,
   };
 };

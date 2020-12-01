@@ -1,11 +1,12 @@
 import moment from "moment";
 import { without } from "lodash";
 import { range } from "../../shared/functions/range";
-import { Show, ShowId } from "../../shared/models/Show";
-import { MovieLanguage } from "../../shared/models/MovieLanguage";
+import { Show, ShowId } from "../../shared/types/Show";
+import { MovieLanguage } from "../../shared/types/MovieLanguage";
 import { rotate } from "../../shared/functions/rotate";
 import { movies } from "./movies";
 import { lounges } from "./lounges";
+import { cinemas } from "./cinemas";
 
 const languages = without(Object.values(MovieLanguage), MovieLanguage.All);
 const timeMin = 18;
@@ -22,14 +23,17 @@ range(0, 6).forEach((day) => {
 
     while (dateCursor <= lastShow) {
       const movie = rotate(movies, id);
+      const cinemaIndex = cinemas.findIndex(
+        (cinema) => cinema.cinemaId === lounge.cinemaId
+      );
       shows.push({
         showId: id,
         loungeId: lounge.loungeId,
         cinemaId: lounge.cinemaId,
         movieId: movie.movieId,
         date: dateCursor,
-        language: rotate(languages, lounge.cinemaId),
-        subtitles: rotate(languages, lounge.cinemaId + 1),
+        language: rotate(languages, cinemaIndex),
+        subtitles: rotate(languages, cinemaIndex + 1),
       });
       id++;
       dateCursor = moment(dateCursor)

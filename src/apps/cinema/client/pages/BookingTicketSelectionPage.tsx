@@ -9,7 +9,7 @@ import { useSnackbarValidator } from "../hooks/useSnackbarValidator";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
 import { totalCounts } from "../../shared/functions/totalCounts";
 import { useCinemaDispatcher } from "../hooks/useCinemaDispatcher";
-import { ShowId } from "../../shared/models/Show";
+import { ShowId } from "../../shared/types/Show";
 
 const usePageState = () =>
   useCinemaSelector(({ ticketTypes, bookingSession }) => ({

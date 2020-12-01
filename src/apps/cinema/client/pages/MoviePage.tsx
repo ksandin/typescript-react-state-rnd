@@ -15,9 +15,9 @@ import { MovieCardWithDetails } from "../components/MovieCardWithDetails";
 import { useCinemaDispatcher } from "../hooks/useCinemaDispatcher";
 import { useCallOnce } from "../hooks/useCallOnce";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
-import { MovieId } from "../../shared/models/Movie";
-import { MovieLanguage } from "../../shared/models/MovieLanguage";
-import { MovieAgeLimit } from "../../shared/models/MovieAgeLimit";
+import { MovieId } from "../../shared/types/Movie";
+import { MovieLanguage } from "../../shared/types/MovieLanguage";
+import { MovieAgeLimit } from "../../shared/types/MovieAgeLimit";
 import { SearchForShowsOptions } from "../../shared/requests/SearchForShowsOptions";
 import { ControlRow } from "../components/ControlRow";
 

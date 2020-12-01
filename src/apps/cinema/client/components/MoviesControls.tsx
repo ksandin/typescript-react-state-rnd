@@ -2,8 +2,8 @@ import React from "react";
 import { Autocomplete } from "@material-ui/lab";
 import TextField from "@material-ui/core/TextField";
 import { Typography } from "@material-ui/core";
-import { MovieGenre } from "../../shared/models/MovieGenre";
-import { MovieAgeLimit } from "../../shared/models/MovieAgeLimit";
+import { MovieGenre } from "../../shared/types/MovieGenre";
+import { MovieAgeLimit } from "../../shared/types/MovieAgeLimit";
 import {
   MovieDisplayOption,
   SearchForMoviesOptions,

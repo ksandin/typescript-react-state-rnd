@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Typography } from "@material-ui/core";
 import { commonRuntimeFormat } from "../functions/commonRuntimeFormat";
-import { Movie } from "../../shared/models/Movie";
+import { Movie } from "../../shared/types/Movie";
 import { Card } from "./Card";
 import { PremiereChip } from "./PremiereChip";
 

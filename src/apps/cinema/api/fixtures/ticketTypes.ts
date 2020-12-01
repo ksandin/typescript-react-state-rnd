@@ -1,6 +1,6 @@
 import { Types } from "mongoose";
-import { TicketType, TicketTypeId } from "../../shared/models/TicketType";
-import { Price } from "../../shared/models/Price";
+import { TicketType, TicketTypeId } from "../../shared/types/TicketType";
+import { Price } from "../../shared/types/Price";
 
 export const ticketTypes: TicketType[] = [
   {

@@ -1,4 +1,4 @@
-import { LoungeSeat } from "../models/LoungeSeat";
+import { LoungeSeat } from "../types/LoungeSeat";
 
 export type GetSeatsForShowResponse = {
   allSeats: LoungeSeat[];

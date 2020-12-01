@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { ChevronRight } from "@material-ui/icons";
-import { Show } from "../../shared/models/Show";
+import { Show } from "../../shared/types/Show";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
 import { commonTimeFormat } from "../functions/commonTimeFormat";
 import { DividedListItem } from "./DividedListItem";

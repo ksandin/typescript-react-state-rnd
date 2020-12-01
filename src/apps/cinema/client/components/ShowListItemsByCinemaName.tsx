@@ -2,7 +2,7 @@ import React from "react";
 import { groupBy } from "lodash";
 import styled from "styled-components";
 import { Typography } from "@material-ui/core";
-import { Show } from "../../shared/models/Show";
+import { Show } from "../../shared/types/Show";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
 import { ShowListItem, ShowListItemProps } from "./ShowListItem";
 

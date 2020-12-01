@@ -1,8 +1,8 @@
 import { List } from "@material-ui/core";
 import React from "react";
 import { groupBy } from "lodash";
-import { Movie } from "../../shared/models/Movie";
-import { Show } from "../../shared/models/Show";
+import { Movie } from "../../shared/types/Movie";
+import { Show } from "../../shared/types/Show";
 import { MovieListItemWithShows } from "./MovieListItemWithShows";
 import { Section } from "./Section";
 

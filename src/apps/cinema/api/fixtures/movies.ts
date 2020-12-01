@@ -7,11 +7,11 @@ import {
   uniqueNamesGenerator,
 } from "unique-names-generator";
 import { Types } from "mongoose";
-import { Movie, MovieId } from "../../shared/models/Movie";
+import { Movie, MovieId } from "../../shared/types/Movie";
 import { range } from "../../shared/functions/range";
-import { MovieAgeLimit } from "../../shared/models/MovieAgeLimit";
-import { MovieGenre } from "../../shared/models/MovieGenre";
-import { MovieLanguage } from "../../shared/models/MovieLanguage";
+import { MovieAgeLimit } from "../../shared/types/MovieAgeLimit";
+import { MovieGenre } from "../../shared/types/MovieGenre";
+import { MovieLanguage } from "../../shared/types/MovieLanguage";
 import { rotate, rotateMany } from "../../shared/functions/rotate";
 
 const description = `En populär influencer och hans vänner reser jorden runt och filmar sig

@@ -7,8 +7,8 @@ import {
   Typography,
 } from "@material-ui/core";
 import { commonPriceFormat } from "../functions/commonPriceFormat";
-import { Price } from "../../shared/models/Price";
-import { TicketCounts } from "../../shared/models/TicketCounts";
+import { Price } from "../../shared/types/Price";
+import { TicketCounts } from "../../shared/types/TicketCounts";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
 
 export type TicketListProps = { tickets: TicketCounts };

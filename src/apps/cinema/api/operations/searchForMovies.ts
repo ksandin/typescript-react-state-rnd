@@ -1,7 +1,7 @@
-import { Movie } from "../../shared/models/Movie";
+import { Movie } from "../../shared/types/Movie";
 import { SearchForMoviesOptions } from "../../shared/requests/SearchForMoviesOptions";
 import { includesAll } from "../../shared/functions/includesAll";
-import { MovieAgeLimit } from "../../shared/models/MovieAgeLimit";
+import { MovieAgeLimit } from "../../shared/types/MovieAgeLimit";
 import { movies } from "../fixtures/movies";
 import { SearchForMoviesResponse } from "../../shared/responses/SearchForMoviesResponse";
 

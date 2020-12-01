@@ -1,4 +1,4 @@
-import { HomeState } from "../../shared/models/HomeState";
+import { HomeState } from "../../shared/types/HomeState";
 import { movies } from "../fixtures/movies";
 
 export const getHomeState = (): HomeState => ({

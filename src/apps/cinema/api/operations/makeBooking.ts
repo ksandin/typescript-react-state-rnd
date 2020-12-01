@@ -1,5 +1,5 @@
 import { without } from "lodash";
-import { Booking } from "../../shared/models/Booking";
+import { Booking } from "../../shared/types/Booking";
 import { totalCounts } from "../../shared/functions/totalCounts";
 import { bookings } from "../fixtures/bookings";
 import { getShowSeats } from "./getShowSeats";

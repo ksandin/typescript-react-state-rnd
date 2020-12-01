@@ -1,6 +1,6 @@
 import React from "react";
 import { Typography } from "@material-ui/core";
-import { Movie } from "../../shared/models/Movie";
+import { Movie } from "../../shared/types/Movie";
 import { commonDateFormat } from "../functions/commonDateFormat";
 
 export type MovieDetailsProps = Pick<

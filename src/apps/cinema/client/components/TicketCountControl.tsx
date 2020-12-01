@@ -5,7 +5,7 @@ import {
   ListItemSecondaryAction,
   ListItemText,
 } from "@material-ui/core";
-import { Price } from "../../shared/models/Price";
+import { Price } from "../../shared/types/Price";
 import { commonPriceFormat } from "../functions/commonPriceFormat";
 import { CountControl, CountControlProps } from "./CountControl";
 

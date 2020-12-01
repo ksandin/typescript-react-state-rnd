@@ -1,3 +1,3 @@
-import { Booking } from "../../shared/models/Booking";
+import { Booking } from "../../shared/types/Booking";
 
 export const bookings: Booking[] = [];

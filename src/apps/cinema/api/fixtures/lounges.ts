@@ -1,5 +1,5 @@
 import { Types } from "mongoose";
-import { Lounge, LoungeId } from "../../shared/models/Lounge";
+import { Lounge, LoungeId } from "../../shared/types/Lounge";
 import { range } from "../../shared/functions/range";
 import { cinemas } from "./cinemas";
 

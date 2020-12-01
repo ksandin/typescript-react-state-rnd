@@ -7,9 +7,9 @@ import {
   ShowDisplayOption,
   SearchForShowsOptions,
 } from "../../shared/requests/SearchForShowsOptions";
-import { MovieGenre } from "../../shared/models/MovieGenre";
-import { MovieLanguage } from "../../shared/models/MovieLanguage";
-import { MovieAgeLimit } from "../../shared/models/MovieAgeLimit";
+import { MovieGenre } from "../../shared/types/MovieGenre";
+import { MovieLanguage } from "../../shared/types/MovieLanguage";
+import { MovieAgeLimit } from "../../shared/types/MovieAgeLimit";
 import { createTemplateComponent } from "../../../../lib/createTemplateComponent";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
 import { ControlRow } from "./ControlRow";

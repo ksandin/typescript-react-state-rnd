@@ -2,7 +2,7 @@ import { useContext } from "react";
 import shallowEquals from "shallowequal";
 import { useSelector } from "../../../../lib/store/useSelector";
 import { CinemaStoreContext } from "../state/CinemaStoreContext";
-import { CinemaState } from "../../shared/models/CinemaState";
+import { CinemaState } from "../../shared/types/CinemaState";
 
 export const useCinemaSelector = <TSelectedState>(
   selector: (state: CinemaState) => TSelectedState,

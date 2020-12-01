@@ -1,8 +1,8 @@
-import { MovieLanguage } from "../models/MovieLanguage";
-import { MovieAgeLimit } from "../models/MovieAgeLimit";
-import { MovieGenre } from "../models/MovieGenre";
-import { CinemaId } from "../models/Cinema";
-import { MovieId } from "../models/Movie";
+import { MovieLanguage } from "../types/MovieLanguage";
+import { MovieAgeLimit } from "../types/MovieAgeLimit";
+import { MovieGenre } from "../types/MovieGenre";
+import { CinemaId } from "../types/Cinema";
+import { MovieId } from "../types/Movie";
 
 export type ShowDisplayOption = "movies" | "timeline";
 
