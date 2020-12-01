@@ -1,6 +1,6 @@
 import { Price } from "./Price";
 
-export type TicketTypeId = Opaque<number, "TicketTypeId">;
+export type TicketTypeId = Opaque<string, "TicketTypeId">;
 
 export type TicketType = {
   ticketTypeId: TicketTypeId;
