@@ -1,9 +1,9 @@
 import React from "react";
 import { Autocomplete } from "@material-ui/lab";
-import { Link } from "../components/Link";
-import { Container } from "../components/Container";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
+import { Link } from "../components/Link";
+import { Container } from "../components/Container";
 import { PageActions } from "../components/PageActions";
 import { useSnackbarValidator } from "../hooks/useSnackbarValidator";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";

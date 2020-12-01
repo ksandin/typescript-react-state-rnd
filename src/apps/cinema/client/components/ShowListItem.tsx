@@ -7,12 +7,12 @@ import {
   ListItemText,
   Typography,
 } from "@material-ui/core";
-import { Link } from "./Link";
 import { ChevronRight } from "@material-ui/icons";
-import { DividedListItem } from "./DividedListItem";
 import { Show } from "../../shared/models/Show";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
 import { commonTimeFormat } from "../functions/commonTimeFormat";
+import { DividedListItem } from "./DividedListItem";
+import { Link } from "./Link";
 
 export type ShowListItemProps = Pick<
   Show,

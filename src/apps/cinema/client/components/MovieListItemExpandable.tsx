@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
-import { MovieListItem, MovieListItemProps } from "./MovieListItem";
 import { Button } from "@material-ui/core";
+import { MovieListItem, MovieListItemProps } from "./MovieListItem";
 
 export type MovieListItemExpandableProps = MovieListItemProps & {
   expanded?: boolean;

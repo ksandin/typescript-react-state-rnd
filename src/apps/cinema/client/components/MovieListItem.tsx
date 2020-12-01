@@ -9,12 +9,12 @@ import {
 } from "@material-ui/core";
 import { Event } from "@material-ui/icons";
 import styled from "styled-components";
-import { DividedListItem } from "./DividedListItem";
-import { Link } from "./Link";
-import { MoviePlayerDialogPlayButton } from "./MoviePlayerDialogPlayButton";
 import { Movie } from "../../shared/models/Movie";
 import { commonDateFormat } from "../functions/commonDateFormat";
 import { commonRuntimeFormat } from "../functions/commonRuntimeFormat";
+import { DividedListItem } from "./DividedListItem";
+import { Link } from "./Link";
+import { MoviePlayerDialogPlayButton } from "./MoviePlayerDialogPlayButton";
 
 export type MovieListItemProps = Pick<
   Movie,

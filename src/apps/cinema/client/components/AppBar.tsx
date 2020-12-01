@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "./Link";
 import { AppBar as MuiAppBar, Toolbar as MuiToolbar } from "@material-ui/core";
+import { Link } from "./Link";
 
 export const AppBar = () => (
   <Container>

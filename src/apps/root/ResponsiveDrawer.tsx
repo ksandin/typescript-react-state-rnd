@@ -8,11 +8,11 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
 import { createMenuItems } from "./createMenuItems";
 import { Menu } from "./Menu";
 import { useRootRouteConfig } from "./RootRouteConfig";
 import { drawerWidth } from "./drawerWidth";
-import { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
 
 // This file is based on https://material-ui.com/components/drawers/#responsive-drawer
 

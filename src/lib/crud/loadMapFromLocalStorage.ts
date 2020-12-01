@@ -1,5 +1,5 @@
-import { CrudState } from "./CrudState";
 import { Map } from "immutable";
+import { CrudState } from "./CrudState";
 
 export const loadMapFromLocalStorage = <Id, Model>(
   key: string

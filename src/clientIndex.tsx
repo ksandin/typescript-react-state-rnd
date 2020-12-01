@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import browserPlugin from "router5-plugin-browser";
 import reportWebVitals from "./reportWebVitals";
 import { Root } from "./apps/root/Root";
 import { createAppTheme } from "./apps/root/theme";
 import { createRouterForConfig } from "./lib/react-router5-extensions/createRouterForConfig";
 import { rootRoutes } from "./rootRoutes";
-import browserPlugin from "router5-plugin-browser";
 
 const router = createRouterForConfig(rootRoutes);
 router.usePlugin(browserPlugin());

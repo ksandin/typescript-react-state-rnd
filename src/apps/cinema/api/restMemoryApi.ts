@@ -1,17 +1,17 @@
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
+import { MovieId } from "../shared/models/Movie";
+import { ShowId } from "../shared/models/Show";
+import { parseBooking } from "../shared/state/parseBooking";
 import { makeBooking } from "./operations/makeBooking";
 import { searchForShows } from "./operations/searchForShows";
-import { MovieId } from "../shared/models/Movie";
 import { searchForMovie } from "./operations/searchForMovie";
 import { searchForMovies } from "./operations/searchForMovies";
-import { ShowId } from "../shared/models/Show";
 import { getShowSeats } from "./operations/getShowSeats";
 import { getShowDetails } from "./operations/getShowDetails";
 import { getHomeState } from "./operations/getHomeState";
 import { getUserSession } from "./operations/getUserSession";
-import { parseBooking } from "../shared/state/parseBooking";
 
 const app = express();
 app.use(cors());

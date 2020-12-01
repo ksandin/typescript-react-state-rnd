@@ -1,13 +1,13 @@
 import React, { useState } from "react";
+import { Button, TextField, Typography } from "@material-ui/core";
+import { useRouter } from "react-router5";
 import { Link } from "../components/Link";
 import { Container } from "../components/Container";
-import { Button, TextField, Typography } from "@material-ui/core";
 import { PageActions } from "../components/PageActions";
 import { BookingConfirmationSummary } from "../components/BookingConfirmationSummary";
 import { useSnackbarValidator } from "../hooks/useSnackbarValidator";
 import { useCinemaDispatcher } from "../hooks/useCinemaDispatcher";
 import { ProgressButton } from "../components/ProgressButton";
-import { useRouter } from "react-router5";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
 
 export const BookingConfirmationPage = () => {

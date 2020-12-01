@@ -1,6 +1,6 @@
 import React from "react";
-import { commonDateFormat } from "../functions/commonDateFormat";
 import { Chip, ChipProps } from "@material-ui/core";
+import { commonDateFormat } from "../functions/commonDateFormat";
 import { useNow } from "../hooks/useNow";
 
 export type PremiereProps = ChipProps & {

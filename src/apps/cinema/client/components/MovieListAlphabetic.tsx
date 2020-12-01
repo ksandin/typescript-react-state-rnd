@@ -1,10 +1,10 @@
-import { Section } from "./Section";
 import { List } from "@material-ui/core";
 import React from "react";
-import { MovieListItemWithShows } from "./MovieListItemWithShows";
+import { groupBy } from "lodash";
 import { Movie } from "../../shared/models/Movie";
 import { Show } from "../../shared/models/Show";
-import { groupBy } from "lodash";
+import { MovieListItemWithShows } from "./MovieListItemWithShows";
+import { Section } from "./Section";
 
 export const MovieListAlphabetic = ({
   movies,

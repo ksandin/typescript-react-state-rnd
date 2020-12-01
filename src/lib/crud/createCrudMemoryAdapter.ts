@@ -1,5 +1,5 @@
-import { CrudAdapter } from "./CrudAdapter";
 import { Map } from "immutable";
+import { CrudAdapter } from "./CrudAdapter";
 import { wait } from "./wait";
 import { CrudState } from "./CrudState";
 import { CrudIdentityFactory } from "./CrudIdentityFactory";

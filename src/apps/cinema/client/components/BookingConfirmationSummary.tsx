@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { Typography } from "@material-ui/core";
-import { Card } from "./Card";
 import { commonDateFormat } from "../functions/commonDateFormat";
 import { commonRuntimeFormat } from "../functions/commonRuntimeFormat";
 import { ShowDetails } from "../../shared/models/ShowDetails";
+import { TicketCounts } from "../../shared/models/TicketCounts";
 import { PremiereChip } from "./PremiereChip";
 import { TicketList } from "./TicketList";
-import { TicketCounts } from "../../shared/models/TicketCounts";
+import { Card } from "./Card";
 
 export type BookingConfirmationSummaryProps = ShowDetails & {
   tickets: TicketCounts;

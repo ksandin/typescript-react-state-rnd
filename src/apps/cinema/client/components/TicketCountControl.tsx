@@ -5,9 +5,9 @@ import {
   ListItemSecondaryAction,
   ListItemText,
 } from "@material-ui/core";
-import { CountControl, CountControlProps } from "./CountControl";
 import { Price } from "../../shared/models/Price";
 import { commonPriceFormat } from "../functions/commonPriceFormat";
+import { CountControl, CountControlProps } from "./CountControl";
 
 export type TicketCountControlProps<
   D extends React.ElementType = "li",

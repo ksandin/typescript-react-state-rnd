@@ -1,5 +1,4 @@
 import React, { useCallback } from "react";
-import { Todo } from "../shared/Todo";
 import {
   Checkbox,
   IconButton,
@@ -9,6 +8,7 @@ import {
   ListItemText,
 } from "@material-ui/core";
 import { Delete, Label } from "@material-ui/icons";
+import { Todo } from "../shared/Todo";
 import { toggleTodoDone } from "../shared/toggleTodoDone";
 
 export type TodoListItemProps = {

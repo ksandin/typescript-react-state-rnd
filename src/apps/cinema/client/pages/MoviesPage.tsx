@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import React, { useState } from "react";
+import { List } from "@material-ui/core";
 import { Container } from "../components/Container";
 import { MoviesControls } from "../components/MoviesControls";
 import { MovieListItemWithTrailerButton } from "../components/MovieListItemWithTrailerButton";
-import { List } from "@material-ui/core";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
 import { useCinemaDispatcher } from "../hooks/useCinemaDispatcher";
 import { useCallOnce } from "../hooks/useCallOnce";

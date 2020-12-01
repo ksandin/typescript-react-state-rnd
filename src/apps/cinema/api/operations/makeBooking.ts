@@ -1,8 +1,8 @@
-import { Booking } from "../../shared/models/Booking";
-import { getShowSeats } from "./getShowSeats";
 import { without } from "lodash";
+import { Booking } from "../../shared/models/Booking";
 import { totalCounts } from "../../shared/functions/totalCounts";
 import { bookings } from "../fixtures/bookings";
+import { getShowSeats } from "./getShowSeats";
 
 export const makeBooking = async (booking: Booking) => {
   const { allSeats, reservedSeats } = await getShowSeats(booking.showId);

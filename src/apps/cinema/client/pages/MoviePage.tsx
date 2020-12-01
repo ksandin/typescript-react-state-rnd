@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import { List, Typography } from "@material-ui/core";
+import styled from "styled-components";
+import { useRoute } from "react-router5";
 import { Container } from "../components/Container";
 import { Center } from "../components/Center";
 import { MoviePlayerDialogPlayButton } from "../components/MoviePlayerDialogPlayButton";
-import { List, Typography } from "@material-ui/core";
 import { HeroBanner } from "../components/HeroBanner";
-import styled from "styled-components";
 import { MovieDetails } from "../components/MovieDetails";
 import { Card } from "../components/Card";
 import { CardRow } from "../components/CardRow";
@@ -12,7 +13,6 @@ import { ShowListItemsByCinemaName } from "../components/ShowListItemsByCinemaNa
 import { TicketsControls } from "../components/TicketsControls";
 import { MovieCardWithDetails } from "../components/MovieCardWithDetails";
 import { useCinemaDispatcher } from "../hooks/useCinemaDispatcher";
-import { useRoute } from "react-router5";
 import { useCallOnce } from "../hooks/useCallOnce";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
 import { MovieId } from "../../shared/models/Movie";

@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { Typography } from "@material-ui/core";
-import { Card } from "./Card";
 import { commonRuntimeFormat } from "../functions/commonRuntimeFormat";
-import { PremiereChip } from "./PremiereChip";
 import { Movie } from "../../shared/models/Movie";
+import { Card } from "./Card";
+import { PremiereChip } from "./PremiereChip";
 
 export type MovieCardWithDetailsProps = Pick<
   Movie,

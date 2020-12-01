@@ -2,7 +2,6 @@ import React from "react";
 import { DatePicker } from "@material-ui/pickers";
 import { Autocomplete } from "@material-ui/lab";
 import TextField from "@material-ui/core/TextField";
-import { ToggleButtonGroup } from "./ToggleButtonGroup";
 import { AvTimer, List } from "@material-ui/icons";
 import {
   ShowDisplayOption,
@@ -12,8 +11,9 @@ import { MovieGenre } from "../../shared/models/MovieGenre";
 import { MovieLanguage } from "../../shared/models/MovieLanguage";
 import { MovieAgeLimit } from "../../shared/models/MovieAgeLimit";
 import { createTemplateComponent } from "../../../../lib/createTemplateComponent";
-import { ControlRow } from "./ControlRow";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
+import { ControlRow } from "./ControlRow";
+import { ToggleButtonGroup } from "./ToggleButtonGroup";
 
 export const TicketsControls = createTemplateComponent(Controls, (elements) => (
   <>

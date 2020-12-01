@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@material-ui/core";
-import { MovieListItem, MovieListItemProps } from "./MovieListItem";
 import styled from "styled-components";
+import { MovieListItem, MovieListItemProps } from "./MovieListItem";
 import { MoviePlayerDialogPlayButton } from "./MoviePlayerDialogPlayButton";
 
 export type MovieListItemWithTrailerButtonProps = MovieListItemProps;

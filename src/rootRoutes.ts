@@ -1,4 +1,3 @@
-import { IsolatedStateExample } from "./apps/todo/client/examples/IsolatedStateExample";
 import {
   AccountTree,
   Autorenew,
@@ -7,6 +6,7 @@ import {
   Save,
   Share,
 } from "@material-ui/icons";
+import { IsolatedStateExample } from "./apps/todo/client/examples/IsolatedStateExample";
 import { SharedStateExample } from "./apps/todo/client/examples/SharedStateExample";
 import { ContextStateExample } from "./apps/todo/client/examples/ContextStateExample";
 import { AsyncStateExample } from "./apps/todo/client/examples/AsyncStateExample";

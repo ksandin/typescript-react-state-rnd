@@ -9,6 +9,8 @@ const appFolder = path.resolve(__dirname, "apps");
 const appNames = getDirectories(appFolder);
 
 module.exports = {
+  plugins: ["import"],
+  rules: { "import/order": ["error"] },
   overrides: [
     // Restricts dependencies between apps
     ...restrictCrossDependencies("apps", appNames),

@@ -1,10 +1,10 @@
 import React from "react";
 import { groupBy } from "lodash";
-import { ShowListItem, ShowListItemProps } from "./ShowListItem";
 import styled from "styled-components";
 import { Typography } from "@material-ui/core";
 import { Show } from "../../shared/models/Show";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
+import { ShowListItem, ShowListItemProps } from "./ShowListItem";
 
 export type ShowListItemsByCinemaNameProps = {
   shows: Show[];

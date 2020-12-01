@@ -1,7 +1,6 @@
 import React from "react";
 import { Autocomplete } from "@material-ui/lab";
 import TextField from "@material-ui/core/TextField";
-import { ToggleButtonGroup } from "./ToggleButtonGroup";
 import { Typography } from "@material-ui/core";
 import { MovieGenre } from "../../shared/models/MovieGenre";
 import { MovieAgeLimit } from "../../shared/models/MovieAgeLimit";
@@ -9,8 +8,9 @@ import {
   MovieDisplayOption,
   SearchForMoviesOptions,
 } from "../../shared/requests/SearchForMoviesOptions";
-import { ControlRow } from "./ControlRow";
 import { createTemplateComponent } from "../../../../lib/createTemplateComponent";
+import { ControlRow } from "./ControlRow";
+import { ToggleButtonGroup } from "./ToggleButtonGroup";
 
 export const MoviesControls = createTemplateComponent(
   renderControls,
