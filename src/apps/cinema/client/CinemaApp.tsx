@@ -14,8 +14,6 @@ import { CinemaStoreContext } from "./state/CinemaStoreContext";
 import { createCinemaStore } from "./state/createCinemaStore";
 import { defaultCinemaState } from "./state/defaultCinemaState";
 import { useCallOnce } from "./hooks/useCallOnce";
-import { Suspense } from "./components/Suspense";
-import { Container } from "./components/Container";
 
 export const CinemaApp = () => {
   const [cinemaRouter] = useState(() => createRouterForConfig(cinemaRoutes));
@@ -33,12 +31,7 @@ export const CinemaApp = () => {
         <MuiPickersUtilsProvider utils={DateMomentUtils}>
           <CinemaRouteConfigContext.Provider value={cinemaRoutes}>
             <AppBar />
-            <Suspense
-              loadingFallback={<Container>Loading...</Container>}
-              errorFallback={<Container>Oops, something went wrong!</Container>}
-            >
-              <Page />
-            </Suspense>
+            <Page />
             <CookieNotification />
           </CinemaRouteConfigContext.Provider>
         </MuiPickersUtilsProvider>
