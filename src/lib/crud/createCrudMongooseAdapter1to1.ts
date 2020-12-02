@@ -32,9 +32,9 @@ export const createCrudMongooseAdapter1to1 = <
     (instance) =>
       (omit(instance, clientIdProperty) as unknown) as UpdateQuery<TDocument>,
     (document) =>
-      ({
+      (({
         ...omit(documentDefinition(document), "_id"),
         [clientIdProperty]: document.id,
-      } as TClientModel)
+      } as unknown) as TClientModel)
   );
 };

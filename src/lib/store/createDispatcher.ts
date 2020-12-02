@@ -1,4 +1,4 @@
-import EventEmitter from "events";
+import { EventEmitter } from "events";
 import { Actions } from "./Actions";
 import { Dispatcher } from "./Dispatcher";
 import { automateDispatches } from "./automateDispatches";
