@@ -1,20 +1,23 @@
 import { HomeState } from "../../shared/types/HomeState";
-import { movies } from "../fixtures/movies";
+import { CinemaModels } from "../createModels";
 
-export const getHomeState = (): HomeState => ({
-  homeHeroRecommendation: movies[5],
-  homeRecommendationCategories: [
-    {
-      name: "Out now",
-      recommendations: movies.slice(0, 5),
-    },
-    {
-      name: "Upcoming recommendations",
-      recommendations: movies.slice(5, 10),
-    },
-    {
-      name: "For children",
-      recommendations: movies.slice(10, 15),
-    },
-  ],
-});
+export const getHomeState = async ({
+  MovieModel,
+  RecommendationModel,
+}: CinemaModels): Promise<HomeState> => {
+  const recommendations = await RecommendationModel.find();
+  const hero = recommendations.find(({ isHero }) => isHero);
+  const other = recommendations.filter(({ isHero }) => !isHero);
+  const heroMovie = hero ? await MovieModel.findOne(hero.query) : undefined;
+  const otherMovies = await Promise.all(
+    other.map(({ query }) => MovieModel.find(query).limit(5))
+  );
+
+  return {
+    homeHeroRecommendation: heroMovie || undefined,
+    homeRecommendationCategories: other.map(({ name }, index) => ({
+      name,
+      recommendations: otherMovies[index],
+    })),
+  };
+};

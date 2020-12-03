@@ -38,8 +38,8 @@ function startExpress(models: CinemaModels) {
     res.json(await getUserSession(models));
   });
 
-  app.get("/home", (req, res) => {
-    res.json(getHomeState());
+  app.get("/home", async (req, res) => {
+    res.json(await getHomeState(models));
   });
 
   app.post("/shows", jsonParser, async (req, res) =>

@@ -59,7 +59,7 @@ const directors = [
   "Peter Jackson",
 ];
 
-export const movies: Movie[] = range(1, 15).map((i) => ({
+export const movies: Movie[] = range(1, 50).map((i) => ({
   bannerUrl: `http://lorempixel.com/920/400/transport/?_=${i}`,
   cardUrl: `http://lorempixel.com/180/280/transport/?_=${i}`,
   name: randomName(i),
