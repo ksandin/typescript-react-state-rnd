@@ -18,7 +18,6 @@ export const ShowSchema = new NamedSchema(
     loungeId: {
       type: NamedSchema.Types.ObjectId,
       required: true,
-      ref: LoungeSchema.name,
     },
     movieId: {
       type: NamedSchema.Types.ObjectId,
@@ -27,7 +26,6 @@ export const ShowSchema = new NamedSchema(
     cinemaId: {
       type: NamedSchema.Types.ObjectId,
       required: true,
-      ref: CinemaSchema.name,
     },
     date: {
       type: Date,
@@ -50,5 +48,19 @@ ShowSchema.virtual("movie", {
   ref: MovieSchema.name,
   localField: "movieId",
   foreignField: "movieId",
+  justOne: true,
+});
+
+ShowSchema.virtual("lounge", {
+  ref: LoungeSchema.name,
+  localField: "loungeId",
+  foreignField: "loungeId",
+  justOne: true,
+});
+
+ShowSchema.virtual("cinema", {
+  ref: CinemaSchema.name,
+  localField: "cinemaId",
+  foreignField: "cinemaId",
   justOne: true,
 });

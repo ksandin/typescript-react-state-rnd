@@ -1,15 +1,24 @@
 import { ShowId } from "../../shared/types/Show";
 import { ShowDetails } from "../../shared/types/ShowDetails";
-import { shows } from "../fixtures/shows";
-import { movies } from "../fixtures/movies";
-import { cinemas } from "../fixtures/cinemas";
-import { lounges } from "../fixtures/lounges";
+import { CinemaModels } from "../createModels";
+import { WithVirtuals } from "../../../../lib/mongoose-tsextensions/WithVirtuals";
+import { ShowDocument, ShowVirtuals } from "../documents/ShowDocument";
 
-export const getShowDetails = (showId: ShowId): ShowDetails | undefined => {
-  const show = shows.find((show) => show.showId === showId);
-  const movie = movies.find((movie) => movie.movieId === show?.movieId);
-  const cinema = cinemas.find((cinema) => cinema.cinemaId === show?.cinemaId);
-  const lounge = lounges.find((lounge) => lounge.loungeId === show?.loungeId);
+export const getShowDetails = async (
+  { ShowModel }: CinemaModels,
+  showId: ShowId
+): Promise<ShowDetails | undefined> => {
+  type PopulatedShow = WithVirtuals<ShowDocument, ShowVirtuals> | null;
+  const show: PopulatedShow = await ShowModel.findOne({ showId })
+    .populate("movie")
+    .populate("cinema")
+    .populate("lounge");
+
+  if (!show) {
+    return;
+  }
+
+  const { movie, cinema, lounge } = show;
   if (show && movie && cinema && lounge) {
     return {
       movieName: movie.name,

@@ -63,7 +63,7 @@ function startExpress(models: CinemaModels) {
   });
 
   app.get("/show/:showId/details", async (req, res) => {
-    res.json(getShowDetails(req.params.showId as ShowId));
+    res.json(await getShowDetails(models, req.params.showId as ShowId));
   });
 
   app.post("/booking", jsonParser, async (req, res) => {

@@ -16,8 +16,8 @@ export const searchForShows = async (
   const showQuery = createShowQuery(options);
   const movieQuery = createMovieQuery({ ageLimit, genres });
 
-  type Population = WithVirtuals<ShowDocument, ShowVirtuals, "movie">;
-  const shows: Population[] = await ShowModel.find(showQuery).populate({
+  type PopulatedShow = WithVirtuals<ShowDocument, ShowVirtuals, "movie">;
+  const shows: PopulatedShow[] = await ShowModel.find(showQuery).populate({
     path: "movie",
     match: movieQuery,
   });
