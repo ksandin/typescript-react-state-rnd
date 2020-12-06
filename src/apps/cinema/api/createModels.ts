@@ -9,6 +9,8 @@ import { TicketTypeSchema } from "./schemas/TicketTypeSchema";
 import { TicketTypeDocument } from "./documents/TicketTypeDocument";
 import { RecommendationDocument } from "./documents/RecommendationDocument";
 import { RecommendationSchema } from "./schemas/RecommendationSchema";
+import { ShowDocument } from "./documents/ShowDocument";
+import { ShowSchema } from "./schemas/ShowSchema";
 
 export type CinemaModels = ReturnType<typeof createModels>;
 
@@ -24,4 +26,5 @@ export const createModels = (conn: Connection) => ({
     RecommendationSchema.name,
     RecommendationSchema
   ),
+  ShowModel: conn.model<ShowDocument>(ShowSchema.name, ShowSchema),
 });

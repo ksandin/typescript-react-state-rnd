@@ -6,6 +6,7 @@ import { createConnection } from "mongoose";
 import { MovieId } from "../shared/types/Movie";
 import { ShowId } from "../shared/types/Show";
 import { parseBooking } from "../shared/state/parseBooking";
+import { parseSearchForShowsOptions } from "../shared/state/parseSearchForShowsOptions";
 import { makeBooking } from "./operations/makeBooking";
 import { searchForShows } from "./operations/searchForShows";
 import { searchForMovie } from "./operations/searchForMovie";
@@ -20,6 +21,7 @@ import { saveFixtures } from "./operations/saveFixtures";
 async function startMongoDB() {
   const mongoDB = new MongoMemoryServer();
   const uri = await mongoDB.getUri();
+  console.log("Starting mongoDB at", uri);
   return createConnection(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -43,27 +45,25 @@ function startExpress(models: CinemaModels) {
   });
 
   app.post("/shows", jsonParser, async (req, res) =>
-    res.json(searchForShows(req.body))
+    res.json(await searchForShows(models, parseSearchForShowsOptions(req.body)))
   );
 
   app.get("/movie/:movieId", async (req, res) => {
     const movieId = req.params.movieId as MovieId;
-    const movie = searchForMovie(movieId);
+    const movie = await searchForMovie(models, movieId);
     res.json(movie);
   });
 
   app.post("/movies", jsonParser, async (req, res) =>
-    res.json(searchForMovies(req.body))
+    res.json(await searchForMovies(models, req.body))
   );
 
   app.get("/show/:showId/seats", async (req, res) => {
-    const showId = parseInt(req.params.showId, 10) as ShowId;
-    res.json(getShowSeats(showId));
+    res.json(getShowSeats(req.params.showId as ShowId));
   });
 
   app.get("/show/:showId/details", async (req, res) => {
-    const showId = parseInt(req.params.showId, 10) as ShowId;
-    res.json(getShowDetails(showId));
+    res.json(getShowDetails(req.params.showId as ShowId));
   });
 
   app.post("/booking", jsonParser, async (req, res) => {

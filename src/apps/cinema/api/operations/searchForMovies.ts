@@ -1,26 +1,29 @@
-import { Movie } from "../../shared/types/Movie";
+import { FilterQuery } from "mongoose";
 import { SearchForMoviesOptions } from "../../shared/requests/SearchForMoviesOptions";
-import { includesAll } from "../../shared/functions/includesAll";
-import { MovieAgeLimit } from "../../shared/types/MovieAgeLimit";
-import { movies } from "../fixtures/movies";
 import { SearchForMoviesResponse } from "../../shared/responses/SearchForMoviesResponse";
+import { MovieDocument } from "../documents/MovieDocument";
+import { CinemaModels } from "../createModels";
+import { MovieAgeLimit } from "../../shared/types/MovieAgeLimit";
+import { compact } from "../../shared/functions/compact";
 
-export const searchForMovies = (
+export const searchForMovies = async (
+  { MovieModel }: CinemaModels,
   options: SearchForMoviesOptions
-): SearchForMoviesResponse => filterMovies(movies, options);
+): Promise<SearchForMoviesResponse> =>
+  MovieModel.find(createMovieQuery(options));
 
-export const filterMovies = (
-  movies: Movie[],
-  { display, genres, ageLimit }: SearchForMoviesOptions
-) =>
-  movies.filter(
-    (movie) =>
-      movieFilters[display](movie) &&
-      includesAll(movie.genres, genres) &&
-      (ageLimit === MovieAgeLimit.All || ageLimit === movie.ageLimit)
-  );
+export const createMovieQuery = ({
+  display,
+  genres,
+  ageLimit,
+}: Partial<SearchForMoviesOptions>): FilterQuery<MovieDocument> =>
+  compact({
+    premiereDate: display ? displayQueries[display]() : undefined,
+    genres: genres?.length ? { $all: genres } : undefined,
+    ageLimit: ageLimit !== MovieAgeLimit.All ? ageLimit : undefined,
+  });
 
-const movieFilters = {
-  upcoming: (movies: Movie) => new Date() < movies.premiereDate,
-  current: (movies: Movie) => new Date() >= movies.premiereDate,
+const displayQueries = {
+  current: () => ({ $lt: new Date() }),
+  upcoming: () => ({ $gte: new Date() }),
 };

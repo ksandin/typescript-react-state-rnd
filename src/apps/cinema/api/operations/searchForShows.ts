@@ -1,57 +1,51 @@
-import moment from "moment";
-import { uniq } from "lodash";
+import { FilterQuery } from "mongoose";
 import { SearchForShowsOptions } from "../../shared/requests/SearchForShowsOptions";
 import { SearchForShowsResponse } from "../../shared/responses/SearchForShowsResponse";
-import { shows } from "../fixtures/shows";
-import { movies } from "../fixtures/movies";
-import { Show } from "../../shared/types/Show";
-import { Movie } from "../../shared/types/Movie";
 import { MovieLanguage } from "../../shared/types/MovieLanguage";
-import { filterMovies } from "./searchForMovies";
+import { CinemaModels } from "../createModels";
+import { dayQuery } from "../functions/dayQuery";
+import { compact } from "../../shared/functions/compact";
+import { ShowDocument, ShowVirtuals } from "../documents/ShowDocument";
+import { WithVirtuals } from "../../../../lib/mongoose-tsextensions/WithVirtuals";
+import { createMovieQuery } from "./searchForMovies";
 
-export const searchForShows = (
-  options: SearchForShowsOptions
-): SearchForShowsResponse => {
-  const selectedShows = filterShows(shows, movies, options);
-  const selectedMovies = uniq(
-    selectedShows.map(
-      ({ movieId }) => movies.find((movie) => movie.movieId === movieId)!
-    )
-  );
+export const searchForShows = async (
+  { ShowModel }: CinemaModels,
+  { ageLimit, genres, ...options }: SearchForShowsOptions
+): Promise<SearchForShowsResponse> => {
+  const showQuery = createShowQuery(options);
+  const movieQuery = createMovieQuery({ ageLimit, genres });
+
+  type Population = WithVirtuals<ShowDocument, ShowVirtuals, "movie">;
+
+  const shows: Population[] = await ShowModel.find(showQuery).populate({
+    path: "movie",
+    match: movieQuery,
+  });
+
+  const showsPopulated = shows.filter(({ movie }) => movie);
+  const moviesForShows = showsPopulated.map(({ movie }) => movie!);
 
   return {
-    shows: selectedShows,
-    movies: selectedMovies,
+    shows: showsPopulated,
+    movies: moviesForShows,
   };
 };
 
-const filterShows = (
-  shows: Show[],
-  moviesForShows: Movie[],
-  {
-    date,
-    cinemas,
-    ageLimit,
-    genres,
-    movies: movieFilters,
-    language,
-    subtitles,
-  }: SearchForShowsOptions
-) =>
-  shows.filter((show) => {
-    const movie = moviesForShows.find(
-      ({ movieId }) => show.movieId === movieId
-    );
-    return (
-      movie &&
-      moment(show.date).isSame(date, "day") &&
-      (movieFilters.length === 0 || movieFilters.includes(show.movieId)) &&
-      (cinemas.length === 0 || cinemas.includes(show.cinemaId)) &&
-      (language === MovieLanguage.All || language === show.language) &&
-      (subtitles === MovieLanguage.All || subtitles === show.subtitles) &&
-      [
-        ...filterMovies([movie], { display: "current", ageLimit, genres }),
-        ...filterMovies([movie], { display: "upcoming", ageLimit, genres }),
-      ].length > 0
-    );
+const createShowQuery = ({
+  date,
+  movies,
+  cinemas,
+  language,
+  subtitles,
+}: Omit<
+  SearchForShowsOptions,
+  "ageLimit" | "genres"
+>): FilterQuery<ShowDocument> =>
+  compact({
+    date: dayQuery(date),
+    movieId: movies.length ? { $in: movies } : undefined,
+    cinemaId: cinemas.length ? { $in: cinemas } : undefined,
+    language: language !== MovieLanguage.All ? language : undefined,
+    subtitles: subtitles !== MovieLanguage.All ? subtitles : undefined,
   });

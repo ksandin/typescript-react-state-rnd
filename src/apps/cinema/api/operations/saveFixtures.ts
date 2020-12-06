@@ -4,6 +4,7 @@ import { cinemas } from "../fixtures/cinemas";
 import { lounges } from "../fixtures/lounges";
 import { ticketTypes } from "../fixtures/ticketTypes";
 import { recommendations } from "../fixtures/recommendations";
+import { shows } from "../fixtures/shows";
 
 export const saveFixtures = ({
   MovieModel,
@@ -11,6 +12,7 @@ export const saveFixtures = ({
   LoungeModel,
   TicketTypeModel,
   RecommendationModel,
+  ShowModel,
 }: CinemaModels) =>
   Promise.all([
     MovieModel.insertMany(movies),
@@ -18,4 +20,5 @@ export const saveFixtures = ({
     LoungeModel.insertMany(lounges),
     TicketTypeModel.insertMany(ticketTypes),
     RecommendationModel.insertMany(recommendations),
+    ShowModel.insertMany(shows),
   ]);

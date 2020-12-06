@@ -3,7 +3,7 @@ import { MovieId } from "./Movie";
 import { MovieLanguage } from "./MovieLanguage";
 import { LoungeId } from "./Lounge";
 
-export type ShowId = Opaque<number, "ShowId">;
+export type ShowId = Opaque<string, "ShowId">;
 
 export type Show = {
   showId: ShowId;

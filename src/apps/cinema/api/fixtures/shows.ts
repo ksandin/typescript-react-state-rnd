@@ -1,5 +1,6 @@
 import moment from "moment";
 import { without } from "lodash";
+import { Types } from "mongoose";
 import { range } from "../../shared/functions/range";
 import { Show, ShowId } from "../../shared/types/Show";
 import { MovieLanguage } from "../../shared/types/MovieLanguage";
@@ -13,7 +14,6 @@ const timeMin = 18;
 const timeMax = 22;
 const minutesBetween = 30;
 
-let id = 0 as ShowId;
 export const shows: Show[] = [];
 range(0, 6).forEach((day) => {
   for (const lounge of lounges) {
@@ -22,12 +22,12 @@ range(0, 6).forEach((day) => {
     let dateCursor = moment(dayStart).add(timeMin, "hours").toDate();
 
     while (dateCursor <= lastShow) {
-      const movie = rotate(movies, id);
+      const movie = rotate(movies, shows.length);
       const cinemaIndex = cinemas.findIndex(
         (cinema) => cinema.cinemaId === lounge.cinemaId
       );
       shows.push({
-        showId: id,
+        showId: Types.ObjectId().toString() as ShowId,
         loungeId: lounge.loungeId,
         cinemaId: lounge.cinemaId,
         movieId: movie.movieId,
@@ -35,7 +35,6 @@ range(0, 6).forEach((day) => {
         language: rotate(languages, cinemaIndex),
         subtitles: rotate(languages, cinemaIndex + 1),
       });
-      id++;
       dateCursor = moment(dateCursor)
         .add(movie.runtime + minutesBetween, "minutes")
         .toDate();

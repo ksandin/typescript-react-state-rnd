@@ -1,6 +1,11 @@
 import { MovieId } from "../../shared/types/Movie";
 import { SearchForMovieResponse } from "../../shared/responses/SearchForMovieResponse";
-import { movies } from "../fixtures/movies";
+import { CinemaModels } from "../createModels";
 
-export const searchForMovie = (movieId: MovieId): SearchForMovieResponse =>
-  movies.find((candidate) => candidate.movieId === movieId);
+export const searchForMovie = async (
+  { MovieModel }: CinemaModels,
+  movieId: MovieId
+): Promise<SearchForMovieResponse> => {
+  const movie = await MovieModel.findOne({ movieId });
+  return movie || undefined;
+};
