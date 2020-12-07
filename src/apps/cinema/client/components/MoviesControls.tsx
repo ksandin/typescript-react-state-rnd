@@ -11,6 +11,7 @@ import {
 import { createTemplateComponent } from "../../../../lib/createTemplateComponent";
 import { ControlRow } from "./ControlRow";
 import { ToggleButtonGroup } from "./ToggleButtonGroup";
+import { EnumPicker } from "./EnumPicker";
 
 export const MoviesControls = createTemplateComponent(
   renderControls,
@@ -49,13 +50,11 @@ function renderControls({
       />
     ),
     ageLimit: (
-      <Autocomplete
-        options={Object.values(MovieAgeLimit)}
-        renderInput={(params) => (
-          <TextField {...params} label="Age limit" variant="outlined" />
-        )}
+      <EnumPicker
+        label="Age limit"
+        Enum={MovieAgeLimit}
         value={value.ageLimit}
-        onChange={(e, newValue) => newValue && change("ageLimit", newValue)}
+        onChange={(newValue) => change("ageLimit", newValue)}
       />
     ),
     display: (

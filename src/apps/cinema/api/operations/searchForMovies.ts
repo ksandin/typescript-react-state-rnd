@@ -3,7 +3,6 @@ import { SearchForMoviesOptions } from "../../shared/requests/SearchForMoviesOpt
 import { SearchForMoviesResponse } from "../../shared/responses/SearchForMoviesResponse";
 import { MovieDocument } from "../documents/MovieDocument";
 import { CinemaModels } from "../createModels";
-import { MovieAgeLimit } from "../../shared/types/MovieAgeLimit";
 import { compact } from "../../shared/functions/compact";
 
 export const searchForMovies = async (
@@ -20,7 +19,7 @@ export const createMovieQuery = ({
   compact({
     premiereDate: display ? displayQueries[display]() : undefined,
     genres: genres?.length ? { $all: genres } : undefined,
-    ageLimit: ageLimit !== MovieAgeLimit.All ? ageLimit : undefined,
+    ageLimit,
   });
 
 const displayQueries = {

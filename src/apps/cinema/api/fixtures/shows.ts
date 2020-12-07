@@ -1,5 +1,4 @@
 import moment from "moment";
-import { without } from "lodash";
 import { Types } from "mongoose";
 import { range } from "../../shared/functions/range";
 import { Show, ShowId } from "../../shared/types/Show";
@@ -9,7 +8,7 @@ import { movies } from "./movies";
 import { lounges } from "./lounges";
 import { cinemas } from "./cinemas";
 
-const languages = without(Object.values(MovieLanguage), MovieLanguage.All);
+const languages = Object.values(MovieLanguage);
 const timeMin = 18;
 const timeMax = 22;
 const minutesBetween = 30;

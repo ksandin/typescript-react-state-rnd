@@ -5,6 +5,6 @@ export type MovieDisplayOption = "current" | "upcoming";
 
 export type SearchForMoviesOptions = {
   display: MovieDisplayOption;
-  ageLimit: MovieAgeLimit;
+  ageLimit?: MovieAgeLimit;
   genres: MovieGenre[];
 };

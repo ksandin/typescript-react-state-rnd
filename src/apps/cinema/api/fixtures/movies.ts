@@ -1,4 +1,3 @@
-import { without } from "lodash";
 import moment from "moment";
 import {
   adjectives,
@@ -26,8 +25,8 @@ const premiereDates = [
 ];
 const runTimes = [75, 87, 95, 105, 112];
 const genres = Object.values(MovieGenre);
-const ageLimits = without(Object.values(MovieAgeLimit), MovieAgeLimit.All);
-const languages = without(Object.values(MovieLanguage), MovieLanguage.All);
+const ageLimits = Object.values(MovieAgeLimit);
+const languages = Object.values(MovieLanguage);
 const randomName = (seed?: number) =>
   uniqueNamesGenerator({
     dictionaries: [adjectives, colors, animals],

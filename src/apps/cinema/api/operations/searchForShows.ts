@@ -1,7 +1,6 @@
 import { FilterQuery } from "mongoose";
 import { SearchForShowsOptions } from "../../shared/requests/SearchForShowsOptions";
 import { SearchForShowsResponse } from "../../shared/responses/SearchForShowsResponse";
-import { MovieLanguage } from "../../shared/types/MovieLanguage";
 import { CinemaModels } from "../createModels";
 import { dayQuery } from "../functions/dayQuery";
 import { compact } from "../../shared/functions/compact";
@@ -47,6 +46,6 @@ const createShowQuery = ({
     date: dayQuery(date),
     movieId: movies.length ? { $in: movies } : undefined,
     cinemaId: cinemas.length ? { $in: cinemas } : undefined,
-    language: language !== MovieLanguage.All ? language : undefined,
-    subtitles: subtitles !== MovieLanguage.All ? subtitles : undefined,
+    language,
+    subtitles,
   });

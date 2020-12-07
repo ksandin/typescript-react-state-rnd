@@ -11,8 +11,8 @@ export type SearchForShowsOptions = {
   date: Date;
   cinemas: CinemaId[];
   movies: MovieId[];
-  subtitles: MovieLanguage;
-  ageLimit: MovieAgeLimit;
-  language: MovieLanguage;
+  subtitles?: MovieLanguage;
+  ageLimit?: MovieAgeLimit;
+  language?: MovieLanguage;
   genres: MovieGenre[];
 };

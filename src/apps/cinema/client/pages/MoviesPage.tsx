@@ -8,7 +8,6 @@ import { useCinemaSelector } from "../hooks/useCinemaSelector";
 import { useCinemaDispatcher } from "../hooks/useCinemaDispatcher";
 import { useCallOnce } from "../hooks/useCallOnce";
 import { SearchForMoviesOptions } from "../../shared/requests/SearchForMoviesOptions";
-import { MovieAgeLimit } from "../../shared/types/MovieAgeLimit";
 
 export const MoviesPage = () => {
   const movies = useCinemaSelector(({ moviesPage }) => moviesPage);
@@ -49,6 +48,5 @@ const Margin = styled.div`
 
 const defaultMoviesOptions: SearchForMoviesOptions = {
   display: "current",
-  ageLimit: MovieAgeLimit.All,
   genres: [],
 };

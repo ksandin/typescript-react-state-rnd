@@ -9,8 +9,6 @@ import {
   ShowDisplayOption,
   SearchForShowsOptions,
 } from "../../shared/requests/SearchForShowsOptions";
-import { MovieLanguage } from "../../shared/types/MovieLanguage";
-import { MovieAgeLimit } from "../../shared/types/MovieAgeLimit";
 import { useCinemaDispatcher } from "../hooks/useCinemaDispatcher";
 import { useCallOnce } from "../hooks/useCallOnce";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
@@ -30,9 +28,6 @@ export const TicketsPage = () => {
     date: new Date(),
     cinemas: [],
     movies: [],
-    subtitles: MovieLanguage.All,
-    ageLimit: MovieAgeLimit.All,
-    language: MovieLanguage.All,
     genres: [],
   });
   const { shows, movies } = useCinemaSelector(({ ticketsPage }) => ticketsPage);

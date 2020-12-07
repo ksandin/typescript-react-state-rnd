@@ -16,8 +16,6 @@ import { useCinemaDispatcher } from "../hooks/useCinemaDispatcher";
 import { useCallOnce } from "../hooks/useCallOnce";
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
 import { MovieId } from "../../shared/types/Movie";
-import { MovieLanguage } from "../../shared/types/MovieLanguage";
-import { MovieAgeLimit } from "../../shared/types/MovieAgeLimit";
 import { SearchForShowsOptions } from "../../shared/requests/SearchForShowsOptions";
 import { ControlRow } from "../components/ControlRow";
 
@@ -29,9 +27,6 @@ export const MoviePage = () => {
     date: new Date(),
     cinemas: [],
     movies: [],
-    subtitles: MovieLanguage.All,
-    ageLimit: MovieAgeLimit.All,
-    language: MovieLanguage.All,
     genres: [],
   });
   const [{ loadMoviePageState }, dispatches] = useCinemaDispatcher();

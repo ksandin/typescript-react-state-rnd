@@ -14,6 +14,7 @@ import { createTemplateComponent } from "../../../../lib/createTemplateComponent
 import { useCinemaSelector } from "../hooks/useCinemaSelector";
 import { ControlRow } from "./ControlRow";
 import { ToggleButtonGroup } from "./ToggleButtonGroup";
+import { EnumPicker } from "./EnumPicker";
 
 export const TicketsControls = createTemplateComponent(Controls, (elements) => (
   <>
@@ -119,33 +120,27 @@ function Controls({
       />
     ),
     language: (
-      <Autocomplete
-        options={Object.values(MovieLanguage)}
-        renderInput={(params) => (
-          <TextField {...params} label="Language" variant="outlined" />
-        )}
+      <EnumPicker
+        label="Language"
+        Enum={MovieLanguage}
         value={value.language}
-        onChange={(e, newValue) => newValue && change("language", newValue)}
+        onChange={(newValue) => change("language", newValue)}
       />
     ),
     subtitles: (
-      <Autocomplete
-        options={Object.values(MovieLanguage)}
-        renderInput={(params) => (
-          <TextField {...params} label="Subtitles" variant="outlined" />
-        )}
+      <EnumPicker
+        label="Subtitles"
+        Enum={MovieLanguage}
         value={value.subtitles}
-        onChange={(e, newValue) => newValue && change("subtitles", newValue)}
+        onChange={(newValue) => change("subtitles", newValue)}
       />
     ),
     ageLimit: (
-      <Autocomplete
-        options={Object.values(MovieAgeLimit)}
-        renderInput={(params) => (
-          <TextField {...params} label="Age limit" variant="outlined" />
-        )}
+      <EnumPicker
+        label="Age limit"
+        Enum={MovieAgeLimit}
         value={value.ageLimit}
-        onChange={(e, newValue) => newValue && change("ageLimit", newValue)}
+        onChange={(newValue) => change("ageLimit", newValue)}
       />
     ),
   };
