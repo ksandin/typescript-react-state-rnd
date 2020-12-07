@@ -6,7 +6,7 @@ import { CinemaModels } from "../createModels";
 import { dayQuery } from "../functions/dayQuery";
 import { compact } from "../../shared/functions/compact";
 import { ShowDocument, ShowVirtuals } from "../documents/ShowDocument";
-import { WithVirtuals } from "../../../../lib/mongoose-tsextensions/WithVirtuals";
+import { populateVirtuals } from "../../../../lib/mongoose-tsextensions/populateVirtuals";
 import { createMovieQuery } from "./searchForMovies";
 
 export const searchForShows = async (
@@ -16,11 +16,13 @@ export const searchForShows = async (
   const showQuery = createShowQuery(options);
   const movieQuery = createMovieQuery({ ageLimit, genres });
 
-  type PopulatedShow = WithVirtuals<ShowDocument, ShowVirtuals, "movie">;
-  const shows: PopulatedShow[] = await ShowModel.find(showQuery).populate({
-    path: "movie",
-    match: movieQuery,
-  });
+  const shows = await populateVirtuals<ShowVirtuals>()(
+    ShowModel.find(showQuery),
+    {
+      path: "movie",
+      match: movieQuery,
+    }
+  );
 
   const showsPopulated = shows.filter(({ movie }) => movie);
   const moviesForShows = showsPopulated.map(({ movie }) => movie!);

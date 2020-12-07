@@ -1,7 +1,8 @@
-import { documentSchemaDefinition } from "../../../../lib/mongoose-tsextensions/documentSchemaDefinition";
 import { MovieLanguage } from "../../shared/types/MovieLanguage";
 import { NamedSchema } from "../../../../lib/mongoose-tsextensions/NamedSchema";
-import { ShowDocument } from "../documents/ShowDocument";
+import { documentSchemaDefinition } from "../../../../lib/mongoose-tsextensions/documentSchemaDefinition";
+import { registerVirtuals } from "../../../../lib/mongoose-tsextensions/registerVirtuals";
+import { ShowDocument, ShowVirtuals } from "../documents/ShowDocument";
 import { MovieSchema } from "./MovieSchema";
 import { CinemaSchema } from "./CinemaSchema";
 import { LoungeSchema } from "./LoungeSchema";
@@ -44,23 +45,23 @@ export const ShowSchema = new NamedSchema(
   })
 );
 
-ShowSchema.virtual("movie", {
-  ref: MovieSchema.name,
-  localField: "movieId",
-  foreignField: "movieId",
-  justOne: true,
-});
-
-ShowSchema.virtual("lounge", {
-  ref: LoungeSchema.name,
-  localField: "loungeId",
-  foreignField: "loungeId",
-  justOne: true,
-});
-
-ShowSchema.virtual("cinema", {
-  ref: CinemaSchema.name,
-  localField: "cinemaId",
-  foreignField: "cinemaId",
-  justOne: true,
+registerVirtuals<ShowDocument, ShowVirtuals>(ShowSchema, {
+  movie: {
+    ref: MovieSchema.name,
+    localField: "movieId",
+    foreignField: "movieId",
+    justOne: true,
+  },
+  lounge: {
+    ref: LoungeSchema.name,
+    localField: "loungeId",
+    foreignField: "loungeId",
+    justOne: true,
+  },
+  cinema: {
+    ref: CinemaSchema.name,
+    localField: "cinemaId",
+    foreignField: "cinemaId",
+    justOne: true,
+  },
 });
