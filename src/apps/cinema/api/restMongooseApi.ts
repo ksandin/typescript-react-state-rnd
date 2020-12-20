@@ -59,7 +59,7 @@ function startExpress(models: CinemaModels) {
   );
 
   app.get("/show/:showId/seats", async (req, res) => {
-    res.json(getShowSeats(req.params.showId as ShowId));
+    res.json(await getShowSeats(models, req.params.showId as ShowId));
   });
 
   app.get("/show/:showId/details", async (req, res) => {
@@ -67,7 +67,7 @@ function startExpress(models: CinemaModels) {
   });
 
   app.post("/booking", jsonParser, async (req, res) => {
-    const error = await makeBooking(parseBooking(req.body));
+    const error = await makeBooking(models, parseBooking(req.body));
     res.json(error ? { error } : {});
   });
 

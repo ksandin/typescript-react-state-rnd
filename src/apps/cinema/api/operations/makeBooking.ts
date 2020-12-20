@@ -1,11 +1,15 @@
 import { without } from "lodash";
-import { Booking } from "../../shared/types/Booking";
+import { Types } from "mongoose";
+import { Booking, BookingId } from "../../shared/types/Booking";
 import { totalCounts } from "../../shared/functions/totalCounts";
-import { bookings } from "../fixtures/bookings";
+import { CinemaModels } from "../createModels";
 import { getShowSeats } from "./getShowSeats";
 
-export const makeBooking = async (booking: Booking) => {
-  const { allSeats, reservedSeats } = await getShowSeats(booking.showId);
+export const makeBooking = async (models: CinemaModels, booking: Booking) => {
+  const { allSeats, reservedSeats } = await getShowSeats(
+    models,
+    booking.showId
+  );
   const remainingSeats = without(allSeats, ...reservedSeats);
   if (totalCounts(booking.tickets) > remainingSeats.length) {
     return "Not enough tickets available";
@@ -14,5 +18,8 @@ export const makeBooking = async (booking: Booking) => {
   if (unallowedSeats.length > 0) {
     return `Seats not allowed: ${unallowedSeats}`;
   }
-  bookings.push(booking);
+  await models.BookingModel.create({
+    ...booking,
+    bookingId: Types.ObjectId().toString() as BookingId,
+  });
 };

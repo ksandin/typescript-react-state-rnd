@@ -1,18 +1,19 @@
 import { ShowId } from "../../shared/types/Show";
 import { GetSeatsForShowResponse } from "../../shared/responses/GetSeatsForShowResponse";
-import { shows } from "../fixtures/shows";
-import { lounges } from "../fixtures/lounges";
 import { range } from "../../shared/functions/range";
 import { LoungeSeat } from "../../shared/types/LoungeSeat";
-import { bookings } from "../fixtures/bookings";
+import { CinemaModels } from "../createModels";
 
-export const getShowSeats = (showId: ShowId): GetSeatsForShowResponse => {
-  const show = shows.find((show) => show.showId === showId);
+export const getShowSeats = async (
+  { BookingModel, ShowModel, LoungeModel }: CinemaModels,
+  showId: ShowId
+): Promise<GetSeatsForShowResponse> => {
+  const show = await ShowModel.findOne({ showId });
   const lounge = show
-    ? lounges.find((lounge) => lounge.loungeId === show.loungeId)
+    ? await LoungeModel.findOne({ loungeId: show.loungeId })
     : undefined;
   const allSeats = lounge ? (range(1, lounge.seats) as LoungeSeat[]) : [];
-  const showBookings = bookings.filter((booking) => booking.showId === showId);
+  const showBookings = await BookingModel.find({ showId });
   const reservedSeats = showBookings.reduce(
     (seats, booking) => [...seats, ...booking.seats],
     [] as LoungeSeat[]

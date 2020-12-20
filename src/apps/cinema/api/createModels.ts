@@ -11,6 +11,8 @@ import { RecommendationDocument } from "./documents/RecommendationDocument";
 import { RecommendationSchema } from "./schemas/RecommendationSchema";
 import { ShowDocument } from "./documents/ShowDocument";
 import { ShowSchema } from "./schemas/ShowSchema";
+import { BookingDocument } from "./documents/BookingDocument";
+import { BookingSchema } from "./schemas/BookingSchema";
 
 export type CinemaModels = ReturnType<typeof createModels>;
 
@@ -27,4 +29,5 @@ export const createModels = (conn: Connection) => ({
     RecommendationSchema
   ),
   ShowModel: conn.model<ShowDocument>(ShowSchema.name, ShowSchema),
+  BookingModel: conn.model<BookingDocument>(BookingSchema.name, BookingSchema),
 });

@@ -3,7 +3,7 @@ import { Booking } from "./Booking";
 import { ShowDetails } from "./ShowDetails";
 
 export type BookingSession = {
-  booking: Booking;
+  booking: Omit<Booking, "bookingId">;
   reservedSeats: LoungeSeat[];
   availableSeats: LoungeSeat[];
   allSeats: LoungeSeat[];

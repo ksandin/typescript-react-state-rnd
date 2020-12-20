@@ -7,7 +7,7 @@ export const createBooking = (
   showId: ShowId,
   defaultTicketTypeId?: TicketTypeId,
   availableTickets: number = 2
-): Booking => ({
+): Omit<Booking, "bookingId"> => ({
   showId,
   tickets: defaultTicketTypeId
     ? Map<TicketTypeId, number>().set(
