@@ -59,8 +59,8 @@ const directors = [
 ];
 
 export const movies: Movie[] = range(1, 50).map((i) => ({
-  bannerUrl: `http://lorempixel.com/920/400/transport/?_=${i}`,
-  cardUrl: `http://lorempixel.com/180/280/transport/?_=${i}`,
+  bannerUrl: `https://picsum.photos/920/400/?_=${i}`,
+  cardUrl: `https://picsum.photos/180/280/?_=${i}`,
   name: randomName(i),
   movieId: Types.ObjectId().toString() as MovieId,
   description,
@@ -73,6 +73,6 @@ export const movies: Movie[] = range(1, 50).map((i) => ({
   director: rotate(directors, i),
   trailerUrl: "https://www.youtube.com/watch?v=AaK0AKQFCNY",
   snapshotUrls: range(0, 4).map(
-    (n) => `http://lorempixel.com/180/280/transport/?_=snap${i * 5 + n}`
+    (n) => `https://picsum.photos/180/280/?_=snap${i * 5 + n}`
   ),
 }));
