@@ -1,0 +1,81 @@
+# Buzzwords
+- migration
+- definition
+- queries (orm, endpoints)
+- adapters (memory, local storage, IndexedDB, sql, mongodb)
+- transfer
+- serialization
+- validation
+- code sharing between client/server
+- transfer progress
+- live updates (web sockets)
+- serverless (faunadb?)
+- userbase
+- test that workflows work with https://nextjs.org/commerce starter kit
+- SSR+Suspense
+- test create-react-app cors proxy
+- facets
+- swr
+
+# ORM/ODMs
+- typeorm
+- typegoose
+- ts-mongoose
+~ mongoose + @types/mongoose
+    - Improper type definitions for returned data when doing model.find().populate() and virtual fields
+    - No validation on relational data (requires custom middleware, ie. https://www.npmjs.com/package/mongoose-id-validator)
+- mongoose + @types/mongoose + always use _id
+- https://www.prisma.io/
+- some sql
+- cassandra
+
+# Research
+https://recoiljs.org/
+https://immerjs.github.io/immer/docs/introduction
+https://www.apollographql.com/docs/
+https://github.com/gcanti/fp-ts
+https://github.com/pmndrs/zustand
+https://github.com/pmndrs/jotai
+https://typegraphql.com/
+https://react-query.tanstack.com/
+https://easy-peasy.now.sh/
+https://relay.dev/
+https://github.com/colinhacks/zod
+
+# App frameworks to try to replicate apps with
+https://wasp-lang.dev/
+https://nextjs.org
+https://angularjs.org/ (not react but could be interesting anyway)
+
+# Dispatcher
+- POC actions referencing other actions
+- dispatcher should be configured with action creators not actions
+- make it easy to see errors caught by dispatcher
+- thoroughly test the dispatches render order (ie. with Suspense)
+(right now immediately after dispatching an action dispatches say resolved, which results in displaying an error page,
+since no data is available and it seems the action is resolved)
+- improve naming of withError
+- improve naming of dispatch/dispatches
+- investigate intellisense issue with return values of useDispatcher()
+- Test / Rebuild with TDD
+
+# Adapter
+- refactor cinema app to use adapters
+- one app should have a clear list of action definitions which then can be reused to enforce adapter implementations (replace CrudAdapter and createCrudDispatcher with generic approach)
+- error protocol between client/server should be composable (have adapters return fetch response for consumer to inspect and extract errors from)
+
+# Nice to have
+- figure out why putting .eslintrc in project root in a CRA creates typescript compiler errors (parsing error: ...)
+- scroll memory plugin for router5
+- add margin/padding components
+- use date-io across the entire app
+- create mechanism that enforces pairing convention of certain state and actions (wtf did i mean?)
+
+# For large app
+- move routes and route config into store
+- add timeout to client fetches (feature: simulate heavy load to force timeouts and demonstrate client stability)
+- add automated route dependency preloader plugin to router5
+
+# Improvements (later)
+- code example ui
+- figure out why src/types/global/index.d.ts works and if it's possible to do via code and with custom filenames
