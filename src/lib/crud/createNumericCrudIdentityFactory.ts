@@ -1,11 +1,11 @@
 import { Map } from "immutable";
 import { CrudIdentityFactory } from "./CrudIdentityFactory";
-import { RepositoryEntries } from "../store/RepositoryEntries";
+import { CrudState } from "./CrudState";
 
 export const createNumericCrudIdentityFactory = <Id extends number, Model>(
   getIdentity: (item: Model) => Id,
   withNewIdentity: (item: Model, id: Id) => Model,
-  initialEntries: RepositoryEntries<Id, Model> = Map()
+  initialEntries: CrudState<Id, Model> = Map()
 ): CrudIdentityFactory<Id, Model> => {
   const initialIds = Array.from(initialEntries.values()).map(getIdentity);
   let idCounter = initialIds.length ? Math.max(...initialIds) + 1 : 0;

@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { MongoMemoryServer } from "mongodb-memory-server";
-import { connect, model, Schema, Document } from "mongoose";
+import { Schema, Document, Connection, createConnection } from "mongoose";
 import { documentSchemaDefinition } from "../../../lib/mongoose-tsextensions/documentSchemaDefinition";
 import { addCrudRestExpressRoutes } from "../../../lib/crud/addCrudRestExpressRoutes";
 import { createCrudMongooseAdapter1to1 } from "../../../lib/crud/createCrudMongooseAdapter1to1";
@@ -16,25 +16,29 @@ const TodoSchema = new Schema(
   })
 );
 
-const TodoModel = model<TodoDocument>("Todo", TodoSchema);
+type TodoModels = ReturnType<typeof createModels>;
+
+const createModels = (conn: Connection) => ({
+  TodoModel: conn.model<TodoDocument>("Todo", TodoSchema),
+});
 
 async function startMongoDB() {
   const mongoDB = new MongoMemoryServer();
   const uri = await mongoDB.getUri();
-  return await connect(uri, {
+  return createConnection(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
   });
 }
 
-async function startExpress() {
+async function startExpress(models: TodoModels) {
   const app = express();
   app.use(cors());
   addCrudRestExpressRoutes(
     "/todo",
     app,
-    createCrudMongooseAdapter1to1<Todo, TodoDocument>(TodoModel, "id")
+    createCrudMongooseAdapter1to1<Todo, TodoDocument>(models.TodoModel, "id")
   );
 
   const port = 3002;
@@ -45,8 +49,9 @@ async function startExpress() {
 }
 
 async function mongoDBExample() {
-  await startMongoDB();
-  await startExpress();
+  const connection = await startMongoDB();
+  const models = createModels(connection);
+  await startExpress(models);
 }
 
 mongoDBExample();

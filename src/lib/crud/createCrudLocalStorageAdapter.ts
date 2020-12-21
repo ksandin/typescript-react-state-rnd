@@ -1,16 +1,16 @@
 import { CrudAdapter } from "./CrudAdapter";
-import { RepositoryEntries } from "../store/RepositoryEntries";
-import { loadMapFromLocalStorage } from "../loadMapFromLocalStorage";
-import { saveMapToLocalStorage } from "../saveMapToLocalStorage";
+import { CrudState } from "./CrudState";
+import { loadMapFromLocalStorage } from "./loadMapFromLocalStorage";
+import { saveMapToLocalStorage } from "./saveMapToLocalStorage";
 import { CrudIdentityFactory } from "./CrudIdentityFactory";
 
 export const createCrudLocalStorageAdapter = <Id, Model>(
   localStorageKey: string,
   identityFactory: CrudIdentityFactory<Id, Model>
 ): CrudAdapter<Id, Model> => {
-  const getEntries = (): RepositoryEntries<Id, Model> =>
+  const getEntries = (): CrudState<Id, Model> =>
     loadMapFromLocalStorage(localStorageKey);
-  const setEntries = (entries: RepositoryEntries<Id, Model>) =>
+  const setEntries = (entries: CrudState<Id, Model>) =>
     saveMapToLocalStorage(localStorageKey, entries);
   return {
     id: identityFactory.getIdentity,

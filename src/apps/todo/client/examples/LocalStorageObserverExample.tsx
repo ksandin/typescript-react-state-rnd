@@ -1,29 +1,35 @@
 import React, { useState } from "react";
+import { Map } from "immutable";
 import { createRepository } from "../../../../lib/store/createRepository";
 import { TodoId } from "../../shared/TodoId";
 import { Todo } from "../../shared/Todo";
 import { createStore } from "../../../../lib/store/createStore";
-import { createCrudDispatcher } from "../../../../lib/crud/createCrudDispatcher";
-import { useStore } from "../../../../lib/store/useStore";
+import { createCrudActions } from "../../../../lib/crud/createCrudActions";
 import { TodoApp } from "../TodoApp";
 import { createNumericCrudIdentityFactory } from "../../../../lib/crud/createNumericCrudIdentityFactory";
 import { createCrudMemoryAdapter } from "../../../../lib/crud/createCrudMemoryAdapter";
-import { automateLocalStorageSerialization } from "../../../../lib/automateLocalStorageSerialization";
+import { automateLocalStorageSerialization } from "../../../../lib/crud/automateLocalStorageSerialization";
+import { Container } from "../Container";
+import { useDispatcher } from "../../../../lib/store/useDispatcher";
+import { useSelector } from "../../../../lib/store/useSelector";
+import { createDispatcher } from "../../../../lib/store/createDispatcher";
 
 const createTodoStore = () => {
-  const repository = createRepository<TodoId, Todo>();
+  const repository = createRepository(Map<TodoId, Todo>());
   automateLocalStorageSerialization("localStateObserverExample", repository);
   return createStore(
     repository,
-    createCrudDispatcher(
-      repository,
-      createCrudMemoryAdapter<TodoId, Todo>(
-        createNumericCrudIdentityFactory(
-          (todo) => todo.id,
-          (todo, id) => ({ ...todo, id }),
-          repository.entries
-        ),
-        repository.entries
+    createDispatcher(
+      createCrudActions(
+        repository,
+        createCrudMemoryAdapter<TodoId, Todo>(
+          createNumericCrudIdentityFactory(
+            (todo) => todo.id,
+            (todo, id) => ({ ...todo, id }),
+            repository.state
+          ),
+          repository.state
+        )
       )
     )
   );
@@ -31,13 +37,16 @@ const createTodoStore = () => {
 
 export const LocalStorageObserverExample = () => {
   const [store] = useState(createTodoStore);
-  const [entries, , actions] = useStore(store);
+  const [actions] = useDispatcher(store.dispatcher);
+  const entries = useSelector(store.repository, (state) => state);
   return (
-    <TodoApp
-      todos={entries.toList().toArray()}
-      createTodo={actions.create}
-      updateTodo={actions.update}
-      deleteTodo={actions.delete}
-    />
+    <Container>
+      <TodoApp
+        todos={entries.toList().toArray()}
+        createTodo={actions.create}
+        updateTodo={actions.update}
+        deleteTodo={actions.delete}
+      />
+    </Container>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { List } from "@material-ui/core";
-import { TodoListItem, TodoListItemProps } from "./TodoListItem";
 import { Todo } from "../shared/Todo";
+import { TodoListItem, TodoListItemProps } from "./TodoListItem";
 
 export type TodoListProps = Pick<TodoListItemProps, "onUpdate" | "onDelete"> & {
   items: Todo[];

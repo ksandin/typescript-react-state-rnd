@@ -1,12 +1,12 @@
-import { CrudAdapter } from "./CrudAdapter";
 import { Map } from "immutable";
+import { CrudAdapter } from "./CrudAdapter";
 import { wait } from "./wait";
-import { RepositoryEntries } from "../store/RepositoryEntries";
+import { CrudState } from "./CrudState";
 import { CrudIdentityFactory } from "./CrudIdentityFactory";
 
 export const createCrudMemoryAdapter = <Id, Model>(
   identityFactory: CrudIdentityFactory<Id, Model>,
-  initialEntries: RepositoryEntries<Id, Model> = Map(),
+  initialEntries: CrudState<Id, Model> = Map(),
   simulatedDelay = 0
 ): CrudAdapter<Id, Model> => {
   let entries = initialEntries;

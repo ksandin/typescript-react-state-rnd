@@ -1,5 +1,5 @@
-import { CrudAdapter } from "./CrudAdapter";
 import { CreateQuery, Document, Model, UpdateQuery } from "mongoose";
+import { CrudAdapter } from "./CrudAdapter";
 
 export const createCrudMongooseAdapter = <
   TClientModelId,

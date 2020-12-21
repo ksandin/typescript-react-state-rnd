@@ -1,45 +1,46 @@
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { useRouter } from "react-router5";
-import { createMenu } from "./createMenu";
-import { useRouteConfig } from "./useRouteConfig";
+import { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
+import { createMenuItems } from "./createMenuItems";
+import { Menu } from "./Menu";
+import { useRootRouteConfig } from "./RootRouteConfig";
+import { drawerWidth } from "./drawerWidth";
 
 // This file is based on https://material-ui.com/components/drawers/#responsive-drawer
 
-const drawerWidth = 270;
+const breakpoint = {
+  up: { value: "lg" as Breakpoint, hiddenProps: { lgUp: true } },
+  down: { value: "md" as Breakpoint, hiddenProps: { mdDown: true } },
+};
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
   },
   drawer: {
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up(breakpoint.up.value)]: {
       width: drawerWidth,
       flexShrink: 0,
     },
   },
   appBar: {
-    [theme.breakpoints.up("sm")]: {
+    zIndex: 1,
+    [theme.breakpoints.up(breakpoint.up.value)]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
     },
   },
   menuButton: {
     marginRight: theme.spacing(2),
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up(breakpoint.up.value)]: {
       display: "none",
     },
   },
@@ -50,54 +51,24 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
   },
 }));
 
 export const ResponsiveDrawer: React.FC = ({ children }) => {
-  const { route, configNode, configMap } = useRouteConfig();
-  const router = useRouter();
+  const { configNode, configMap } = useRootRouteConfig();
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
-  const menu = createMenu(configMap);
   const title = configNode ? `${configNode.app} > ${configNode.title}` : "404";
 
   const drawer = (
     <div>
       <div className={classes.toolbar} />
-      {Object.getOwnPropertyNames(menu).map((appName) => (
-        <React.Fragment key={appName}>
-          <ListItem>
-            <ListItemText primary={appName} />
-          </ListItem>
-          <Divider />
-          <List>
-            {menu[appName].map(
-              ({ name: itemName, title: itemTitle, icon: Icon }, index) => {
-                const isSelected = route.name === itemName;
-                return (
-                  <ListItem
-                    button
-                    key={index}
-                    selected={isSelected}
-                    onClick={() => {
-                      router.navigate(itemName);
-                      setMobileOpen(false);
-                    }}
-                  >
-                    <ListItemIcon>
-                      <Icon />
-                    </ListItemIcon>
-                    <ListItemText primary={itemTitle} />
-                  </ListItem>
-                );
-              }
-            )}
-          </List>
-        </React.Fragment>
-      ))}
+      <Menu
+        items={createMenuItems(configMap)}
+        onItemSelected={() => setMobileOpen(false)}
+      />
     </div>
   );
 
@@ -125,7 +96,7 @@ export const ResponsiveDrawer: React.FC = ({ children }) => {
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Hidden smUp implementation="css">
+        <Hidden {...breakpoint.up.hiddenProps} implementation="css">
           <Drawer
             container={container}
             variant="temporary"
@@ -142,7 +113,7 @@ export const ResponsiveDrawer: React.FC = ({ children }) => {
             {drawer}
           </Drawer>
         </Hidden>
-        <Hidden xsDown implementation="css">
+        <Hidden {...breakpoint.down.hiddenProps} implementation="css">
           <Drawer
             classes={{
               paper: classes.drawerPaper,
