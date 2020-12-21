@@ -5,7 +5,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "react-jsx"
   },
   "exclude": ["src/apps/*/api", "src/apiIndex.ts"],
   "include": ["src"]
