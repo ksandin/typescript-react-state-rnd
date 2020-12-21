@@ -45,17 +45,22 @@ function startExpress(models: CinemaModels) {
   });
 
   app.post("/shows", jsonParser, async (req, res) =>
-    res.json(await searchForShows(models, parseSearchForShowsOptions(req.body)))
+    res.json(
+      await searchForShows(
+        models.ShowModel,
+        parseSearchForShowsOptions(req.body)
+      )
+    )
   );
 
   app.get("/movie/:movieId", async (req, res) => {
     const movieId = req.params.movieId as MovieId;
-    const movie = await searchForMovie(models, movieId);
+    const movie = await searchForMovie(models.MovieModel, movieId);
     res.json(movie);
   });
 
   app.post("/movies", jsonParser, async (req, res) =>
-    res.json(await searchForMovies(models, req.body))
+    res.json(await searchForMovies(models.MovieModel, req.body))
   );
 
   app.get("/show/:showId/seats", async (req, res) => {
@@ -63,7 +68,9 @@ function startExpress(models: CinemaModels) {
   });
 
   app.get("/show/:showId/details", async (req, res) => {
-    res.json(await getShowDetails(models, req.params.showId as ShowId));
+    res.json(
+      await getShowDetails(models.ShowModel, req.params.showId as ShowId)
+    );
   });
 
   app.post("/booking", jsonParser, async (req, res) => {

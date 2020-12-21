@@ -1,11 +1,11 @@
+import { Model } from "mongoose";
 import { ShowId } from "../../shared/types/Show";
 import { ShowDetails } from "../../shared/types/ShowDetails";
-import { CinemaModels } from "../createModels";
 import { populateVirtuals } from "../../../../lib/mongoose-tsextensions/populateVirtuals";
-import { ShowVirtuals } from "../documents/ShowDocument";
+import { ShowDocument, ShowVirtuals } from "../documents/ShowDocument";
 
 export const getShowDetails = async (
-  { ShowModel }: CinemaModels,
+  ShowModel: Model<ShowDocument>,
   showId: ShowId
 ): Promise<ShowDetails | undefined> => {
   const show = await populateVirtuals<ShowVirtuals>()(

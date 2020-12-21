@@ -1,10 +1,15 @@
+import { Model } from "mongoose";
 import { HomeState } from "../../shared/types/HomeState";
-import { CinemaModels } from "../createModels";
+import { MovieDocument } from "../documents/MovieDocument";
+import { RecommendationDocument } from "../documents/RecommendationDocument";
 
 export const getHomeState = async ({
   MovieModel,
   RecommendationModel,
-}: CinemaModels): Promise<HomeState> => {
+}: {
+  MovieModel: Model<MovieDocument>;
+  RecommendationModel: Model<RecommendationDocument>;
+}): Promise<HomeState> => {
   const recommendations = await RecommendationModel.find();
   const hero = recommendations.find(({ isHero }) => isHero);
   const other = recommendations.filter(({ isHero }) => !isHero);

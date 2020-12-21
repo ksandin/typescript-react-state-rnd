@@ -1,11 +1,20 @@
 import { without } from "lodash";
-import { Types } from "mongoose";
+import { Model, Types } from "mongoose";
 import { Booking, BookingId } from "../../shared/types/Booking";
 import { totalCounts } from "../../shared/functions/totalCounts";
-import { CinemaModels } from "../createModels";
+import { BookingDocument } from "../documents/BookingDocument";
+import { ShowDocument } from "../documents/ShowDocument";
+import { LoungeDocument } from "../documents/LoungeDocument";
 import { getShowSeats } from "./getShowSeats";
 
-export const makeBooking = async (models: CinemaModels, booking: Booking) => {
+export const makeBooking = async (
+  models: {
+    BookingModel: Model<BookingDocument>;
+    ShowModel: Model<ShowDocument>;
+    LoungeModel: Model<LoungeDocument>;
+  },
+  booking: Booking
+) => {
   const { allSeats, reservedSeats } = await getShowSeats(
     models,
     booking.showId

@@ -1,7 +1,6 @@
-import { FilterQuery } from "mongoose";
+import { FilterQuery, Model } from "mongoose";
 import { SearchForShowsOptions } from "../../shared/requests/SearchForShowsOptions";
 import { SearchForShowsResponse } from "../../shared/responses/SearchForShowsResponse";
-import { CinemaModels } from "../createModels";
 import { dayQuery } from "../functions/dayQuery";
 import { compact } from "../../shared/functions/compact";
 import { ShowDocument, ShowVirtuals } from "../documents/ShowDocument";
@@ -9,7 +8,7 @@ import { populateVirtuals } from "../../../../lib/mongoose-tsextensions/populate
 import { createMovieQuery } from "./searchForMovies";
 
 export const searchForShows = async (
-  { ShowModel }: CinemaModels,
+  ShowModel: Model<ShowDocument>,
   { ageLimit, genres, ...options }: SearchForShowsOptions
 ): Promise<SearchForShowsResponse> => {
   const showQuery = createShowQuery(options);

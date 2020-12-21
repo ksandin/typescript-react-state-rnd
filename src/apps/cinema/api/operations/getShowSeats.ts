@@ -1,11 +1,22 @@
+import { Model } from "mongoose";
 import { ShowId } from "../../shared/types/Show";
 import { GetSeatsForShowResponse } from "../../shared/responses/GetSeatsForShowResponse";
 import { range } from "../../shared/functions/range";
 import { LoungeSeat } from "../../shared/types/LoungeSeat";
-import { CinemaModels } from "../createModels";
+import { BookingDocument } from "../documents/BookingDocument";
+import { ShowDocument } from "../documents/ShowDocument";
+import { LoungeDocument } from "../documents/LoungeDocument";
 
 export const getShowSeats = async (
-  { BookingModel, ShowModel, LoungeModel }: CinemaModels,
+  {
+    BookingModel,
+    ShowModel,
+    LoungeModel,
+  }: {
+    BookingModel: Model<BookingDocument>;
+    ShowModel: Model<ShowDocument>;
+    LoungeModel: Model<LoungeDocument>;
+  },
   showId: ShowId
 ): Promise<GetSeatsForShowResponse> => {
   const show = await ShowModel.findOne({ showId });

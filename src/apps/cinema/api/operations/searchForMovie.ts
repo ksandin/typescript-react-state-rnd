@@ -1,9 +1,10 @@
+import { Model } from "mongoose";
 import { MovieId } from "../../shared/types/Movie";
 import { SearchForMovieResponse } from "../../shared/responses/SearchForMovieResponse";
-import { CinemaModels } from "../createModels";
+import { MovieDocument } from "../documents/MovieDocument";
 
 export const searchForMovie = async (
-  { MovieModel }: CinemaModels,
+  MovieModel: Model<MovieDocument>,
   movieId: MovieId
 ): Promise<SearchForMovieResponse> => {
   const movie = await MovieModel.findOne({ movieId });
