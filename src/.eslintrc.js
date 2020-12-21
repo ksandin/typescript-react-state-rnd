@@ -1,4 +1,5 @@
 const path = require("path");
+const without = require("lodash.without");
 const { getDirectories } = require("./lib/getDirectories");
 const {
   restrictCrossDependencies,
@@ -19,8 +20,16 @@ module.exports = {
       (overrides, appName) => [
         ...overrides,
         ...restrictCrossDependencies(`apps/${appName}`, ["api", "client"]),
-        // Restricts shared from importing from client/api
+        // Restricts shared application code from depending on client/api
         restrictDependencies(`apps/${appName}/shared/**`, ["api", "client"]),
+        // Restricts shared api code from depending on api implementations
+        restrictDependencies(
+          `apps/${appName}/api/shared/**`,
+          without(
+            getDirectories(path.resolve(__dirname, "apps", appName, "api")),
+            "shared"
+          )
+        ),
       ],
       []
     ),
