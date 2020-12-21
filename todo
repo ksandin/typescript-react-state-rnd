@@ -50,7 +50,7 @@ https://angularjs.org/ (not react but could be interesting anyway)
 # Api abstraction
 - [x] Move mongoose code to mongoose directory
 - [x] Convert fixtures to abstract factory pattern
-- [ ] Make express server db agnostic
+- [x] Make express server db agnostic
 - [ ] Make Recommendation["query"] db agnostic (currently mongoose specific)
 
 # Dispatcher
