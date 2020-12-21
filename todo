@@ -47,6 +47,12 @@ https://wasp-lang.dev/
 https://nextjs.org
 https://angularjs.org/ (not react but could be interesting anyway)
 
+# Api abstraction
+- [x] Move mongoose code to mongoose directory
+- [x] Convert fixtures to abstract factory pattern
+- [ ] Make express server db agnostic
+- [ ] Make Recommendation["query"] db agnostic (currently mongoose specific)
+
 # Dispatcher
 - POC actions referencing other actions
 - dispatcher should be configured with action creators not actions

@@ -5,7 +5,6 @@ import {
   colors,
   uniqueNamesGenerator,
 } from "unique-names-generator";
-import { Types } from "mongoose";
 import { Movie, MovieId } from "../../../shared/types/Movie";
 import { range } from "../../../shared/functions/range";
 import { MovieAgeLimit } from "../../../shared/types/MovieAgeLimit";
@@ -58,21 +57,22 @@ const directors = [
   "Peter Jackson",
 ];
 
-export const movies: Movie[] = range(1, 50).map((i) => ({
-  bannerUrl: `https://picsum.photos/920/400/?_=${i}`,
-  cardUrl: `https://picsum.photos/180/280/?_=${i}`,
-  name: randomName(i),
-  movieId: Types.ObjectId().toString() as MovieId,
-  description,
-  premiereDate: rotate(premiereDates, i),
-  runtime: rotate(runTimes, i),
-  genres: [rotate(genres, i), rotate(genres, i + 1)],
-  ageLimit: rotate(ageLimits, i),
-  language: rotate(languages, i),
-  cast: rotateMany(cast, i, 3),
-  director: rotate(directors, i),
-  trailerUrl: "https://www.youtube.com/watch?v=AaK0AKQFCNY",
-  snapshotUrls: range(0, 4).map(
-    (n) => `https://picsum.photos/180/280/?_=snap${i * 5 + n}`
-  ),
-}));
+export const createMovies = (newId: () => MovieId): Movie[] =>
+  range(1, 50).map((i) => ({
+    bannerUrl: `https://picsum.photos/920/400/?_=${i}`,
+    cardUrl: `https://picsum.photos/180/280/?_=${i}`,
+    name: randomName(i),
+    movieId: newId(),
+    description,
+    premiereDate: rotate(premiereDates, i),
+    runtime: rotate(runTimes, i),
+    genres: [rotate(genres, i), rotate(genres, i + 1)],
+    ageLimit: rotate(ageLimits, i),
+    language: rotate(languages, i),
+    cast: rotateMany(cast, i, 3),
+    director: rotate(directors, i),
+    trailerUrl: "https://www.youtube.com/watch?v=AaK0AKQFCNY",
+    snapshotUrls: range(0, 4).map(
+      (n) => `https://picsum.photos/180/280/?_=snap${i * 5 + n}`
+    ),
+  }));

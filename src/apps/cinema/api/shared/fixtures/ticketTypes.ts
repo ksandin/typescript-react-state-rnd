@@ -1,16 +1,15 @@
-import { Types } from "mongoose";
 import { TicketType, TicketTypeId } from "../../../shared/types/TicketType";
 import { Price } from "../../../shared/types/Price";
 
-export const ticketTypes: TicketType[] = [
+export const createTicketTypes = (newId: () => TicketTypeId): TicketType[] => [
   {
     name: "Regular ticket",
-    ticketTypeId: Types.ObjectId().toString() as TicketTypeId,
+    ticketTypeId: newId(),
     price: 120 as Price,
   },
   {
     name: "Pensioner ticket",
-    ticketTypeId: Types.ObjectId().toString() as TicketTypeId,
+    ticketTypeId: newId(),
     price: 90 as Price,
   },
 ];
